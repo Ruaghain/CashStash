@@ -1,7 +1,7 @@
-let mongoose = require('mongoose');
-let Schema = mongoose.Schema;
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-let accountSchema = new Schema({
+var accountSchema = new Schema({
   name: String,
   number: String,
   // accountType: {

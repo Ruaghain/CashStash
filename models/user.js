@@ -1,17 +1,11 @@
 import crypto from 'crypto';
 
-let mongoose = require('mongoose');
-let Schema = mongoose.Schema;
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 const authTypes = ['github', 'twitter', 'facebook', 'google'];
 
-// firstName: { type: String, required: true },
-// lastName: { type: String, required: true },
-// password: { type: String, reuqired: true },
-// email: { type: String, required: true, unique: true },
-// messages: [{ type: Schema.Types.ObjectId, ref: 'Message' }]
-
-let userSchema = new Schema({
+var userSchema = new Schema({
   userName: { type: String, required: true },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },

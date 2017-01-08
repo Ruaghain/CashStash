@@ -1,9 +1,9 @@
-let mongoose = require('mongoose');
-let Schema = mongoose.Schema;
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-let transactionSchema = new Schema({
+module.exports = mongoose.model('Transaction', transactionSchema);
+
+var transactionSchema = new Schema({
   id: Number,
   amount: Number
 });
-
-module.exports = mongoose.model('Transaction', transactionSchema);
