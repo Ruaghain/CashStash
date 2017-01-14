@@ -16,13 +16,13 @@ module.exports = function (app) {
   app.set('views', config.root + '/server/views');
   app.set('view engine', 'hbs');
 
-// uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
   app.use(logger('dev'));
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
   app.use(cookieParser());
-  app.use(express.static(path.join(__dirname, 'public')));
+  app.use(express.static(path.join(config.root, 'public')));
+  console.log(path.join(config.root, 'public'));
 
   app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');

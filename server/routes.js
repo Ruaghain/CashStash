@@ -3,7 +3,7 @@
 
 module.exports = function(app) {
 
-  app.use('/api/v1/users', require('./api/user/user.route.js'));
+  app.use('/api/v1/users', require('./api/user/user.route'));
   // app.use('/api/accounts', require('./api/account'));
 
   // app.use('/auth', require('./auth').default);
@@ -12,7 +12,7 @@ module.exports = function(app) {
   // app.route('/:url(api|auth|components|app|bower_components|assets)/*').get(errors[404]);
 
   // All other routes should redirect to the index.html
-  app.route('/*').get((req, res) => {
+  app.use('/', function (req, res) {
     res.render('index');
   });
 };
