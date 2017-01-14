@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+var crypto = require('crypto');
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
@@ -27,10 +27,7 @@ var userSchema = new Schema({
     default: 'user'
   },
   provider: String,
-  salt: String,
-  facebook: {},
-  twitter: {},
-  github: {}
+  salt: String
 });
 
 /**

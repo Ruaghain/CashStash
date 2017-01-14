@@ -3,7 +3,7 @@ var jwt = require('jsonwebtoken');
 
 var router = express.Router();
 
-var Account = require('../models/account');
+var Account = require('./account');
 
 router.get('/', function (req, res, next) {
   Account.find().exec(function (err, messages) {

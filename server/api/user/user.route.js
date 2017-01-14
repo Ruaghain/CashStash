@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var jwt = require('jsonwebtoken');
+//var jwt = require('jsonwebtoken');
 
-var User = require('../models/user');
+var User = require('./user.model');
 
-router.post('/', function (req, res, next) {
+router.post('/', function (req, res) {
   var user = new User({
     userName: req.body.userName,
     firstName: req.body.firstName,
