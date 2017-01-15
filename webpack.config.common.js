@@ -2,7 +2,7 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: {
-    'app': './assets/app/main.ts'
+    'app': './client/src/app/main.ts'
   },
 
   resolve: {
@@ -34,7 +34,7 @@ module.exports = {
     new webpack.ContextReplacementPlugin(
       // The (\\|\/) piece accounts for path separators in *nix and Windows
       /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
-      './src' // location of your src
+      './client/src' // location of your src
     )
   ]
 };

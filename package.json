@@ -5,10 +5,8 @@
   "scripts": {
     "test": "set NODE_ENV=test && jasmine-node server/api --autotest",
     "start": "set NODE_ENV=development && node ./server/app",
-    "build": "del-cli public/js/app && webpack --config webpack.config.dev.js --progress --profile --watch",
-    "build:prod": "del-cli public/js/app && ngc -p tsconfig.aot.json && ngc -p tsconfig.aot.json && webpack --config webpack.config.prod.js --progress --profile --bail && del-cli 'public/js/app/**/*.js' 'public/js/app/**/*.js.map' '!public/js/app/bundle.js' '!public/js/app/*.chunk.js' 'assets/**/*.ngfactory.ts' 'assets/app/**/*.shim.ts'"
+    "build": "del-cli dist/js/app && webpack --config webpack.config.dev.js --progress --profile --watch"
   },
-  "main": "server/app.js",
   "dependencies": {
     "@angular/common": "2.0.1",
     "@angular/compiler": "2.0.1",
@@ -49,7 +47,7 @@
     "jasmine-node": "^1.14.5",
     "raw-loader": "^0.5.1",
     "request": "^2.79.0",
-    "typescript": "2.0.3",
+    "typescript": "~2.1.5",
     "webpack": "2.1.0-beta.21",
     "webpack-merge": "^0.14.1"
   }
