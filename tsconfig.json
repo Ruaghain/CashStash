@@ -5,11 +5,13 @@
     "moduleResolution": "node",
     "noImplicitAny": false,
     "sourceMap": true,
+    "removeComments": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "outDir": "./dist/js/app"
   },
   "exclude": [
     "node_modules/*",
-    "**/*-aot.ts"
+    "**/*.aot.ts"
   ]
 }
