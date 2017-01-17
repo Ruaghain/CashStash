@@ -1,7 +1,8 @@
 'use strict';
 
-import webpack from 'webpack';
-import makeWebpackConfig from './webpack.config.dev';
+import _ from 'lodash';
+import webpack from 'webpack-stream';
+import webpackCommon from './webpack.config.common';
 import gulp from 'gulp';
 import del from 'del';
 import gulpLoadPlugins from 'gulp-load-plugins';
@@ -9,25 +10,14 @@ import nodemon from 'nodemon';
 import typescript from 'typescript';
 import { Server as KarmaServer } from 'karma';
 import tscConfig from './tsconfig.json';
+import runSequence from 'run-sequence';
 
-// import _ from 'lodash';
-// import grunt from 'grunt';
 // import path from 'path';
 // import through2 from 'through2';
 // import http from 'http';
 // import open from 'open';
 // import lazypipe from 'lazypipe';
-// import runSequence from 'run-sequence';
 
-// const webpack = require('webpack-stream');
-// const makeWebpackConfig = require('./webpack.make');
-// const gulp = require('gulp');
-// const del = require('del');
-// const typescript = require('gulp-typescript');
-// const tscConfig = require('./tsconfig.json');
-// const gulpLoadPlugins = require('gulp-load-plugins');
-// const nodemon = require('nodemon');
-// const karmaServer = require('karma').Server;
 
 var plugins = gulpLoadPlugins();
 var config;
@@ -35,7 +25,12 @@ var config;
 const serverPath = 'server';
 const paths = {
   client: {},
-  server: {},
+  server: {
+    scripts: [
+      `${serverPath}/**/!(*.spec|*.integration).js`,
+      `!${serverPath}/config/local.env.sample.js`
+    ],
+  },
   karma: 'karma.conf.js',
   dist: 'dist'
 };
@@ -53,13 +48,12 @@ gulp.task('compile', ['clean'], function () {
     .pipe(gulp.dest('dist/app'));
 });
 
-// gulp.task('webpack:dev', function() {
-//   const webpackDevConfig = makeWebpackConfig({ DEV: true });
-//   return gulp.src(webpackDevConfig.entry.app)
-//     .pipe(plugins.plumber())
-//     .pipe(webpack(webpackDevConfig))
-//     .pipe(gulp.dest('dist'));
-// });
+gulp.task('webpack:dev', function () {
+  const common = webpackCommon;
+  return gulp.src(common.entry.app)
+    .pipe(webpack(common))
+    .pipe(gulp.dest(paths.dist));
+});
 //
 // gulp.task('webpack:test', function() {
 //   const webpackTestConfig = makeWebpackConfig({ TEST: true });
@@ -122,6 +116,18 @@ gulp.task('test:client', (done) => {
   }).start();
 });
 
+gulp.task('watch', () => {
+  plugins.watch(paths.server.scripts)
+    .pipe(plugins.plumber());
+});
+
+gulp.task('serve', cb => {
+  runSequence(
+    ['start:server'],
+    'watch',
+    cb
+  );
+});
 
 gulp.task('build', ['compile']);
 gulp.task('default', ['build']);
