@@ -1,49 +1,37 @@
+var webpackConfig = require('./webpack.test');
+
 module.exports = function (config) {
-  config.set({
-    basePath: '.',
+  var _config = {
+    basePath: '',
 
     frameworks: ['jasmine'],
 
-    plugins: [
-      'karma-jasmine',
-      'karma-coverage',
-      'karma-chrome-launcher'
-    ],
-
     files: [
-      { pattern: './client/**/*.spec.ts', watched: false }
+      { pattern: './karma-test-shim.js', watched: false }
     ],
 
     preprocessors: {
-      'dist/**/!(*spec).js': ['coverage']
+      './karma-test-shim.js': ['webpack', 'sourcemap']
     },
 
-    // Coverage reporter generates the coverage
-    reporters: [
-      'dots',
-      'coverage'
-    ],
+    webpack: webpackConfig,
 
+    webpackMiddleware: {
+      stats: 'errors-only'
+    },
+
+    webpackServer: {
+      noInfo: true
+    },
+
+    reporters: ['progress'],
     port: 9876,
-
-    coverageReporter: {
-      reporters: [
-        {
-          type: 'json',
-          subdir: '.',
-          file: 'coverage-final.json'
-        }
-      ]
-    },
-
     colors: true,
-
     logLevel: config.LOG_INFO,
+    autoWatch: false,
+    browsers: ['PhantomJS'],
+    singleRun: true
+  };
 
-    autoWatch: true,
-
-    browsers: ['Chrome'],
-
-    singleRun: false
-  });
+  config.set(_config);
 };

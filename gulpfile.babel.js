@@ -2,14 +2,12 @@
 
 import _ from 'lodash';
 import webpack from 'webpack-stream';
-import webpackCommon from './webpack.config.common';
+import webpack_dev from './webpack.dev';
 import gulp from 'gulp';
 import del from 'del';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import nodemon from 'nodemon';
-import typescript from 'typescript';
 import { Server as KarmaServer } from 'karma';
-import tscConfig from './tsconfig.json';
 import runSequence from 'run-sequence';
 
 // import path from 'path';
@@ -32,7 +30,7 @@ const paths = {
     ],
   },
   karma: 'karma.conf.js',
-  dist: 'dist'
+  dist: 'dist/js'
 };
 
 // clean the contents of the distribution directory
@@ -40,18 +38,12 @@ gulp.task('clean', function () {
   return del('dist/**/*');
 });
 
-// TypeScript compile
-gulp.task('compile', ['clean'], function () {
-  return gulp
-    .src('client/src/**/*.ts')
-    .pipe(typescript(tscConfig))
-    .pipe(gulp.dest('dist/app'));
-});
-
 gulp.task('webpack:dev', function () {
-  const common = webpackCommon;
-  return gulp.src(common.entry.app)
-    .pipe(webpack(common))
+  return gulp.src(webpack_dev.entry.app)
+    .pipe(webpack(webpack_dev))
+    .on('error', function handleError(e) {
+      this.emit('There was an error: ' + e);
+    })
     .pipe(gulp.dest(paths.dist));
 });
 //
@@ -93,6 +85,7 @@ gulp.task('env:test', () => {
     vars: { NODE_ENV: 'test' }
   });
 });
+
 gulp.task('env:prod', () => {
   plugins.env({
     vars: { NODE_ENV: 'production' }
@@ -100,10 +93,11 @@ gulp.task('env:prod', () => {
 });
 
 gulp.task('start:server', () => {
-  process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-  config = require(`./${serverPath}/config/environment`);
-  nodemon(`-w ${serverPath} ${serverPath}`)
-    .on('log', onServerLog);
+  return nodemon({
+    script: `./${serverPath}/app.js`
+  }).on('error', (error) => {
+    console.log('There was an error: ' + error);
+  });
 });
 
 gulp.task('test:client', (done) => {
