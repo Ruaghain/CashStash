@@ -1,3 +1,5 @@
+// module.exports = require('./config/karma.conf.js');
+
 var webpackConfig = require('./webpack.test');
 
 module.exports = function (config) {
@@ -7,7 +9,7 @@ module.exports = function (config) {
     frameworks: ['jasmine'],
 
     files: [
-      { pattern: './karma-test-shim.js', watched: false }
+      { pattern: 'karma.test.shim.js', watched: false }
     ],
 
     preprocessors: {
@@ -20,6 +22,14 @@ module.exports = function (config) {
       stats: 'errors-only'
     },
 
+    plugins: [
+      require("karma-webpack"),
+      require("karma-sourcemap-loader"),
+      require("karma-phantomjs-launcher"),
+      require("karma-chrome-launcher"),
+      require("karma-jasmine")
+    ],
+
     webpackServer: {
       noInfo: true
     },
@@ -29,7 +39,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: false,
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
     singleRun: true
   };
 

@@ -2,8 +2,7 @@
   "name": "cash-stash",
   "version": "0.0.1",
   "private": true,
-  "scripts": {
-  },
+  "scripts": {},
   "dependencies": {
     "@angular/common": "2.0.1",
     "@angular/compiler": "2.0.1",
@@ -59,7 +58,7 @@
     "install": "^0.8.4",
     "jasmine-core": "^2.5.2",
     "jasmine-node": "^1.14.5",
-    "karma": "^1.4.0",
+    "karma": "^0.12.31",
     "karma-chrome-launcher": "^2.0.0",
     "karma-coverage": "^1.1.1",
     "karma-jasmine": "^1.1.0",
