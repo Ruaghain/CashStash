@@ -9,13 +9,11 @@ module.exports = function (config) {
     frameworks: ['jasmine'],
 
     files: [
-      './client/src/**/*.spec.ts'
-      // { pattern: 'karma.test.shim.js', watched: false }
+      { pattern: 'karma-test-shim.js', watched: false }
     ],
 
     preprocessors: {
-      './client/src/**/*.spec.ts': ['webpack', 'sourcemap']
-      // './karma-test-shim.js': ['webpack', 'sourcemap']
+      './karma-test-shim.js': ['webpack', 'sourcemap']
     },
 
     webpack: webpackConfig,
