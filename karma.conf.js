@@ -9,11 +9,13 @@ module.exports = function (config) {
     frameworks: ['jasmine'],
 
     files: [
-      { pattern: 'karma.test.shim.js', watched: false }
+      './client/src/**/*.spec.ts'
+      // { pattern: 'karma.test.shim.js', watched: false }
     ],
 
     preprocessors: {
-      './karma-test-shim.js': ['webpack', 'sourcemap']
+      './client/src/**/*.spec.ts': ['webpack', 'sourcemap']
+      // './karma-test-shim.js': ['webpack', 'sourcemap']
     },
 
     webpack: webpackConfig,
@@ -39,7 +41,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: false,
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
     singleRun: true
   };
 
