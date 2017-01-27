@@ -1,1 +1,34 @@
-<h1>We're signing up.</h1>
+<div>
+  <h2>Register</h2>
+  <form id="user-signup" (ngSubmit)="register()">
+    <div>
+      <div class="form-group">
+        <label for="user-name">Username:</label>
+        <input id="user-name" type="text" required/>
+      </div>
+      <div class="form-group">
+        <label for="first-name">First Name:</label>
+        <input id="first-name" type="text">
+      </div>
+      <div class="form-group">
+        <label for="last-name">Last Name:</label>
+        <input id="last-name" type="text">
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input id="email" type="email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input id="password" type="password" required>
+      </div>
+      <div class="form-group">
+        <label for="confirm-password">Confirm Password:</label>
+        <input id="confirm-password" type="password" required>
+      </div>
+      <div class="form-group">
+        <button>Register</button>
+      </div>
+    </div>
+  </form>
+</div>

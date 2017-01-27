@@ -1,31 +1,30 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from "@angular/platform-browser";
-import { DebugElement } from "@angular/core";
 
 import { SignupComponent } from "./signup.component";
 
 describe("SignupComponent", () => {
-  let comp: SignupComponent;
   let fixture: ComponentFixture<SignupComponent>;
-  let de: DebugElement;
-  let el: HTMLElement;
 
-  beforeEach(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SignupComponent], // declare the test component
+      // declare the test component
+      declarations: [SignupComponent],
     });
-
     fixture = TestBed.createComponent(SignupComponent);
+    fixture.detectChanges();
+  }));
 
-    comp = fixture.componentInstance; // SignupComponent test instance
+  it('should display a form to register', () => {
+    let form = fixture.debugElement.query(By.css('form'));
+    expect(form).toBeDefined();
 
-    // query for the title <h1> by CSS element selector
-    de = fixture.debugElement.query(By.css('h1'));
-    el = de.nativeElement;
   });
 
   it('has the correct title', () => {
-    expect(el.textContent).toEqual("We're signing up.");
+    let headingElement = fixture.debugElement.query(By.css('h2'));
+    let nativeElement = headingElement.nativeElement;
+    expect(nativeElement.textContent).toEqual("Register");
   });
 
 });
