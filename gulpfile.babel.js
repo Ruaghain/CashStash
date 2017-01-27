@@ -10,6 +10,7 @@ import nodemon from 'nodemon';
 import { Server as KarmaServer } from 'karma';
 import runSequence from 'run-sequence';
 import http from 'http';
+import open from 'open';
 
 // import path from 'path';
 // import through2 from 'through2';
@@ -47,7 +48,8 @@ gulp.task('webpack:dev', function () {
     })
     .pipe(gulp.dest(paths.dist));
 });
-//
+
+//This is for the test environment.
 // gulp.task('webpack:test', function() {
 //   const webpackTestConfig = makeWebpackConfig({ TEST: true });
 //   return gulp.src(webpackTestConfig.entry.app)
@@ -140,7 +142,9 @@ gulp.task('start:server:debug', () => {
 gulp.task('test:client', (done) => {
   new KarmaServer({
     configFile: `${__dirname}/${paths.karma}`,
-    singleRun: true
+    singleRun: false,
+    autoWatch: true,
+    browsers: ['Chrome']
   }, err => {
     done(err);
     process.exit(err);
@@ -176,12 +180,11 @@ gulp.task('serve:debug', cb => {
       'clean',
     ],
     [
-      'webpack:dev',
+      'webpack:dev'
     ],
     [
       'start:server:debug',
-      //TODO: Need to get the start client working correctly.
-      //'start:client'
+      'start:client'
     ],
     'watch',
     cb);
