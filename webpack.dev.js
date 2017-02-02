@@ -5,6 +5,7 @@ var commonConfig = require('./webpack.common.js');
 var helpers = require('./helpers');
 
 module.exports = webpackMerge(commonConfig, {
+
   devtool: 'cheap-module-eval-source-map',
 
   output: {
@@ -15,11 +16,14 @@ module.exports = webpackMerge(commonConfig, {
   },
 
   plugins: [
-    //   new ExtractTextPlugin('[name].css')
+    new ExtractTextPlugin('[name].css'),
     new webpack.ContextReplacementPlugin(
       // The (\\|\/) piece accounts for path separators in *nix and Windows
       /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
       './client/src'), // location of your src
+    new webpack.LoaderOptionsPlugin({
+      debug: true
+    })
   ],
 
   devServer: {
