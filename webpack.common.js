@@ -44,20 +44,23 @@ module.exports = {
         loader: 'file?name=assets/[name].[hash].[ext]'
       },
       {
-        test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader?sourceMap', 'sass-loader?sourceMap'],
-        include: [
-          './node_modules/bootstrap-sass/assets/stylesheets/*.scss'
+        test: /\.(scss)$/,
+        loaders: [
+          'raw-loader',
+          'sass-loader'
         ]
       }
     ]
   },
   plugins: [
     new webpack.LoaderOptionsPlugin({
-      test: /\.scss$/,
       options: {
-        sassLoader: {
-          includePaths: [path.resolve(__dirname, "./client/src/app")]
+        resolve: {},
+        ts: {
+          configFileName: 'tsconfig.json'
+        },
+        tslint: {
+          configuration: require('./tslint.json')
         }
       }
     })
