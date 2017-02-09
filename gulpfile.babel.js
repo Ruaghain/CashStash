@@ -1,8 +1,10 @@
 'use strict';
 
 import _ from 'lodash';
-import webpack from 'webpack-stream';
-import webpack_dev from './webpack.dev';
+import webpack from 'webpack';
+import webpackStream from 'webpack-stream';
+import webpackDev from './webpack.dev';
+import webpackTest from './webpack.test';
 import gulp from 'gulp';
 import del from 'del';
 import gulpLoadPlugins from 'gulp-load-plugins';
@@ -41,8 +43,8 @@ gulp.task('clean', function () {
 });
 
 gulp.task('webpack:dev', function () {
-  return gulp.src(webpack_dev.entry.app)
-    .pipe(webpack(webpack_dev))
+  return gulp.src(webpackDev.entry.app)
+    .pipe(webpackStream(webpackDev, webpack))
     .on('error', function handleError(e) {
       this.emit('end');
     })
@@ -50,12 +52,14 @@ gulp.task('webpack:dev', function () {
 });
 
 //This is for the test environment.
-// gulp.task('webpack:test', function() {
-//   const webpackTestConfig = makeWebpackConfig({ TEST: true });
-//   return gulp.src(webpackTestConfig.entry.app)
-//     .pipe(webpack(webpackTestConfig))
-//     .pipe(gulp.dest('dist'));
-// });
+gulp.task('webpack:test', function() {
+  return gulp.src(webpackDev.entry.app)
+    .pipe(webpackStream(webpackTest, webpack))
+    .on('error', function handleError(e) {
+      this.emit('end');
+    })
+    .pipe(gulp.dest(paths.dist));
+});
 
 /********************
  * Helper functions
