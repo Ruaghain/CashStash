@@ -8,4 +8,9 @@ import { Component } from "@angular/core";
 
 export class HeaderComponent {
 
+  isUserLoggedIn: boolean;
+
+  userLoggedIn = () => {
+    return this.isUserLoggedIn;
+  }
 }

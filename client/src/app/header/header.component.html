@@ -12,11 +12,14 @@
 
     <div class="collapse navbar-collapse">
       <ol class="nav navbar-nav navbar-right">
-        <li routerLinkActive="active">
+        <li routerLinkActive="active" *ngIf="!userLoggedIn()">
           <a [routerLink]="['signup']">Sign Up</a>
         </li>
-        <li>
+        <li *ngIf="!userLoggedIn()">
           <a [routerLink]="['login']">Login</a>
+        </li>
+        <li *ngIf="userLoggedIn()">
+          <a [routerLink]="['logout']">Logout</a>
         </li>
       </ol>
     </div>
