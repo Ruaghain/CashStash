@@ -1,18 +1,17 @@
 import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'cash-header',
-  styleUrls: ['./header.component.scss'],
-  templateUrl: 'header.component.html'
+  selector: 'cash-topbar',
+  styleUrls: ['topbar.component.scss'],
+  templateUrl: 'topbar.component.html'
 })
 
-export class HeaderComponent extends OnInit {
-
+export class TopbarComponent extends OnInit {
   private headerUserLoggedIn: boolean;
   private headerUserFullName: string;
 
   ngOnInit(): void {
-    this.setUserLoggedIn(true);
+    this.setUserLoggedIn(false);
     this.setUserFullName("Rowan Massey");
   }
 

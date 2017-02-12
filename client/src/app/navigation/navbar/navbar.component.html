@@ -1,0 +1,9 @@
+<nav class="cash-navigation">
+  <div *ngIf="isUserLoggedIn()">
+    <ul>
+      <li class="left" *ngFor="let item of navigationItems()">
+        <a [routerLink]="[item.link]">{{item.name}}</a>
+      </li>
+    </ul>
+  </div>
+</nav>

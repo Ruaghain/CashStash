@@ -1,0 +1,21 @@
+<div class="top-bar">
+  <div class="left">
+    <a class="header" href="#">Cash Stash</a>
+  </div>
+  <div *ngIf="isUserLoggedIn()">
+    <div class="right">
+      <a class="item" [routerLink]="['logout']">Logout</a>
+    </div>
+    <div class="right">
+      <a class="item" href="#">{{userFullName()}}</a>
+    </div>
+  </div>
+  <div *ngIf="!isUserLoggedIn()">
+    <div class="right">
+      <a class="item" [routerLink]="['signup']">Sign Up</a>
+    </div>
+    <div class="right">
+      <a class="item" [routerLink]="['login']">Login</a>
+    </div>
+  </div>
+</div>
