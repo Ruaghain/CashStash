@@ -98,6 +98,26 @@ userSchema
       });
   }, 'The specified email address is already in use.');
 
+// Validate username is not taken
+userSchema
+  .path('userName')
+  .validate(function (value, respond) {
+    const self = this;
+    return this.constructor.findOne({ userName: value }).exec()
+      .then(function (user) {
+        if (user) {
+          if (self.id === user.id) {
+            return respond(true);
+          }
+          return respond(false);
+        }
+        return respond(true);
+      })
+      .catch(function (err) {
+        throw err;
+      });
+  }, 'The specified username is already in use.');
+
 const validatePresenceOf = function (value) {
   return value && value.length;
 };

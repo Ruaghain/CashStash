@@ -27,4 +27,21 @@ describe('User API Router:', function () {
       });
     });
   });
+
+  describe('POST /signin', function () {
+    it('successfully signs in a user', function (done) {
+      var body = {
+        userName: 'TestUser',
+        password: 'Passw0rd'
+      };
+      request.post({
+        url: base_url + 'api/v1/users/signin',
+        json: body
+      }, function (error, response, body) {
+        expect(response.statusCode).toBe(201);
+        expect(body).toBeDefined();
+        done();
+      });
+    });
+  });
 });
