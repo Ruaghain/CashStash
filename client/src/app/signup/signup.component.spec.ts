@@ -3,6 +3,8 @@ import { By } from "@angular/platform-browser";
 
 import { SignUpComponent } from "./signup.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import {AuthService} from "../auth/auth.service";
+import {HttpModule} from "@angular/http";
 
 describe("SignupComponent", () => {
   let fixture: ComponentFixture<SignUpComponent>;
@@ -11,9 +13,13 @@ describe("SignupComponent", () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        HttpModule
       ],
       declarations: [SignUpComponent],
+      providers: [
+        AuthService
+      ]
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(SignUpComponent);
       fixture.detectChanges();

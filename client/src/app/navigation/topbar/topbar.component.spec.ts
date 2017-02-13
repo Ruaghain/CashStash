@@ -4,8 +4,10 @@ import { APP_BASE_HREF } from "@angular/common";
 import { TopbarComponent } from "./topbar.component";
 import { RouterTestingModule } from "@angular/router/testing";
 import { DebugElement } from "@angular/core";
+import {AuthService} from "../../auth/auth.service";
+import {HttpModule} from "@angular/http";
 
-describe("HeaderComponent", () => {
+describe("TopbarComponent", () => {
   let component: TopbarComponent;
   let fixture: ComponentFixture<TopbarComponent>;
   let debugElement: DebugElement;
@@ -14,11 +16,13 @@ describe("HeaderComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        HttpModule
       ],
       declarations: [TopbarComponent],
       providers: [
-        { provide: APP_BASE_HREF, useValue: '/' }
+        {provide: APP_BASE_HREF, useValue: '/'},
+        AuthService
       ]
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(TopbarComponent);
@@ -33,7 +37,7 @@ describe("HeaderComponent", () => {
   });
 
   //TODO: Need to test for the actual route when the relevant item is clicked.
-  it('should have a header name of "CashStash"', () => {
+  it('should have a header name of "Cash Stash"', () => {
     debugElement = fixture.debugElement.query(By.css('.header'));
     element = debugElement.nativeElement;
     expect(element.textContent).toEqual('Cash Stash');
@@ -43,7 +47,6 @@ describe("HeaderComponent", () => {
     let items: any;
 
     beforeEach(() => {
-      component.setUserLoggedIn(false);
       fixture.detectChanges();
       items = fixture.debugElement.queryAll(By.css('.item'));
     });
@@ -63,8 +66,6 @@ describe("HeaderComponent", () => {
     let items: any;
 
     beforeEach(() => {
-      component.setUserLoggedIn(true);
-      component.setUserFullName('One User');
       fixture.detectChanges();
       items = fixture.debugElement.queryAll(By.css('.item'));
     });

@@ -3,8 +3,10 @@ import { APP_BASE_HREF } from "@angular/common";
 import { NavbarComponent } from "./navbar.component";
 import { RouterTestingModule } from "@angular/router/testing";
 import { NavigationItem } from "./navbar.item";
+import {AuthService} from "../../auth/auth.service";
+import {HttpModule} from "@angular/http";
 
-describe("HeaderComponent", () => {
+describe("NavbarComponent", () => {
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
   let element: HTMLElement;
@@ -12,11 +14,13 @@ describe("HeaderComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        HttpModule
       ],
       declarations: [NavbarComponent],
       providers: [
-        { provide: APP_BASE_HREF, useValue: '/' }
+        {provide: APP_BASE_HREF, useValue: '/'},
+        AuthService
       ]
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(NavbarComponent);
@@ -33,7 +37,6 @@ describe("HeaderComponent", () => {
   describe('user not logged in', () => {
 
     beforeEach(() => {
-      component.setUserLoggedIn(false);
       fixture.detectChanges();
     });
 
@@ -46,7 +49,6 @@ describe("HeaderComponent", () => {
   describe('user is logged in', () => {
 
     beforeEach(() => {
-      component.setUserLoggedIn(true);
       component.addNavigationItem(new NavigationItem('Accounts', 'accounts'));
       component.addNavigationItem(new NavigationItem('Reports', 'reports'));
       fixture.detectChanges();
