@@ -3,10 +3,17 @@ import { APP_BASE_HREF } from "@angular/common";
 import { NavbarComponent } from "./navbar.component";
 import { RouterTestingModule } from "@angular/router/testing";
 import { NavigationItem } from "./navbar.item";
-import {AuthService} from "../../auth/auth.service";
-import {HttpModule} from "@angular/http";
+import { AuthService } from "../../auth/auth.service";
+import { HttpModule } from "@angular/http";
 
 describe("NavbarComponent", () => {
+
+  class MockAuthService {
+    public isLoggedIn = () => {
+      return true;
+    }
+  }
+
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
   let element: HTMLElement;
@@ -19,9 +26,14 @@ describe("NavbarComponent", () => {
       ],
       declarations: [NavbarComponent],
       providers: [
-        {provide: APP_BASE_HREF, useValue: '/'},
-        AuthService
+        { provide: APP_BASE_HREF, useValue: '/', }
       ]
+    }).overrideComponent(NavbarComponent, {
+      set: {
+        providers: [
+          { provide: AuthService, useClass: MockAuthService }
+        ]
+      }
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(NavbarComponent);
       component = fixture.componentInstance;
@@ -35,7 +47,6 @@ describe("NavbarComponent", () => {
 
   //TODO: Need to test for the actual route when the relevant item is clicked.
   describe('user not logged in', () => {
-
     beforeEach(() => {
       fixture.detectChanges();
     });
@@ -56,7 +67,7 @@ describe("NavbarComponent", () => {
 
     it('should display the navigation bar', () => {
       element = fixture.nativeElement.querySelector('nav>div');
-      expect(element).toBeDefined('The navigation component should not be displayed if no user is logged in.');
+      expect(element).toBeDefined('The navigation component should be displayed if user is logged in.');
     });
 
     it('should display two list items', () => {
