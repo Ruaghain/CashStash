@@ -1,24 +1,25 @@
-import { ComponentFixture, TestBed, async } from "@angular/core/testing";
-import { APP_BASE_HREF } from "@angular/common";
-import { NavbarComponent } from "./navbar.component";
-import { RouterTestingModule } from "@angular/router/testing";
-import { NavigationItem } from "./navbar.item";
-import { AuthService } from "../../auth/auth.service";
-import { HttpModule } from "@angular/http";
+import {ComponentFixture, TestBed, async} from "@angular/core/testing";
+import {APP_BASE_HREF} from "@angular/common";
+import {NavbarComponent} from "./navbar.component";
+import {RouterTestingModule} from "@angular/router/testing";
+import {AuthService} from "../../auth/auth.service";
+import {HttpModule} from "@angular/http";
 
 describe("NavbarComponent", () => {
-
-  class MockAuthService {
-    public isLoggedIn = () => {
-      return true;
-    }
-  }
 
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
   let element: HTMLElement;
+  let authService: any;
 
   beforeEach(async(() => {
+    class MockAuthService {
+      public loggedIn = false;
+      public isLoggedIn = () => {
+        return this.loggedIn;
+      }
+    }
+
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
@@ -26,17 +27,15 @@ describe("NavbarComponent", () => {
       ],
       declarations: [NavbarComponent],
       providers: [
-        { provide: APP_BASE_HREF, useValue: '/', }
+        {provide: APP_BASE_HREF, useValue: '/'},
+        {provide: AuthService, useClass: MockAuthService}
       ]
-    }).overrideComponent(NavbarComponent, {
-      set: {
-        providers: [
-          { provide: AuthService, useClass: MockAuthService }
-        ]
-      }
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(NavbarComponent);
       component = fixture.componentInstance;
+
+      authService = TestBed.get(AuthService);
+
       fixture.detectChanges();
     });
   }));
@@ -48,6 +47,7 @@ describe("NavbarComponent", () => {
   //TODO: Need to test for the actual route when the relevant item is clicked.
   describe('user not logged in', () => {
     beforeEach(() => {
+      authService.loggedIn = false;
       fixture.detectChanges();
     });
 
@@ -60,8 +60,7 @@ describe("NavbarComponent", () => {
   describe('user is logged in', () => {
 
     beforeEach(() => {
-      component.addNavigationItem(new NavigationItem('Accounts', 'accounts'));
-      component.addNavigationItem(new NavigationItem('Reports', 'reports'));
+      authService.loggedIn = true;
       fixture.detectChanges();
     });
 
@@ -73,7 +72,7 @@ describe("NavbarComponent", () => {
     it('should display two list items', () => {
       element = fixture.nativeElement.querySelectorAll('ul>li');
       let navigationItems = Array.prototype.slice.call(element);
-      expect(navigationItems.length).toEqual(2, 'There should be two list items displayed.');
+      expect(navigationItems.length).toEqual(3, 'There should be three list items displayed.');
     });
 
     it('should display the correct item names', () => {

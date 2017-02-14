@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed, async } from "@angular/core/testing";
-import { By } from "@angular/platform-browser";
-import { APP_BASE_HREF } from "@angular/common";
-import { TopbarComponent } from "./topbar.component";
-import { RouterTestingModule } from "@angular/router/testing";
-import { DebugElement } from "@angular/core";
+import {ComponentFixture, TestBed, async} from "@angular/core/testing";
+import {By} from "@angular/platform-browser";
+import {APP_BASE_HREF} from "@angular/common";
+import {TopbarComponent} from "./topbar.component";
+import {RouterTestingModule} from "@angular/router/testing";
+import {DebugElement} from "@angular/core";
 import {AuthService} from "../../auth/auth.service";
 import {HttpModule} from "@angular/http";
 
@@ -12,8 +12,21 @@ describe("TopbarComponent", () => {
   let fixture: ComponentFixture<TopbarComponent>;
   let debugElement: DebugElement;
   let element: HTMLElement;
+  let authService: any;
 
   beforeEach(async(() => {
+
+    class MockAuthService {
+      public loggedIn = false;
+      public isLoggedIn = () => {
+        return this.loggedIn;
+      };
+
+      public getFullName() {
+        return "One User";
+      }
+    }
+
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
@@ -22,11 +35,13 @@ describe("TopbarComponent", () => {
       declarations: [TopbarComponent],
       providers: [
         {provide: APP_BASE_HREF, useValue: '/'},
-        AuthService
+        {provide: AuthService, useClass: MockAuthService}
       ]
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(TopbarComponent);
       component = fixture.componentInstance;
+
+      authService = TestBed.get(AuthService);
 
       fixture.detectChanges();
     });
@@ -47,6 +62,7 @@ describe("TopbarComponent", () => {
     let items: any;
 
     beforeEach(() => {
+      authService.loggedIn = false;
       fixture.detectChanges();
       items = fixture.debugElement.queryAll(By.css('.item'));
     });
@@ -66,6 +82,7 @@ describe("TopbarComponent", () => {
     let items: any;
 
     beforeEach(() => {
+      authService.loggedIn = true;
       fixture.detectChanges();
       items = fixture.debugElement.queryAll(By.css('.item'));
     });
