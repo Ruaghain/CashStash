@@ -1,0 +1,32 @@
+<div class="signin-component">
+  <h2>Sign In</h2>
+  <form [formGroup]="signInForm" id="user-signin" (ngSubmit)="onSubmit()">
+    <div>
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input
+          id="username"
+          class="form-control"
+          type="text"
+          formControlName="username"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input
+          id="password"
+          class="form-control"
+          type="password"
+          formControlName="password"
+        />
+      </div>
+      <div class="form-group">
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="!signInForm.valid">Login
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -5,6 +5,7 @@ import { User } from "../auth/user.model";
 
 @Component({
   selector: 'cash-signin',
+  styleUrls: ['./signin.component.scss'],
   templateUrl: './signin.component.html'
 })
 

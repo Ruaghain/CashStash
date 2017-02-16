@@ -5,7 +5,7 @@ import { AuthService } from "../auth/auth.service";
 
 @Component({
   selector: 'cash-signup',
-  styleUrls: ['/signup.component.scss'],
+  styleUrls: ['./signup.component.scss'],
   templateUrl: './signup.component.html'
 })
 export class SignUpComponent implements OnInit {

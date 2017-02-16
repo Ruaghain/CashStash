@@ -1,0 +1,14 @@
+@import "../sass/colours";
+
+h2 {
+  color: $grey;
+}
+
+label {
+  @extend h2;
+}
+
+input[type="text"], textarea, input[type="password"], input[type="email"] {
+  color: $cloud-grey;
+  background-color: $grey;
+}

@@ -8,13 +8,15 @@ import { TopbarComponent } from "./navigation/topbar/topbar.component";
 import { SignUpComponent } from "./signup/signup.component";
 import { AuthService } from "./auth/auth.service";
 import { routing } from "./app.routing";
+import {SignInComponent} from "./signin/signin.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     TopbarComponent,
     NavbarComponent,
-    SignUpComponent
+    SignUpComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,
