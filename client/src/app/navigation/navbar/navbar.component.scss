@@ -1,4 +1,8 @@
+@import '../../app.component.global';
+
 .cash-navigation {
+  height: $nav-bar-height;
+
   ul {
     background-color: #383838;
     list-style-type: none;

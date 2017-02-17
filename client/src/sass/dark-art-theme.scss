@@ -1,0 +1,61 @@
+@import 'partials/colours';
+@import 'partials/mixins';
+
+//Will download these fonts - can be used in the fonts in the FONTS section.
+@include google-font('Alegreya+Sans');
+@include google-font('Titillium+Web');
+
+// === FONTS ===
+$text-colour: $grey;
+$text-font: Veranda, Arial, sans-serif;
+$header-font: 'Palatino Linotype', Georgia, serif;
+
+// === INPUTS ===
+$input-background-colour: $grey;
+$input-text-colour: $cloud-grey;
+
+$container-width: 960px;
+
+// === TOP BAR ===
+$top-bar-height: 30px;
+$top-bar-colour: $black;
+$top-bar-header-colour: $grey;
+$top-bar-hover-colour: $cloud-grey;
+
+// === NAV BAR ===
+$nav-bar-height: 60px;
+
+$button-text-colour: $dusty-white;
+
+// == BUTTONS ===
+.submit {
+  @include submit-button;
+}
+
+.cancel {
+  @include cancel-button;
+}
+
+// ========================
+body {
+  font-family: sans-serif;
+  color: $text-colour;
+
+  @media only screen and (max-width: 960px) {
+    font-size: 125%;
+  }
+}
+
+h1, h2, h3, h4 {
+  font-family: $header-font;
+  color: $text-colour;
+}
+
+label {
+  color: $text-colour;
+}
+
+input[type="text"], textarea, input[type="password"], input[type="email"] {
+  color: $input-text-colour;
+  background-color: $input-background-colour;
+}

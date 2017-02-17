@@ -1,14 +1,11 @@
-@import "../sass/colours";
+@import "../sass/dark-art-theme";
 
-h2 {
-  color: $grey;
-}
-
-label {
-  @extend h2;
-}
-
-input[type="text"], textarea, input[type="password"], input[type="email"] {
-  color: $cloud-grey;
-  background-color: $grey;
+.container {
+  width: $container-width;
+  @media only screen and (max-width: 960px) {
+    width: auto;
+    max-width: $container-width;
+  }
+  margin-left: auto;
+  margin-right: auto;
 }

@@ -1,0 +1,50 @@
+@import 'colours';
+
+//This downloads the font from the internet (googleapis specifically)
+@mixin google-font($font) {
+  $font: unquote($font);
+  @import url(https://fonts.googleapis.com/css?family=#{$font});
+}
+
+@mixin header {
+  font: {
+    size: 22px;
+    weight: bold;
+  }
+}
+
+//Can specify parameters and default values.
+@mixin rounded($radius: 6px) {
+  border-radius: $radius;
+}
+
+@mixin button($radius: 4px, $border: 1px solid) {
+  @include rounded($radius);
+  width: 100px;
+  height: 30px;
+  border: $border $dusty-white;
+}
+
+@mixin submit-button {
+  @include button;
+  background-color: $dusty-blue;
+  color: $button-text-colour;
+}
+
+@mixin cancel-button {
+  @include button;
+  background: $dusty-red;
+  color: $button-text-colour
+}
+
+@mixin box($radius: 6px, $border: 1px solid) {
+  @include rounded($radius);
+  border: $border $dusty-white;
+}
+
+//The three dots make it a var arg
+@mixin box-shadow($shadows...) {
+  box-shadow: $shadows;
+  -moz-box-shadow: $shadows;
+  -webkit-box-shadow: $shadows;
+}
