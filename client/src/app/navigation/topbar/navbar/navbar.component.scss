@@ -1,6 +1,7 @@
 @import '../../../app.component.global';
 
 .cash-navigation {
+
   height: $nav-bar-height;
 
   ul {
@@ -9,18 +10,18 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-  }
 
-  li a {
-    color: $nav-bar-item-colour;
-    display: block;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
+    li a {
+      color: $nav-bar-item-colour;
+      display: block;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
 
-  li a:hover {
-    color: $nav-bar-hover-colour;
-    background-color: $nav-bar-hover-background;
+      &:hover {
+        color: $nav-bar-hover-colour;
+        background-color: $nav-bar-hover-background;
+      }
+    }
   }
 }
