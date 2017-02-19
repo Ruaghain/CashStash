@@ -2,10 +2,10 @@
 
 .container {
   width: $container-width;
-  @media only screen and (max-width: 960px) {
-    width: auto;
-    max-width: $container-width;
-  }
+  //@media only screen and (max-width: 960px) {
+  //  width: auto;
+  //  max-width: $container-width;
+  //}
   margin-left: auto;
   margin-right: auto;
 }

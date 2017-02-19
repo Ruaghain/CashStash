@@ -1,10 +1,10 @@
 var request = require("request");
 
-var base_url = "http://localhost:3000/";
+var base_url = "http://localhost:3000/api/v1";
 
-describe('User API Router:', function () {
+describe('Auth API Router:', function () {
 
-  describe('POST /', function () {
+  describe('POST /signin', function () {
     it('successfully creates a new user', function (done) {
       var body = {
         userName: 'TestUser',
@@ -14,7 +14,7 @@ describe('User API Router:', function () {
         password: 'Passw0rd'
       };
       request.post({
-        url: base_url + 'api/v1/users/',
+        url: base_url + '/auth/signin',
         json: body
       }, function (error, response, body) {
         expect(response.statusCode).toBe(201);
@@ -23,6 +23,23 @@ describe('User API Router:', function () {
         expect(body.obj.userName).toEqual('TestUser');
         expect(body.obj.firstName).toEqual('One');
         expect(body.obj.lastName).toEqual('User');
+        done();
+      });
+    });
+  });
+
+  describe('POST /signin', function () {
+    it('successfully signs in a user', function (done) {
+      var body = {
+        userName: 'TestUser',
+        password: 'Passw0rd'
+      };
+      request.post({
+        url: base_url + '/auth/signin',
+        json: body
+      }, function (error, response, body) {
+        expect(response.statusCode).toBe(201);
+        expect(body).toBeDefined();
         done();
       });
     });

@@ -9,12 +9,15 @@
   background-color: $top-bar-colour;
 
   .header {
-    @include header;
+    cursor: pointer;
     color: $top-bar-header-colour;
+    @extend .cash-top-bar-header;
   }
 
   .item {
-    @extend .header;
+    cursor: pointer;
+    color: $top-bar-header-colour;
+    @extend .cash-top-bar-item;
   }
 
   a:hover {
@@ -25,13 +28,5 @@
     text-align: center;
     padding: 5px 5px;
     text-decoration: none;
-  }
-
-  .right {
-    float: right;
-  }
-
-  .left {
-    float: left;
   }
 }

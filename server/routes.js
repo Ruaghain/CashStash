@@ -3,6 +3,7 @@
 
 module.exports = function(app) {
 
+  app.use('/api/v1/auth', require('./api/auth/auth.route'));
   app.use('/api/v1/users', require('./api/user/user.route'));
   // app.use('/api/accounts', require('./api/account'));
 

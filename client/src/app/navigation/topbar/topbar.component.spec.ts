@@ -1,11 +1,12 @@
-import {ComponentFixture, TestBed, async} from "@angular/core/testing";
-import {By} from "@angular/platform-browser";
-import {APP_BASE_HREF} from "@angular/common";
-import {TopbarComponent} from "./topbar.component";
-import {RouterTestingModule} from "@angular/router/testing";
-import {DebugElement} from "@angular/core";
-import {AuthService} from "../../auth/auth.service";
-import {HttpModule} from "@angular/http";
+import { ComponentFixture, TestBed, async } from "@angular/core/testing";
+import { By } from "@angular/platform-browser";
+import { APP_BASE_HREF } from "@angular/common";
+import { TopbarComponent } from "./topbar.component";
+import { RouterTestingModule } from "@angular/router/testing";
+import { DebugElement } from "@angular/core";
+import { AuthService } from "../../auth/auth.service";
+import { HttpModule } from "@angular/http";
+import { NavbarComponent } from "./navbar/navbar.component";
 
 describe("TopbarComponent", () => {
   let component: TopbarComponent;
@@ -32,10 +33,10 @@ describe("TopbarComponent", () => {
         RouterTestingModule,
         HttpModule
       ],
-      declarations: [TopbarComponent],
+      declarations: [TopbarComponent, NavbarComponent],
       providers: [
-        {provide: APP_BASE_HREF, useValue: '/'},
-        {provide: AuthService, useClass: MockAuthService}
+        { provide: APP_BASE_HREF, useValue: '/' },
+        { provide: AuthService, useClass: MockAuthService }
       ]
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(TopbarComponent);
@@ -67,14 +68,19 @@ describe("TopbarComponent", () => {
       items = fixture.debugElement.queryAll(By.css('.item'));
     });
 
-    it('should display two options when a user is not signed in', () => {
+    it('displays two options when a user is not signed in', () => {
       let loggedOutItems = Array.prototype.slice.call(items);
       expect(loggedOutItems.length).toBe(2, 'There should be two options for users who are not signed in.');
     });
 
-    it('should display the "Sign In" and "Sign Up" buttons if the user is not logged in', () => {
+    it('displays the "Sign In" and "Sign Up" buttons if the user is not logged in', () => {
       expect(items[0].nativeElement.innerText).toEqual('Sign Up');
       expect(items[1].nativeElement.innerText).toEqual('Login');
+    });
+
+    it('does not display the navigation bar', () => {
+      let nav = fixture.debugElement.query(By.css('.cash-navigation'));
+      expect(nav).toBeNull();
     });
   });
 
@@ -87,12 +93,17 @@ describe("TopbarComponent", () => {
       items = fixture.debugElement.queryAll(By.css('.item'));
     });
 
-    it('should display a logout option', () => {
+    it('displays a logout option', () => {
       expect(items[0].nativeElement.innerText).toBe('Logout', 'There should be a "Logout" option displayed to the user.');
     });
 
-    it('should display the users full name', () => {
+    it('displays the users full name', () => {
       expect(items[1].nativeElement.innerText).toBe('One User', 'The users full name should be displayed in the top bar.');
+    });
+
+    it('displays the navigation bar', () => {
+      let nav = fixture.debugElement.query(By.css('.cash-navigation'));
+      expect(nav).toBeDefined();
     });
 
   });

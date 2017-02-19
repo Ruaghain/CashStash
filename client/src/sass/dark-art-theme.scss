@@ -2,13 +2,13 @@
 @import 'partials/mixins';
 
 //Will download these fonts - can be used in the fonts in the FONTS section.
-@include google-font('Alegreya+Sans');
-@include google-font('Titillium+Web');
+//@include google-font('Alegreya+Sans');
+//@include google-font('Titillium+Web');
 
 // === FONTS ===
 $text-colour: $grey;
-$text-font: Veranda, Arial, sans-serif;
-$header-font: 'Palatino Linotype', Georgia, serif;
+$text-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$header-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 // === INPUTS ===
 $input-background-colour: $grey;
@@ -22,18 +22,52 @@ $top-bar-colour: $black;
 $top-bar-header-colour: $grey;
 $top-bar-hover-colour: $cloud-grey;
 
-// === NAV BAR ===
-$nav-bar-height: 60px;
-
-$button-text-colour: $dusty-white;
-
-// == BUTTONS ===
-.submit {
-  @include submit-button;
+.cash-top-bar-header {
+  text-transform: uppercase;
+  @include font-size(18px, bold)
 }
 
-.cancel {
-  @include cancel-button;
+.cash-top-bar-item {
+  @include font-size(12px, bold)
+}
+
+// === NAV BAR ===
+$nav-bar-height: 60px;
+$nav-bar-colour: $storm-grey;
+$nav-bar-item-colour: $grey;
+$nav-bar-hover-colour: $cloud-grey;
+$nav-bar-hover-background: $winter-grey;
+
+.cash-nav-bar-item {
+  @include font-size(14px, bold);
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+// == BUTTONS ===
+$button-text-colour: $dusty-white;
+$button-border-colour: $dusty-white;
+.cash-submit {
+  @include button($background: $dusty-blue, $text-colour: $button-text-colour)
+}
+
+.cash-cancel {
+  @include button($background: $dusty-red, $text-colour: $button-text-colour)
+}
+
+.cash-form-group {
+  margin-bottom: 15px;
+}
+
+// == TEXTBOX ===
+.cash-textbox {
+  @include textbox($dusty-white, $dusty-yellow);
 }
 
 // ========================
@@ -41,9 +75,9 @@ body {
   font-family: sans-serif;
   color: $text-colour;
 
-  @media only screen and (max-width: 960px) {
-    font-size: 125%;
-  }
+  //@media only screen and (max-width: 960px) {
+  //  font-size: 125%;
+  //}
 }
 
 h1, h2, h3, h4 {
@@ -52,6 +86,7 @@ h1, h2, h3, h4 {
 }
 
 label {
+  @include label;
   color: $text-colour;
 }
 

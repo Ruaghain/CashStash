@@ -1,10 +1,10 @@
-@import '../../app.component.global';
+@import '../../../app.component.global';
 
 .cash-navigation {
   height: $nav-bar-height;
 
   ul {
-    background-color: #383838;
+    background-color: $nav-bar-colour;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -12,7 +12,7 @@
   }
 
   li a {
-    color: #616161;
+    color: $nav-bar-item-colour;
     display: block;
     text-align: center;
     padding: 14px 16px;
@@ -20,11 +20,7 @@
   }
 
   li a:hover {
-    color: #969696;
-    background-color: #4b4b4b;
-  }
-
-  .left {
-    float: left;
+    color: $nav-bar-hover-colour;
+    background-color: $nav-bar-hover-background;
   }
 }

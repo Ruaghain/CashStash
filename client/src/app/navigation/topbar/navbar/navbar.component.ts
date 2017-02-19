@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NavigationItem } from "./navbar.item";
-import { AuthService } from "../../auth/auth.service";
+import { AuthService } from "../../../auth/auth.service";
 
 @Component({
   selector: 'cash-navbar',

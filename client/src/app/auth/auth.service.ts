@@ -17,7 +17,7 @@ export class AuthService extends BaseService {
     const headers = new Headers({
       'Content-Type': 'application/json'
     });
-    return this.http.post(this.baseUrl + '/users', body, { headers: headers })
+    return this.http.post(this.baseUrl + '/auth/signup', body, { headers: headers })
       .map((response: Response) => response.json())
       .catch((error: Response) => {
         return Observable.throw(error.json())
@@ -29,12 +29,12 @@ export class AuthService extends BaseService {
     const headers = new Headers({
       'Content-Type': 'application/json'
     });
-    return this.http.post(this.baseUrl + '/users/signin', body, { headers: headers })
+    return this.http.post(this.baseUrl + '/auth/signin', body, { headers: headers })
       .map((response: Response) => {
-        console.log('User signed in successfully. Sign them in.');
         return response.json()
       })
       .catch((error: Response) => {
+        localStorage.clear();
         // this.errorService.handleError(error.json());
         return Observable.throw(error.json())
       });
@@ -45,10 +45,12 @@ export class AuthService extends BaseService {
   };
 
   isLoggedIn = () => {
-    return localStorage.getItem('cashToken') != null;
+    return localStorage.getItem('userId') != null;
   };
 
+  //Can get the full name from the token - need to decode it from base64.
   getFullName = () => {
-    return "Full Name";
+    //console.log(window.atob(localStorage.getItem('token')));
+    return localStorage.getItem('fullName');
   }
 }

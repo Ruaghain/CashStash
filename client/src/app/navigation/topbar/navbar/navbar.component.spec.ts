@@ -1,9 +1,9 @@
-import {ComponentFixture, TestBed, async} from "@angular/core/testing";
-import {APP_BASE_HREF} from "@angular/common";
-import {NavbarComponent} from "./navbar.component";
-import {RouterTestingModule} from "@angular/router/testing";
-import {AuthService} from "../../auth/auth.service";
-import {HttpModule} from "@angular/http";
+import { ComponentFixture, TestBed, async } from "@angular/core/testing";
+import { APP_BASE_HREF } from "@angular/common";
+import { NavbarComponent } from "./navbar.component";
+import { RouterTestingModule } from "@angular/router/testing";
+import { AuthService } from "../../../auth/auth.service";
+import { HttpModule } from "@angular/http";
 
 describe("NavbarComponent", () => {
 
@@ -27,8 +27,8 @@ describe("NavbarComponent", () => {
       ],
       declarations: [NavbarComponent],
       providers: [
-        {provide: APP_BASE_HREF, useValue: '/'},
-        {provide: AuthService, useClass: MockAuthService}
+        { provide: APP_BASE_HREF, useValue: '/' },
+        { provide: AuthService, useClass: MockAuthService }
       ]
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(NavbarComponent);

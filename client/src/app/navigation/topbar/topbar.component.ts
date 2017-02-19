@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { AuthService } from "../../auth/auth.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'cash-topbar',
@@ -9,7 +10,7 @@ import { AuthService } from "../../auth/auth.service";
 
 export class TopbarComponent {
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   isUserLoggedIn = () => {
@@ -18,5 +19,10 @@ export class TopbarComponent {
 
   userFullName = () => {
     return this.authService.getFullName();
+  };
+
+  logout = () => {
+    this.authService.logout();
+    this.router.navigateByUrl('/')
   }
 }
