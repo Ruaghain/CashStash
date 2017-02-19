@@ -5,6 +5,8 @@
 //@include google-font('Alegreya+Sans');
 //@include google-font('Titillium+Web');
 
+$container-width: 900px;
+
 // === FONTS ===
 $text-colour: $grey;
 $text-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -14,7 +16,6 @@ $header-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $input-background-colour: $grey;
 $input-text-colour: $cloud-grey;
 
-$container-width: 960px;
 
 // === TOP BAR ===
 $top-bar-height: 30px;

@@ -24,5 +24,9 @@ export class TopbarComponent {
   logout = () => {
     this.authService.logout();
     this.router.navigateByUrl('/')
+  };
+
+  onHeaderClick = () => {
+    this.router.navigateByUrl('/')
   }
 }

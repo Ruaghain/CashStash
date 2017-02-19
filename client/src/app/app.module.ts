@@ -5,10 +5,11 @@ import { HttpModule } from "@angular/http";
 import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./navigation/topbar/navbar/navbar.component";
 import { TopbarComponent } from "./navigation/topbar/topbar.component";
+import { HomeComponent } from "./home/home.component";
+import { SignInComponent } from "./signin/signin.component";
 import { SignUpComponent } from "./signup/signup.component";
 import { AuthService } from "./auth/auth.service";
 import { routing } from "./app.routing";
-import { SignInComponent } from "./signin/signin.component";
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SignInComponent } from "./signin/signin.component";
     TopbarComponent,
     NavbarComponent,
     SignUpComponent,
-    SignInComponent
+    SignInComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

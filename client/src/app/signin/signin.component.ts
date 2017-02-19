@@ -42,7 +42,14 @@ export class SignInComponent implements OnInit {
         localStorage.setItem('fullName', data.fullName);
         this.router.navigateByUrl('/');
       },
-      error => console.error(error)
+      error => {
+        this.signInForm.value.password.reset();
+        console.error(error)
+      }
     )
+  };
+
+  onCancel = () => {
+    this.router.navigateByUrl('/')
   }
 }

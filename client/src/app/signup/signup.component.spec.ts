@@ -4,9 +4,14 @@ import { SignUpComponent } from "./signup.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AuthService } from "../auth/auth.service";
 import { HttpModule } from "@angular/http";
+import { Router } from "@angular/router";
 
 describe("SignupComponent", () => {
   let fixture: ComponentFixture<SignUpComponent>;
+
+  let mockRouter = {
+    navigateByUrl: jasmine.createSpy('navigateByUrl')
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -17,6 +22,7 @@ describe("SignupComponent", () => {
       ],
       declarations: [SignUpComponent],
       providers: [
+        { provide: Router, useValue: mockRouter },
         AuthService
       ]
     }).compileComponents().then(() => {

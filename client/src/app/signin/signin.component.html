@@ -26,8 +26,8 @@
           type="submit"
           [disabled]="!signInForm.valid">Login
         </button>
-        <button
-          class="cash-cancel">Cancel
+        <button (click)="onCancel()"
+                class="cash-cancel">Cancel
         </button>
       </div>
     </div>
