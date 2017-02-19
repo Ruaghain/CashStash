@@ -5,22 +5,44 @@
   height: $nav-bar-height;
 
   ul {
-    background-color: $nav-bar-colour;
-    list-style-type: none;
+    @include flexbox;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    list-style: none;
+    background-color: $nav-bar-colour;
+    justify-content: flex-start;
 
     li a {
-      color: $nav-bar-item-colour;
       display: block;
       text-align: center;
       padding: 14px 16px;
       text-decoration: none;
+      color: $nav-bar-item-colour;
 
       &:hover {
         color: $nav-bar-hover-colour;
         background-color: $nav-bar-hover-background;
+      }
+    }
+
+    @include medium-screen {
+      justify-content: space-around;
+    }
+
+    @include small-screen {
+      -webkit-flex-flow: column wrap;
+      flex-flow: column wrap;
+      padding: 0;
+
+      li a {
+        text-align: center;
+        padding: 10px;
+        border-top: $nav-bar-item-colour;
+        border-bottom: $nav-bar-hover-background;
+      }
+
+      li:last-of-type a {
+        border-bottom: none;
       }
     }
   }

@@ -1,11 +1,19 @@
 @import "../sass/dark-art-theme";
 
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+}
+
 .container {
-  width: $container-width;
-  //@media only screen and (max-width: 960px) {
-  //  width: auto;
-  //  max-width: $container-width;
-  //}
+  width: $large-width;
+  @include large-screen {
+    width: auto;
+    max-width: $large-width;
+  }
   margin-left: auto;
   margin-right: auto;
 }
