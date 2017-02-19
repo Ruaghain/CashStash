@@ -24,17 +24,18 @@ module.exports = function (config) {
 
     plugins: [
       require("karma-webpack"),
-      require("karma-sourcemap-loader"),
-      require("karma-phantomjs-launcher"),
+      require("karma-jasmine"),
+      require("karma-coverage"),
       require("karma-chrome-launcher"),
-      require("karma-jasmine")
+      require("karma-sourcemap-loader"),
+      require("karma-phantomjs-launcher")
     ],
 
     webpackServer: {
       noInfo: true
     },
 
-    reporters: ['progress'],
+    reporters: ['progress', 'coverage'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,

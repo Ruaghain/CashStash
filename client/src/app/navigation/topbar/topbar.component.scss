@@ -1,31 +1,32 @@
+@import '../../app.component.global';
+
 .top-bar {
+  //Need to specify the parameter name, since border is the second argument
+  //@include box($border: 1px solid);
+  //@include box-shadow(2px, 0px, 4px $white, 1px 1px 6px $dusty-red);
   padding: 5px 5px 0 5px;
-  height: 30px;
-  background-color: #1A1A1A;
+  height: $top-bar-height;
+  background-color: $top-bar-colour;
 
   .header {
-    color: #616161;
+    cursor: pointer;
+    color: $top-bar-header-colour;
+    @extend .cash-top-bar-header;
   }
 
   .item {
-    @extend .header;
+    cursor: pointer;
+    color: $top-bar-header-colour;
+    @extend .cash-top-bar-item;
   }
 
   a:hover {
-    color: #969696;
+    color: $top-bar-hover-colour;
   }
 
   a {
     text-align: center;
     padding: 5px 5px;
     text-decoration: none;
-  }
-
-  .right {
-    float: right;
-  }
-
-  .left {
-    float: left;
   }
 }

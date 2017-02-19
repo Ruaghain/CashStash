@@ -1,3 +1,4 @@
+require('./app.component.global.scss');
 import { Component } from '@angular/core';
 
 @Component({

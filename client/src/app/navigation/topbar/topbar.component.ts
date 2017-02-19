@@ -1,4 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
+import { AuthService } from "../../auth/auth.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'cash-topbar',
@@ -6,29 +8,25 @@ import { Component, OnInit } from "@angular/core";
   templateUrl: 'topbar.component.html'
 })
 
-export class TopbarComponent extends OnInit {
-  private headerUserLoggedIn: boolean;
-  private headerUserFullName: string;
+export class TopbarComponent {
 
-  ngOnInit(): void {
-    this.setUserLoggedIn(false);
-    this.setUserFullName("Rowan Massey");
+  constructor(private authService: AuthService, private router: Router) {
   }
 
-  //Will get the following from the authorisation service when it's created.
-  setUserLoggedIn = (userLoggedIn: boolean) => {
-    this.headerUserLoggedIn = userLoggedIn;
-  };
-
-  setUserFullName = (userFullName: string) => {
-    this.headerUserFullName = userFullName;
-  };
-
   isUserLoggedIn = () => {
-    return this.headerUserLoggedIn;
+    return this.authService.isLoggedIn();
   };
 
   userFullName = () => {
-    return this.headerUserFullName;
+    return this.authService.getFullName();
+  };
+
+  logout = () => {
+    this.authService.logout();
+    this.router.navigateByUrl('/')
+  };
+
+  onHeaderClick = () => {
+    this.router.navigateByUrl('/')
   }
 }

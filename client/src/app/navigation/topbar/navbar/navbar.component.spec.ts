@@ -2,25 +2,40 @@ import { ComponentFixture, TestBed, async } from "@angular/core/testing";
 import { APP_BASE_HREF } from "@angular/common";
 import { NavbarComponent } from "./navbar.component";
 import { RouterTestingModule } from "@angular/router/testing";
-import { NavigationItem } from "./navbar.item";
+import { AuthService } from "../../../auth/auth.service";
+import { HttpModule } from "@angular/http";
 
-describe("HeaderComponent", () => {
+describe("NavbarComponent", () => {
+
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
   let element: HTMLElement;
+  let authService: any;
 
   beforeEach(async(() => {
+    class MockAuthService {
+      public loggedIn = false;
+      public isLoggedIn = () => {
+        return this.loggedIn;
+      }
+    }
+
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        HttpModule
       ],
       declarations: [NavbarComponent],
       providers: [
-        { provide: APP_BASE_HREF, useValue: '/' }
+        { provide: APP_BASE_HREF, useValue: '/' },
+        { provide: AuthService, useClass: MockAuthService }
       ]
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(NavbarComponent);
       component = fixture.componentInstance;
+
+      authService = TestBed.get(AuthService);
+
       fixture.detectChanges();
     });
   }));
@@ -31,9 +46,8 @@ describe("HeaderComponent", () => {
 
   //TODO: Need to test for the actual route when the relevant item is clicked.
   describe('user not logged in', () => {
-
     beforeEach(() => {
-      component.setUserLoggedIn(false);
+      authService.loggedIn = false;
       fixture.detectChanges();
     });
 
@@ -46,21 +60,19 @@ describe("HeaderComponent", () => {
   describe('user is logged in', () => {
 
     beforeEach(() => {
-      component.setUserLoggedIn(true);
-      component.addNavigationItem(new NavigationItem('Accounts', 'accounts'));
-      component.addNavigationItem(new NavigationItem('Reports', 'reports'));
+      authService.loggedIn = true;
       fixture.detectChanges();
     });
 
     it('should display the navigation bar', () => {
       element = fixture.nativeElement.querySelector('nav>div');
-      expect(element).toBeDefined('The navigation component should not be displayed if no user is logged in.');
+      expect(element).toBeDefined('The navigation component should be displayed if user is logged in.');
     });
 
     it('should display two list items', () => {
       element = fixture.nativeElement.querySelectorAll('ul>li');
       let navigationItems = Array.prototype.slice.call(element);
-      expect(navigationItems.length).toEqual(2, 'There should be two list items displayed.');
+      expect(navigationItems.length).toEqual(3, 'There should be three list items displayed.');
     });
 
     it('should display the correct item names', () => {
