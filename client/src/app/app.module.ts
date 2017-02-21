@@ -10,6 +10,7 @@ import { SignInComponent } from "./signin/signin.component";
 import { SignUpComponent } from "./signup/signup.component";
 import { AuthService } from "./auth/auth.service";
 import { routing } from "./app.routing";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { routing } from "./app.routing";
     routing,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    FlexLayoutModule
   ],
   providers: [
     AuthService

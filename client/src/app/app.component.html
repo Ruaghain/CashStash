@@ -1,4 +1,8 @@
 <div class="container">
-  <cash-topbar></cash-topbar>
-  <router-outlet></router-outlet>
+  <div fxLayout="column" fxFlex>
+    <!--<div fxFlex> I'm above on mobile, and left on larger devices. </div>-->
+    <!--<div fxFlex> I'm below on mobile, and right on larger devices. </div>-->
+    <cash-topbar></cash-topbar>
+    <router-outlet></router-outlet>
+  </div>
 </div>
