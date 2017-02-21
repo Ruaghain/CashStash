@@ -4,8 +4,6 @@
   //Need to specify the parameter name, since border is the second argument
   //@include box($border: 1px solid);
   //@include box-shadow(2px, 0px, 4px $white, 1px 1px 6px $dusty-red);
-  @include flexbox;
-  justify-content: flex-start;
 
   padding: 5px 5px 0 5px;
   height: $top-bar-height;
