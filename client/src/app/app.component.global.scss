@@ -7,7 +7,6 @@
 .container {
   box-sizing: content-box !important;
 
-  width: $large-width;
   @include large-screen {
     width: auto;
     max-width: $large-width;
