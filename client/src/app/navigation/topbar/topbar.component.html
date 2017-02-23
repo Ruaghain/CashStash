@@ -1,21 +1,21 @@
 <div>
-  <div class="top-bar" fxFlex="100%">
-    <div class="left">
+  <div fxLayout="row" class="top-bar">
+    <div>
       <a class="header" (click)="onHeaderClick()">Cash Stash</a>
     </div>
-    <div *ngIf="isUserLoggedIn()">
-      <div class="right">
-        <a class="item" (click)="logout()">Logout</a>
-      </div>
-      <div class="right">
+    <div fxFlex fxLayout="row" fxLayoutAlign="end" *ngIf="isUserLoggedIn()">
+      <div>
         <a class="item">{{userFullName()}}</a>
       </div>
+      <div>
+        <a class="item" (click)="logout()">Logout</a>
+      </div>
     </div>
-    <div *ngIf="!isUserLoggedIn()">
-      <div class="right">
+    <div fxFlex fxLayout="row" fxLayoutAlign="end" *ngIf="!isUserLoggedIn()">
+      <div>
         <a class="item" [routerLink]="['signup']">Sign Up</a>
       </div>
-      <div class="right">
+      <div>
         <a class="item" [routerLink]="['signin']">Login</a>
       </div>
     </div>

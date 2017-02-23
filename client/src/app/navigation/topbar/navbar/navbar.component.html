@@ -1,10 +1,9 @@
 <nav class="cash-navigation">
   <div *ngIf="isUserLoggedIn()">
-    <ul fxLayout="row" fxLayoutAlign="left" fxLayout.xs="column">
+    <ul fxLayout="row" fxLayoutAlign="start" fxLayout.xs="column">
       <li *ngFor="let item of navigationItems()">
         <a class="cash-nav-bar-item" [routerLink]="[item.link]">{{item.name}}</a>
       </li>
     </ul>
   </div>
 </nav>
-<!--http://plnkr.co/edit/WzfbnAaRBxH8H67B5Di4?p=preview-->
