@@ -94,11 +94,11 @@ describe("TopbarComponent", () => {
     });
 
     it('displays a logout option', () => {
-      expect(items[0].nativeElement.innerText).toBe('Logout', 'There should be a "Logout" option displayed to the user.');
+      expect(items[1].nativeElement.innerText).toBe('Logout', 'There should be a "Logout" option displayed to the user.');
     });
 
     it('displays the users full name', () => {
-      expect(items[1].nativeElement.innerText).toBe('One User', 'The users full name should be displayed in the top bar.');
+      expect(items[0].nativeElement.innerText).toBe('One User', 'The users full name should be displayed in the top bar.');
     });
 
     it('displays the navigation bar', () => {
