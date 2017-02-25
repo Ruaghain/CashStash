@@ -1,11 +1,12 @@
 @import "../sass/dark-art-theme";
 
 .container {
-  width: $container-width;
-  //@media only screen and (max-width: 960px) {
-  //  width: auto;
-  //  max-width: $container-width;
-  //}
+  min-height: 98vh;
+
+  @include large-screen {
+    width: auto;
+    max-width: $large-width;
+  }
   margin-left: auto;
   margin-right: auto;
 }

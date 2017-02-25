@@ -2,21 +2,18 @@
 
 .cash-navigation {
 
-  height: $nav-bar-height;
-
   ul {
-    background-color: $nav-bar-colour;
-    list-style-type: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    list-style: none;
+    background-color: $nav-bar-colour;
 
     li a {
-      color: $nav-bar-item-colour;
       display: block;
       text-align: center;
       padding: 14px 16px;
       text-decoration: none;
+      color: $nav-bar-item-colour;
 
       &:hover {
         color: $nav-bar-hover-colour;

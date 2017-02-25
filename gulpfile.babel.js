@@ -1,18 +1,17 @@
 'use strict';
 
-import _ from 'lodash';
-import webpack from 'webpack';
-import webpackStream from 'webpack-stream';
-import webpackDev from './webpack.dev';
-import webpackTest from './webpack.test';
-import gulp from 'gulp';
-import del from 'del';
-import gulpLoadPlugins from 'gulp-load-plugins';
-import nodemon from 'nodemon';
-import { Server as KarmaServer } from 'karma';
-import runSequence from 'run-sequence';
-import http from 'http';
-import open from 'open';
+import webpack from "webpack";
+import webpackStream from "webpack-stream";
+import webpackDev from "./webpack.dev";
+import webpackTest from "./webpack.test";
+import gulp from "gulp";
+import del from "del";
+import gulpLoadPlugins from "gulp-load-plugins";
+import nodemon from "nodemon";
+import { Server as KarmaServer } from "karma";
+import runSequence from "run-sequence";
+import http from "http";
+import open from "open";
 
 // import path from 'path';
 // import through2 from 'through2';
@@ -25,8 +24,16 @@ var plugins = gulpLoadPlugins();
 var config;
 
 const serverPath = 'server';
+const clientPath = 'client';
+
 const paths = {
-  client: {},
+  client: {
+    scripts: [
+      `${clientPath}/**/*.html`,
+      `${clientPath}/**/!(*.spec).ts`,
+      `${clientPath}/**/*.scss`
+    ]
+  },
   server: {
     scripts: [
       `${serverPath}/**/!(*.spec|*.integration).js`,
@@ -44,21 +51,21 @@ gulp.task('clean', function () {
 
 gulp.task('webpack:dev', function () {
   return gulp.src(webpackDev.entry.app)
-    .pipe(webpackStream(webpackDev, webpack))
-    .on('error', function handleError(e) {
-      this.emit('end');
-    })
-    .pipe(gulp.dest(paths.dist));
+  .pipe(webpackStream(webpackDev, webpack))
+  .on('error', function handleError(e) {
+    this.emit('end');
+  })
+  .pipe(gulp.dest(paths.dist));
 });
 
 //This is for the test environment.
-gulp.task('webpack:test', function() {
+gulp.task('webpack:test', function () {
   return gulp.src(webpackDev.entry.app)
-    .pipe(webpackStream(webpackTest, webpack))
-    .on('error', function handleError(e) {
-      this.emit('end');
-    })
-    .pipe(gulp.dest(paths.dist));
+  .pipe(webpackStream(webpackTest, webpack))
+  .on('error', function handleError(e) {
+    this.emit('end');
+  })
+  .pipe(gulp.dest(paths.dist));
 });
 
 /********************
@@ -70,8 +77,8 @@ function checkAppReady(cb) {
     port: config.port
   };
   http
-    .get(options, () => cb(true))
-    .on('error', () => cb(false));
+  .get(options, () => cb(true))
+  .on('error', () => cb(false));
 }
 
 function whenServerReady(cb) {
@@ -157,7 +164,16 @@ gulp.task('test:client', (done) => {
 
 gulp.task('watch', () => {
   plugins.watch(paths.server.scripts)
-    .pipe(plugins.plumber());
+  .pipe(plugins.plumber());
+});
+
+gulp.task('watch:client', () => {
+  gulp.watch(paths.client.scripts, ['clean', 'webpack:dev'])
+});
+
+gulp.task('watch:server', () => {
+  plugins.watch(paths.client.scripts)
+  .pipe(plugins.plumber());
 });
 
 gulp.task('serve', cb => {
@@ -171,9 +187,7 @@ gulp.task('serve', cb => {
     [
       'start:server'
     ],
-    [
-      'watch'
-    ],
+    'watch:client',
     cb
   );
 });
@@ -191,7 +205,8 @@ gulp.task('serve:debug', cb => {
       'start:client'
     ],
     'watch',
-    cb);
+    cb
+  );
 });
 
 gulp.task('build', ['compile']);

@@ -5,7 +5,9 @@
 //@include google-font('Alegreya+Sans');
 //@include google-font('Titillium+Web');
 
-$container-width: 900px;
+$large-width: 960px;
+$medium-width: 680px;
+$small-width: 480px;
 
 // === FONTS ===
 $text-colour: $grey;
@@ -33,7 +35,6 @@ $top-bar-hover-colour: $cloud-grey;
 }
 
 // === NAV BAR ===
-$nav-bar-height: 60px;
 $nav-bar-colour: $storm-grey;
 $nav-bar-item-colour: $grey;
 $nav-bar-hover-colour: $cloud-grey;
