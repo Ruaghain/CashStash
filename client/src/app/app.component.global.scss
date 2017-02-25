@@ -1,11 +1,7 @@
 @import "../sass/dark-art-theme";
 
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
 .container {
-  box-sizing: content-box !important;
+  min-height: 98vh;
 
   @include large-screen {
     width: auto;

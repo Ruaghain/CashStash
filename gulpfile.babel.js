@@ -29,7 +29,9 @@ const clientPath = 'client';
 const paths = {
   client: {
     scripts: [
-      `${clientPath}/**/!(*.spec|*.integration).html`
+      `${clientPath}/**/*.html`,
+      `${clientPath}/**/!(*.spec).ts`,
+      `${clientPath}/**/*.scss`
     ]
   },
   server: {
