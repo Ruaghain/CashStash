@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 // var HtmlWebpackPlugin = require('html-webpack-plugin');
-var helpers = require('./helpers');
+var helpers = require('./../helpers');
 
 module.exports = {
   target: 'node',
@@ -72,7 +72,7 @@ module.exports = {
           configFileName: 'tsconfig.json'
         },
         tslint: {
-          configuration: require('./tslint.json')
+          configuration: require('./../typescript/tslint.json')
         }
       }
     })

@@ -2,8 +2,8 @@
 
 import webpack from "webpack";
 import webpackStream from "webpack-stream";
-import webpackDev from "./webpack.dev";
-import webpackTest from "./webpack.test";
+import webpackDev from "./config/webpack/webpack.dev";
+import webpackTest from "./config/webpack/webpack.test";
 import gulp from "gulp";
 import del from "del";
 import gulpLoadPlugins from "gulp-load-plugins";
