@@ -6,6 +6,7 @@ import webpackDev from "./config/webpack/webpack.dev";
 import webpackTest from "./config/webpack/webpack.test";
 import gulp from "gulp";
 import del from "del";
+import jasmineNode from "gulp-jasmine-node";
 import gulpLoadPlugins from "gulp-load-plugins";
 import nodemon from "nodemon";
 import { Server as KarmaServer } from "karma";
@@ -39,6 +40,9 @@ const paths = {
       `${serverPath}/**/!(*.spec|*.integration).js`,
       `!${serverPath}/config/local.env.sample.js`
     ],
+    test: {
+      unit: [`${serverPath}/api/**/*.spec.js`]
+    }
   },
   karma: 'karma.conf.js',
   dist: 'dist/js'
@@ -51,21 +55,21 @@ gulp.task('clean', function () {
 
 gulp.task('webpack:dev', function () {
   return gulp.src(webpackDev.entry.app)
-  .pipe(webpackStream(webpackDev, webpack))
-  .on('error', function handleError(e) {
-    this.emit('end');
-  })
-  .pipe(gulp.dest(paths.dist));
+    .pipe(webpackStream(webpackDev, webpack))
+    .on('error', function handleError(e) {
+      this.emit('end');
+    })
+    .pipe(gulp.dest(paths.dist));
 });
 
 //This is for the test environment.
 gulp.task('webpack:test', function () {
   return gulp.src(webpackDev.entry.app)
-  .pipe(webpackStream(webpackTest, webpack))
-  .on('error', function handleError(e) {
-    this.emit('end');
-  })
-  .pipe(gulp.dest(paths.dist));
+    .pipe(webpackStream(webpackTest, webpack))
+    .on('error', function handleError(e) {
+      this.emit('end');
+    })
+    .pipe(gulp.dest(paths.dist));
 });
 
 /********************
@@ -77,8 +81,8 @@ function checkAppReady(cb) {
     port: config.port
   };
   http
-  .get(options, () => cb(true))
-  .on('error', () => cb(false));
+    .get(options, () => cb(true))
+    .on('error', () => cb(false));
 }
 
 function whenServerReady(cb) {
@@ -140,16 +144,6 @@ gulp.task('start:server', () => {
   });
 });
 
-gulp.task('start:server:debug', () => {
-  process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-  config = require(`./${serverPath}/config/environment`);
-  return nodemon({
-    script: `./${serverPath}/app.js`
-  }).on('error', (error) => {
-    console.log('There was an error: ' + error);
-  });
-});
-
 gulp.task('test:client', (done) => {
   new KarmaServer({
     configFile: `${__dirname}/${paths.karma}`,
@@ -162,9 +156,23 @@ gulp.task('test:client', (done) => {
   }).start();
 });
 
+gulp.task('test:server', (cb) => {
+  runSequence(
+    'env:all',
+    'env:test',
+    'start:server',
+    'jasmine:unit',
+    cb);
+});
+
+gulp.task('jasmine:unit', () => {
+  gulp.src(paths.server.test.unit)
+    .pipe(jasmineNode());
+});
+
 gulp.task('watch', () => {
   plugins.watch(paths.server.scripts)
-  .pipe(plugins.plumber());
+    .pipe(plugins.plumber());
 });
 
 gulp.task('watch:client', () => {
@@ -173,7 +181,7 @@ gulp.task('watch:client', () => {
 
 gulp.task('watch:server', () => {
   plugins.watch(paths.client.scripts)
-  .pipe(plugins.plumber());
+    .pipe(plugins.plumber());
 });
 
 gulp.task('serve', cb => {
@@ -201,7 +209,7 @@ gulp.task('serve:debug', cb => {
       'webpack:dev'
     ],
     [
-      'start:server:debug',
+      'start:server',
       'start:client'
     ],
     'watch',
