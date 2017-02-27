@@ -1,44 +1,31 @@
-var request = require("request");
+var request = require("supertest");
+var express = require("express");
 
-var base_url = "http://localhost:3000/";
+
+const app = express();
+const base_url = "http://localhost:3000/";
 
 describe('Account API Router:', function () {
 
   describe('POST /', function () {
+    var body = {
+      name: 'Current',
+      number: '12345678',
+      openingBalance: 500.32,
+      balance: -500
+    };
+    beforeEach(() => {
+      app.post('/accounts', function (req, res) {
+        res.status(201).json(req.body)
+      })
+    });
+
     it('successfully creates a new account', function (done) {
-      var body = {
-        name: 'Current',
-        number: '12345678',
-        openingBalance: 500.32,
-        balance: -500
-      };
-      request.post({
-        url: base_url + 'api/v1/accounts/',
-        json: body
-      }, function (error, response, body) {
-        console.log(error);
+      request(app).post('/accounts', body).
         expect(response.statusCode).toBe(201);
         expect(body).toBeDefined();
-        expect(body.message).toEqual('Account created');
-        expect(body.obj.name).toEqual('Current');
-        expect(body.obj.number).toEqual('12345678');
-        expect(body.obj.openingBalance).toEqual('500.32');
+      expect(body.name).toEqual('Current');
         done();
-      });
     });
   });
-
-  describe('GET /', function () {
-    it('successfully gets all accounts', function (done) {
-      request.get({
-        url: base_url + 'api/v1/accounts/'
-      }, function (error, response, body) {
-        console.log(error);
-        console.log(response);
-        console.log(body);
-        done();
-      });
-    });
-  });
-
 });

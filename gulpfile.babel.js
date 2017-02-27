@@ -160,7 +160,7 @@ gulp.task('test:server', (cb) => {
   runSequence(
     'env:all',
     'env:test',
-    'start:server',
+    //'start:server',
     'jasmine:unit',
     cb);
 });
