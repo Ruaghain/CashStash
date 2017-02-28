@@ -1,46 +1,51 @@
-var request = require("request");
+var request = require("supertest");
+var express = require("express");
 
-var base_url = "http://localhost:3000/api/v1";
+const app = express();
 
 describe('Auth API Router:', function () {
 
   describe('POST /signin', function () {
-    it('successfully creates a new user', function (done) {
-      var body = {
-        userName: 'TestUser',
-        firstName: 'One',
-        lastName: 'User',
-        email: 'one_user@mailinator.com',
-        password: 'Passw0rd'
-      };
-      request.post({
-        url: base_url + '/auth/signin',
-        json: body
-      }, function (error, response, body) {
-        expect(response.statusCode).toBe(201);
-        expect(body).toBeDefined();
-        expect(body.message).toEqual('User created');
-        expect(body.obj.userName).toEqual('TestUser');
-        expect(body.obj.firstName).toEqual('One');
-        expect(body.obj.lastName).toEqual('User');
-        done();
+    var body = {
+      userName: 'TestUser',
+      firstName: 'One',
+      lastName: 'User',
+      email: 'one_user@mailinator.com',
+      password: 'Passw0rd'
+    };
+
+    beforeEach(() => {
+      app.post('/auth/signin', function (req, res) {
+        res.status(201).json(req.body)
+      });
+    });
+
+    it('successfully creates a new user', () => {
+      request(app).post('/auth/signin', body)
+      .expect(201)
+      .then(response => {
+        expect(response.body.userName, 'TestUser');
       });
     });
   });
 
   describe('POST /signin', function () {
-    it('successfully signs in a user', function (done) {
-      var body = {
-        userName: 'TestUser',
-        password: 'Passw0rd'
-      };
-      request.post({
-        url: base_url + '/auth/signin',
-        json: body
-      }, function (error, response, body) {
-        expect(response.statusCode).toBe(201);
-        expect(body).toBeDefined();
-        done();
+    var body = {
+      userName: 'TestUser',
+      password: 'Passw0rd'
+    };
+
+    beforeEach(() => {
+      app.post('/auth/signin', function (req, res) {
+        res.status(201).json(req.body)
+      });
+    });
+
+    it('successfully signs in a user', () => {
+      request(app).post('/auth/signin', body)
+      .expect(201)
+      .then(response => {
+        expect(response.body.userName, 'TestUser');
       });
     });
   });

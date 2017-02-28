@@ -1,9 +1,7 @@
 var request = require("supertest");
 var express = require("express");
 
-
 const app = express();
-const base_url = "http://localhost:3000/";
 
 describe('Account API Router:', function () {
 
@@ -20,12 +18,12 @@ describe('Account API Router:', function () {
       })
     });
 
-    it('successfully creates a new account', function (done) {
-      request(app).post('/accounts', body).
-        expect(response.statusCode).toBe(201);
-        expect(body).toBeDefined();
-      expect(body.name).toEqual('Current');
-        done();
+    it('successfully creates a new account', () => {
+      request(app).post('/accounts', body)
+      .expect(201)
+      .then(response => {
+        expect(response.body.name, 'Current')
+      });
     });
   });
 });
