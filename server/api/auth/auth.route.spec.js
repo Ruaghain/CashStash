@@ -1,11 +1,14 @@
 var request = require("supertest");
 var express = require("express");
+var bodyParser = require('body-parser');
 
 const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 describe('Auth API Router:', function () {
 
-  describe('POST /signin', function () {
+  describe('POST /signup', function () {
     var body = {
       userName: 'TestUser',
       firstName: 'One',
@@ -15,17 +18,20 @@ describe('Auth API Router:', function () {
     };
 
     beforeEach(() => {
-      app.post('/auth/signin', function (req, res) {
+      app.post('/auth/signup', function (req, res) {
         res.status(201).json(req.body)
       });
     });
 
     it('successfully creates a new user', () => {
-      request(app).post('/auth/signin', body)
-      .expect(201)
-      .then(response => {
-        expect(response.body.userName, 'TestUser');
-      });
+      request(app).post('/auth/signup').send(body)
+        .end(function (err, res) {
+          expect(res.statusCode).toEqual(201);
+          expect(res.body.userName).toEqual('TestUser');
+          expect(res.body.firstName).toEqual('One');
+          expect(res.body.lastName).toEqual('Two');
+          expect(res.body.email).toEqual('one_user@mailiantor.com');
+        });
     });
   });
 
@@ -42,11 +48,11 @@ describe('Auth API Router:', function () {
     });
 
     it('successfully signs in a user', () => {
-      request(app).post('/auth/signin', body)
-      .expect(201)
-      .then(response => {
-        expect(response.body.userName, 'TestUser');
-      });
+      request(app).post('/auth/signin').send(body)
+        .end(function (err, res) {
+          expect(res.statusCode).toEqual(201);
+          expect(res.body.userName).toEqual('TestUser');
+        });
     });
   });
 });
