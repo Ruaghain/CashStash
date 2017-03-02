@@ -6,9 +6,9 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-describe('Auth API Router:', function () {
+describe('Auth API Router:', () => {
 
-  describe('POST /signup', function () {
+  describe('POST /signup', () => {
     var body = {
       userName: 'TestUser',
       firstName: 'One',
@@ -18,14 +18,14 @@ describe('Auth API Router:', function () {
     };
 
     beforeEach(() => {
-      app.post('/auth/signup', function (req, res) {
+      app.post('/auth/signup', (req, res) => {
         res.status(201).json(req.body)
       });
     });
 
     it('successfully creates a new user', () => {
       request(app).post('/auth/signup').send(body)
-        .end(function (err, res) {
+        .end((err, res) => {
           expect(res.statusCode).toEqual(201);
           expect(res.body.userName).toEqual('TestUser');
           expect(res.body.firstName).toEqual('One');

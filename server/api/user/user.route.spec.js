@@ -1,11 +1,14 @@
-var request = require("supertest");
 var express = require("express");
+var request = require("supertest");
+var bodyParser = require('body-parser');
 
 const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-describe('User API Router:', function () {
+describe('User API Router:', () => {
 
-  describe('POST /', function () {
+  describe('POST /', () => {
     var body = {
       userName: 'TestUser',
       firstName: 'One',
@@ -15,18 +18,19 @@ describe('User API Router:', function () {
     };
 
     beforeEach(() => {
-      app.post('/users', function (req, res) {
+      app.post('/users', (req, res) => {
         res.status(201).json(req.body)
       })
     });
 
     it('successfully creates a new user', () => {
-      request(app).post('/users', body)
-      .expect(201)
-      .then(response => {
-        console.log(response.body);
-        expect(response.body.userName, 'TestUser')
-      });
+      request(app).post('/users').send(body)
+        .end((err, res) => {
+          expect(res.body.userName, 'TestUser');
+          expect(res.body.firstName, 'One');
+          expect(res.body.lastName, 'User');
+          expect(res.body.email, 'one_user@mailinator.com');
+        });
     });
   });
 });
