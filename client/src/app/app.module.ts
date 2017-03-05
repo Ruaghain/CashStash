@@ -1,16 +1,19 @@
-import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { BrowserModule } from "@angular/platform-browser";
+import { FlexLayoutModule } from "@angular/flex-layout";
 import { HttpModule } from "@angular/http";
-import { AppComponent } from "./app.component";
-import { NavbarComponent } from "./navigation/topbar/navbar/navbar.component";
-import { TopbarComponent } from "./navigation/topbar/topbar.component";
-import { HomeComponent } from "./home/home.component";
+import { NgModule } from "@angular/core";
+import { NavbarComponent } from "./components/navbar/navbar.component";
+import { TopbarComponent } from "./components/topbar/topbar.component";
+import { ButtonItemComponent } from "./components/button-list/button-list-item/button-list-item.component";
+import { ButtonListComponent } from "./components/button-list/button-list.component";
+import { AccountListComponent } from "./account/account-list.component";
 import { SignInComponent } from "./signin/signin.component";
 import { SignUpComponent } from "./signup/signup.component";
+import { HomeComponent } from "./home/home.component";
+import { AppComponent } from "./app.component";
 import { AuthService } from "./auth/auth.service";
 import { routing } from "./app.routing";
-import { FlexLayoutModule } from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     NavbarComponent,
     SignUpComponent,
     SignInComponent,
-    HomeComponent
+    HomeComponent,
+    AccountListComponent,
+    ButtonListComponent,
+    ButtonItemComponent
   ],
   imports: [
     BrowserModule,

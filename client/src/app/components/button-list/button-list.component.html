@@ -1,3 +1,4 @@
-<div>
-  <h1>Button List</h1>
+<div fxLayout="column" class="button-list">
+  <wraith-button-item *ngFor="let button of buttons" (click)="onButtonClick(button)"
+                      [button]="button"></wraith-button-item>
 </div>

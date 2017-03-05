@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed, async } from "@angular/core/testing";
-import { APP_BASE_HREF } from "@angular/common";
-import { NavbarComponent } from "./navbar.component";
 import { RouterTestingModule } from "@angular/router/testing";
-import { AuthService } from "../../../auth/auth.service";
+import { APP_BASE_HREF } from "@angular/common";
 import { HttpModule } from "@angular/http";
+import { NavbarComponent } from "./navbar.component";
+import { AuthService } from "../../auth/auth.service";
 
 describe("NavbarComponent", () => {
 

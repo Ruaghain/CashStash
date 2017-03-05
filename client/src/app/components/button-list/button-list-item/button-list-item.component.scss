@@ -1,0 +1,25 @@
+@import '../../../app.component.global';
+
+.button-item {
+  @include rounded(4px);
+  display: block;
+  cursor: pointer;
+  border: 1px solid $grey;
+  height: 50px;
+  margin-bottom: 30px;
+  width: 100%;
+
+  color: $nav-bar-item-colour;
+  background-color: $nav-bar-colour;
+
+  &:hover {
+    color: $nav-bar-hover-colour;
+    background-color: $nav-bar-hover-background;
+  }
+
+  .button-name {
+    font-weight: bold;
+    margin-top: 15px;
+    text-align: center;
+  }
+}
