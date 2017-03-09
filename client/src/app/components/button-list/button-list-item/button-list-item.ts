@@ -1,4 +1,19 @@
 export class Button {
-  constructor(public name: string, public recordId?: string, public link?: string) {
+  protected innerHtml: string;
+
+  constructor(public name: string, public html?: string, public recordId?: string, public link?: string) {
+
+  }
+
+  hasInnerHtml = () => {
+    return this.innerHtml !== '';
+  };
+
+  getInnerHtml = () => {
+    return this.innerHtml;
+  };
+
+  render = () => {
+    return this.name;
   }
 }

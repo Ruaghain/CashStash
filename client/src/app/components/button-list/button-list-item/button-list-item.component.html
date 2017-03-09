@@ -1,3 +1,4 @@
 <div class="button-item">
-  <div class="button-name">{{button?.name}}</div>
+  <div class="button-name">{{button.render()}}</div>
+  <div *ngIf="button.hasInnerHtml()" class="button-custom-content" [innerHtml]="button.getInnerHtml()"></div>
 </div>
