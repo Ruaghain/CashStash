@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { Button } from "./button-list-item";
+import { ButtonListItem } from "./button-list-item";
 
 @Component({
   selector: 'wraith-button-item',
@@ -7,8 +7,8 @@ import { Button } from "./button-list-item";
   templateUrl: 'button-list-item.component.html'
 })
 
-export class ButtonItemComponent {
-  @Input() button: Button;
+export class ButtonListItemComponent {
+  @Input() button: ButtonListItem;
 
   constructor() {
   };

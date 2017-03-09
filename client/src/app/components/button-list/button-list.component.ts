@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { Button } from "./button-list-item/button-list-item";
+import { ButtonListItem } from "./button-list-item/button-list-item";
 
 @Component({
   selector: 'wraith-button-list',
@@ -7,13 +7,13 @@ import { Button } from "./button-list-item/button-list-item";
 })
 
 export class ButtonListComponent {
-  @Input() buttons: Button[] = [];
-  @Output() buttonSelected = new EventEmitter<Button>();
+  @Input() buttons: ButtonListItem[] = [];
+  @Output() buttonSelected = new EventEmitter<ButtonListItem>();
 
   constructor() {
   };
 
-  onButtonClick(button: Button) {
+  onButtonClick(button: ButtonListItem) {
     this.buttonSelected.emit(button);
   }
 }

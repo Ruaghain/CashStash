@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { Button } from "../components/button-list/button-list-item/button-list-item";
-import {AccountButtonItem} from "./account-button-item";
+import { ButtonListItem } from "../components/button-list/button-list-item/button-list-item";
+import { AccountButtonItem } from "./account-button-item";
 
 @Component({
   selector: 'cash-account-list',
@@ -8,7 +8,7 @@ import {AccountButtonItem} from "./account-button-item";
 })
 
 export class AccountListComponent implements OnInit {
-  buttons: Button[] = [];
+  buttons: ButtonListItem[] = [];
 
   ngOnInit(): void {
     this.buttons.push(new AccountButtonItem('Current', '-20.00'));

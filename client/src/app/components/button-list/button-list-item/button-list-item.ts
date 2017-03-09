@@ -1,8 +1,7 @@
-export class Button {
-  protected innerHtml: string;
+export class ButtonListItem {
+  protected innerHtml: string = '';
 
-  constructor(public name: string, public html?: string, public recordId?: string, public link?: string) {
-
+  constructor(public name: string) {
   }
 
   hasInnerHtml = () => {

@@ -1,34 +1,55 @@
 import { TestBed, async, ComponentFixture } from "@angular/core/testing";
-import { ButtonItemComponent } from "./button-list-item.component";
-import { Button } from "./button-list-item";
+import { ButtonListItemComponent } from "./button-list-item.component";
+import { ButtonListItem } from "./button-list-item";
 
-describe("ButtonListComponent", () => {
+describe("ButtonListItemComponent", () => {
 
-  let component: ButtonItemComponent;
-  let fixture: ComponentFixture<ButtonItemComponent>;
+  let component: ButtonListItemComponent;
+  let fixture: ComponentFixture<ButtonListItemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ButtonItemComponent
+        ButtonListItemComponent
       ],
     }).compileComponents().then(() => {
-      fixture = TestBed.createComponent(ButtonItemComponent);
+      fixture = TestBed.createComponent(ButtonListItemComponent);
       component = fixture.componentInstance;
+      component.button = new ButtonListItem('Current');
       fixture.detectChanges();
     });
   }));
 
-  it('should be an instance of ButtonListComponent', () => {
-    expect(component instanceof ButtonItemComponent).toBe(true, 'should be an instance of ButtonItemComponent');
+  it('is an instance of ButtonListItemComponent', () => {
+    expect(component instanceof ButtonListItemComponent).toBe(true, 'should be an instance of ButtonItemComponent');
   });
 
   it('should display name of provided button', () => {
-    component.button = new Button('Current');
-    fixture.detectChanges();
-
     let button = fixture.nativeElement.querySelector('.button-name');
     expect(button.innerText).toEqual('Current');
   });
 
+  describe('innerHtml', () => {
+
+    beforeEach(() => {
+      class HtmlButton extends ButtonListItem {
+        constructor(public name: string, public html: string) {
+          super(name);
+          this.innerHtml = html;
+        }
+      }
+      component.button = new HtmlButton('Credit Card', `<div>This is extra html</div>`);
+      fixture.detectChanges();
+    });
+
+    it('displays the button name', () => {
+      let buttonName = fixture.nativeElement.querySelector('.button-name');
+      expect(buttonName.innerText).toEqual('Credit Card');
+    });
+
+    it('displays the button html', () => {
+      let buttonHtml = fixture.nativeElement.querySelector('.button-custom-content');
+      expect(buttonHtml.innerText).toEqual('This is extra html');
+    });
+  })
 });

@@ -1,7 +1,7 @@
 import { ButtonListComponent } from "./button-list.component";
 import { TestBed, async, ComponentFixture } from "@angular/core/testing";
-import { ButtonItemComponent } from "./button-list-item/button-list-item.component";
-import { Button } from "./button-list-item/button-list-item";
+import { ButtonListItemComponent } from "./button-list-item/button-list-item.component";
+import { ButtonListItem } from "./button-list-item/button-list-item";
 import { By } from "@angular/platform-browser";
 
 describe("ButtonListComponent", () => {
@@ -9,12 +9,11 @@ describe("ButtonListComponent", () => {
   let component: ButtonListComponent;
   let fixture: ComponentFixture<ButtonListComponent>;
 
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         ButtonListComponent,
-        ButtonItemComponent
+        ButtonListItemComponent
       ],
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(ButtonListComponent);
@@ -23,18 +22,18 @@ describe("ButtonListComponent", () => {
     });
   }));
 
-  it('should be an instance of ButtonListComponent', () => {
+  it('is an instance of ButtonListComponent', () => {
     expect(component instanceof ButtonListComponent).toBe(true, 'should be an instance of ButtonListComponent');
   });
 
   describe('button functionality', () => {
-    let buttonList: Button[] = [];
+    let buttonList: ButtonListItem[] = [];
     let currentButton;
     let creditButton;
 
     beforeEach(() => {
-      currentButton = new Button('Current');
-      creditButton = new Button('Credit Card');
+      currentButton = new ButtonListItem('Current');
+      creditButton = new ButtonListItem('Credit Card');
 
       buttonList.push(currentButton);
       buttonList.push(creditButton);
@@ -50,8 +49,8 @@ describe("ButtonListComponent", () => {
     });
 
     it('emits clicked button information', () => {
-      let selectedButton: Button;
-      component.buttonSelected.subscribe((button: Button) => selectedButton = button);
+      let selectedButton: ButtonListItem;
+      component.buttonSelected.subscribe((button: ButtonListItem) => selectedButton = button);
 
       let buttonClick = fixture.debugElement.query(By.css('.button-item'));
       buttonClick.triggerEventHandler('click', null);

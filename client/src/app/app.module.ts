@@ -5,7 +5,7 @@ import { HttpModule } from "@angular/http";
 import { NgModule } from "@angular/core";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { TopbarComponent } from "./components/topbar/topbar.component";
-import { ButtonItemComponent } from "./components/button-list/button-list-item/button-list-item.component";
+import { ButtonListItemComponent } from "./components/button-list/button-list-item/button-list-item.component";
 import { ButtonListComponent } from "./components/button-list/button-list.component";
 import { AccountListComponent } from "./account/account-list.component";
 import { SignInComponent } from "./signin/signin.component";
@@ -25,7 +25,7 @@ import { routing } from "./app.routing";
     HomeComponent,
     AccountListComponent,
     ButtonListComponent,
-    ButtonItemComponent
+    ButtonListItemComponent
   ],
   imports: [
     BrowserModule,
