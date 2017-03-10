@@ -44,8 +44,10 @@ describe("ButtonListComponent", () => {
     });
 
     it('displays a list of buttons', () => {
-      let buttonItems = fixture.nativeElement.querySelectorAll('button-item');
-      expect(buttonItems.length).toEqual(2, 'There should be buttons listed.')
+      let buttonItems = fixture.nativeElement.querySelectorAll('.button-item');
+      expect(buttonItems.length).toEqual(2, 'There should be buttons listed.');
+      expect(buttonItems[0].innerText.trim()).toEqual('Current', 'The button name should be called "Current"');
+      expect(buttonItems[1].innerText.trim()).toEqual('Credit Card', 'The button name should be called "Credit Card"');
     });
 
     it('emits clicked button information', () => {
@@ -54,7 +56,6 @@ describe("ButtonListComponent", () => {
 
       let buttonClick = fixture.debugElement.query(By.css('.button-item'));
       buttonClick.triggerEventHandler('click', null);
-      console.log(buttonClick.nativeElement);
     });
   });
 });
