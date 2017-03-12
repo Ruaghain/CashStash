@@ -1,4 +1,3 @@
-<div class="button-item">
-  <div class="button-name">{{button.render()}}</div>
-  <div *ngIf="button.hasInnerHtml()" class="button-custom-content" [innerHtml]="button.getInnerHtml()"></div>
+<div class="button-item" fxLayout="row" fxLayoutAlign="space-between center">
+  <div *ngFor="let itemLabel of button.getItemLabels()" [style.color]="itemLabel.colour">{{itemLabel.label}}</div>
 </div>

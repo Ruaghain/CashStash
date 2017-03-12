@@ -26,30 +26,5 @@ describe("ButtonListItemComponent", () => {
 
   it('should display name of provided button', () => {
     let button = fixture.nativeElement.querySelector('.button-name');
-    expect(button.innerText).toEqual('Current');
   });
-
-  describe('innerHtml', () => {
-
-    beforeEach(() => {
-      class HtmlButton extends ButtonListItem {
-        constructor(public name: string, public html: string) {
-          super(name);
-          this.innerHtml = html;
-        }
-      }
-      component.button = new HtmlButton('Credit Card', `<div>This is extra html</div>`);
-      fixture.detectChanges();
-    });
-
-    it('displays the button name', () => {
-      let buttonName = fixture.nativeElement.querySelector('.button-name');
-      expect(buttonName.innerText).toEqual('Credit Card');
-    });
-
-    it('displays the button html', () => {
-      let buttonHtml = fixture.nativeElement.querySelector('.button-custom-content');
-      expect(buttonHtml.innerText).toEqual('This is extra html');
-    });
-  })
 });
