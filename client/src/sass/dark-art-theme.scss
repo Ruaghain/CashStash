@@ -63,6 +63,10 @@ $button-border-colour: $dusty-white;
   @include button($background: $dusty-red, $text-colour: $button-text-colour)
 }
 
+.cash-new {
+  @include button($background: $irish-green, $text-colour: $button-text-colour)
+}
+
 .cash-form-group {
   margin-bottom: 15px;
 }

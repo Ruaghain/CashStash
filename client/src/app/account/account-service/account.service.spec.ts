@@ -24,7 +24,7 @@ describe("AccountService", () => {
     });
   }));
 
-  describe("accounts()", () => {
+  describe("getAccounts()", () => {
 
     const mockResponse = [
       {
@@ -49,7 +49,7 @@ describe("AccountService", () => {
       });
 
       //TODO: should accounts reference an account model instead of any?
-      accountService.accounts().subscribe((accounts: any) => {
+      accountService.getAccounts().subscribe((accounts: any) => {
         expect(accounts.length).toEqual(2);
         expect(accounts[0].name).toEqual('Current');
         expect(accounts[0].number).toEqual('123456789');

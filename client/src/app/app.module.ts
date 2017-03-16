@@ -3,29 +3,24 @@ import { BrowserModule } from "@angular/platform-browser";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { HttpModule } from "@angular/http";
 import { NgModule } from "@angular/core";
-import { NavbarComponent } from "./components/navbar/navbar.component";
-import { TopbarComponent } from "./components/topbar/topbar.component";
-import { ButtonListItemComponent } from "./components/button-list/button-list-item/button-list-item.component";
-import { ButtonListComponent } from "./components/button-list/button-list.component";
-import { AccountListComponent } from "./account/account-list.component";
+import { AccountListComponent } from "./account/account-list/account-list.component";
 import { SignInComponent } from "./signin/signin.component";
 import { SignUpComponent } from "./signup/signup.component";
 import { HomeComponent } from "./home/home.component";
 import { AppComponent } from "./app.component";
 import { AuthService } from "./auth/auth.service";
 import { routing } from "./app.routing";
+import { WraithModule } from "./components/wraith.module";
+import { AccountComponent } from "./account/account.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    TopbarComponent,
-    NavbarComponent,
     SignUpComponent,
     SignInComponent,
     HomeComponent,
     AccountListComponent,
-    ButtonListComponent,
-    ButtonListItemComponent
+    AccountComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +28,8 @@ import { routing } from "./app.routing";
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    WraithModule
   ],
   providers: [
     AuthService
