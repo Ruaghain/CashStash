@@ -3,7 +3,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { HttpModule } from "@angular/http";
 import { NgModule } from "@angular/core";
-import { AccountListComponent } from "./account/account-list/account-list.component";
 import { SignInComponent } from "./signin/signin.component";
 import { SignUpComponent } from "./signup/signup.component";
 import { HomeComponent } from "./home/home.component";
@@ -12,6 +11,8 @@ import { AuthService } from "./auth/auth.service";
 import { routing } from "./app.routing";
 import { WraithModule } from "./components/wraith.module";
 import { AccountComponent } from "./account/account.component";
+import { AccountEditComponent } from "./account/account-edit/account-edit.component";
+import { AccountService } from "./account/account-service/account.service";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { AccountComponent } from "./account/account.component";
     SignUpComponent,
     SignInComponent,
     HomeComponent,
-    AccountListComponent,
+    AccountEditComponent,
     AccountComponent
   ],
   imports: [
@@ -32,7 +33,8 @@ import { AccountComponent } from "./account/account.component";
     WraithModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    AccountService
   ],
   bootstrap: [
     AppComponent

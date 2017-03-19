@@ -63,7 +63,7 @@ $button-border-colour: $dusty-white;
   @include button($background: $dusty-red, $text-colour: $button-text-colour)
 }
 
-.cash-new {
+.cash-save {
   @include button($background: $irish-green, $text-colour: $button-text-colour)
 }
 

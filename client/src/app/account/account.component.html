@@ -1,6 +1,6 @@
 <div class="account-component">
-  <button class="cash-new">Add</button>
+  <button class="cash-save" (click)="onAccountAdd()">Add Account</button>
   <div>
-    <cash-account-list [buttons]="buttons"></cash-account-list>
+    <wraith-button-list [buttons]="buttons" (buttonSelected)="onAccountSelected($event)"></wraith-button-list>
   </div>
 </div>

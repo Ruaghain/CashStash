@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ButtonListItem } from "../components/button-list/button-list-item/button-list-item";
+import { Router } from "@angular/router";
+import { AccountService } from "./account-service/account.service";
+import { Account } from "./account.model";
 
 @Component({
   selector: 'cash-account',
@@ -8,21 +11,31 @@ import { ButtonListItem } from "../components/button-list/button-list-item/butto
 })
 
 export class AccountComponent implements OnInit {
+  private buttons: ButtonListItem[] = [];
 
-  buttons: ButtonListItem[] = [];
-
-  ngOnInit(): void {
-    let currentButton = new ButtonListItem('Current');
-    currentButton.addLabel('-20.00', 'indianred');
-    this.buttons.push(currentButton);
-
-    let onlineSavingButton = new ButtonListItem('Online Savings');
-    onlineSavingButton.addLabel('2000.00', 'forestgreen');
-    this.buttons.push(onlineSavingButton);
-
-    let creditCardButton = new ButtonListItem('Credit Card');
-    creditCardButton.addLabel('0.00', 'forestgreen');
-    this.buttons.push(creditCardButton);
+  constructor(private accountService: AccountService, private router: Router) {
   }
 
+  ngOnInit(): void {
+    let accounts: Account[] = [];
+    this.accountService.getAccounts().subscribe(
+      (result) => {
+        accounts = result;
+        accounts.forEach((account) => {
+          let buttonItem = new ButtonListItem(account);
+          buttonItem.addLabel(account.name);
+          buttonItem.addLabel(account.balance.toString(), account.balance >= 0 ? 'forestgreen' : 'indianred');
+          this.buttons.push(buttonItem);
+        })
+      }
+    );
+  }
+
+  onAccountAdd = () => {
+    this.router.navigateByUrl('/accounts/new');
+  };
+
+  onAccountSelected = (event: any) => {
+    console.log(event);
+  };
 }
