@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, EventEmitter } from "@angular/core";
 import { BaseService } from "../../shared/base.service";
 import { Http, Headers, Response } from "@angular/http";
 import { Observable } from "rxjs";
@@ -7,8 +7,14 @@ import { Account } from "../account.model";
 @Injectable()
 export class AccountService extends BaseService {
 
+  selectedAcc = new EventEmitter<Account>();
+
   constructor(private http: Http) {
     super()
+  }
+
+  selectedAccount(account: Account) {
+    this.selectedAcc.emit(account);
   }
 
   getAccounts = () => {

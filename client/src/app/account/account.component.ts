@@ -36,6 +36,8 @@ export class AccountComponent implements OnInit {
   };
 
   onAccountSelected = (event: any) => {
-    console.log(event);
+    this.accountService.selectedAccount(event.associatedObject);
+    let url = `/accounts/${event.associatedObject._id}/edit`;
+    this.router.navigateByUrl(url);
   };
 }

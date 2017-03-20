@@ -13,9 +13,9 @@ import { Subscription } from "rxjs";
 
 export class AccountEditComponent implements OnInit, OnDestroy {
   private accountEditForm: FormGroup;
-  private accountSubscription: Subscription;
+  //private accountSubscription: Subscription;
   private isNew = true;
-  private accountId: number;
+  //private accountId: number;
   private account: Account;
 
   constructor(private route: ActivatedRoute, private accountService: AccountService, private router: Router) {
@@ -23,25 +23,34 @@ export class AccountEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.accountSubscription = this.route.params.subscribe(
-      (params: any) => {
-        if (params.hasOwnProperty('id')) {
-          console.log('Editing an existing account.');
-          this.isNew = false;
-          //The plus sign converts it into a number.
-          this.accountId = +params['id'];
-          // this.account = this.accountService.getAccount(this.accountId);
-        } else {
-          this.isNew = true;
-          this.account = null;
-        }
-        this.initForm();
+    this.accountService.selectedAcc.subscribe(
+      data => {
+        console.log('Data is: ' + JSON.stringify(data));
+        this.account = data;
+        console.log('Account is: ' + JSON.stringify(this.account));
       }
-    )
+    );
+
+    this.isNew = !this.account;
+    //this.accountSubscription = this.route.params.subscribe(
+    //  (params: any) => {
+    //    if (params.hasOwnProperty('id')) {
+    //      this.isNew = false;
+    //      //The plus sign converts it into a number.
+    //      this.accountId = params['id'];
+    //      // this.account = this.accountService.getAccount(this.accountId);
+    //    } else {
+    //      this.isNew = true;
+    //      this.account = null;
+    //    }
+    //    this.initForm();
+    //  }
+    //)
+    this.initForm();
   }
 
   ngOnDestroy() {
-    this.accountSubscription.unsubscribe();
+    this.accountService.selectedAcc.unsubscribe();
   }
 
   private initForm() {

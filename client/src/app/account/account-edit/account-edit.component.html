@@ -37,9 +37,9 @@
         formControlName="balance"
       />
     </div>
+    <div class = "cash-form-group">
+      <button class = "cash-save" type = "submit">Save</button>
+      <button class = "cash-cancel" (click) = "onCancel()">Cancel</button>
+    </div>
   </form>
-  <div class="cash-form-group">
-    <button class="cash-save" type="submit" [disabled]="!accountEditForm.valid">Save</button>
-    <button class="cash-cancel" (click)="onCancel()">Cancel</button>
-  </div>
 </div>

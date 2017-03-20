@@ -11,7 +11,8 @@ const APP_ROUTERS: Routes = [
   { path: 'signin', component: SignInComponent },
   { path: 'home', component: HomeComponent },
   { path: 'accounts', component: AccountComponent },
-  { path: 'accounts/new', component: AccountEditComponent }
+  { path: 'accounts/new', component: AccountEditComponent },
+  { path: 'accounts/:id/edit', component: AccountEditComponent }
   // { path: 'accounts', loadChildren: './account/account.module#AccountModule' }
 ];
 
