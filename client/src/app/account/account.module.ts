@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
-import { AccountEditComponent } from "./account-edit/account-edit.component";
 import { ReactiveFormsModule } from "@angular/forms";
+import { AccountEditComponent } from "./account-edit/account-edit.component";
 import { SharedModule } from "../shared/shared.module";
 import { accountRouting } from "./account.routing";
 
@@ -16,5 +16,4 @@ import { accountRouting } from "./account.routing";
 })
 
 export class AccountModule {
-
 }

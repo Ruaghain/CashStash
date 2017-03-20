@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { BaseService } from "../../shared/base.service";
 import { Http, Headers, Response } from "@angular/http";
 import { Observable } from "rxjs";
@@ -7,15 +7,16 @@ import { Account } from "../account.model";
 @Injectable()
 export class AccountService extends BaseService {
 
-  selectedAcc = new EventEmitter<Account>();
+  // selectedAcc = new EventEmitter<Account>();
 
   constructor(private http: Http) {
     super()
   }
 
-  selectedAccount(account: Account) {
-    this.selectedAcc.emit(account);
-  }
+  // selectedAccount(account: Account) {
+  //   console.log('emitting account: ' + JSON.stringify(account));
+  //   this.selectedAcc.emit(account);
+  // }
 
   getAccounts = () => {
     const token = localStorage.getItem('token');
@@ -33,6 +34,24 @@ export class AccountService extends BaseService {
           })
         }
         return result
+      }).catch((error: Response) => {
+        return Observable.throw(error.json())
+      })
+  };
+
+  getAccount = (id: string) => {
+    console.log('Making request for id: ' + id);
+    const token = localStorage.getItem('token');
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get(this.baseUrl + '/accounts/' + id, { headers: headers })
+      .map((response: Response) => response.json().obj)
+      .map((account: Account) => {
+        if (account) {
+          return new Account(account.name, account.number, account.openingBalance, account.balance, account._id);
+        }
       }).catch((error: Response) => {
         return Observable.throw(error.json())
       })
