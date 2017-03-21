@@ -1,8 +1,8 @@
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AccountService } from '../account-service/account.service';
-import { Account } from '../account.model';
+import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { Component, OnInit } from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router";
+import { AccountService } from "../account-service/account.service";
+import { Account } from "../account.model";
 
 @Component({
   selector: 'cash-edit-account',
@@ -66,13 +66,23 @@ export class AccountEditComponent implements OnInit {
       this.accountEditForm.value.balance
     );
 
-    this.accountService.saveAccount(account).subscribe(
-      () => {
-        this.router.navigateByUrl('/accounts');
-      }, error => {
-        console.log('There was an error saving the account: ' + error)
-      }
-    );
+    if (this.isNew) {
+      this.accountService.saveAccount(account).subscribe(
+        () => {
+          this.router.navigateByUrl('/accounts');
+        }, error => {
+          console.log('There was an error saving the account: ' + error)
+        }
+      );
+    } else {
+      this.accountService.updateAccount(this.account._id, account).subscribe(
+        () => {
+          this.router.navigateByUrl('/accounts');
+        }, error => {
+          console.log('There was an error saving the account: ' + JSON.stringify(error))
+        }
+      );
+    }
   };
 
   onCancel = () => {

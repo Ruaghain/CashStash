@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { BaseService } from '../../shared/base.service';
-import { Http, Headers, Response } from '@angular/http';
-import { Observable } from 'rxjs';
-import { Account } from '../account.model';
+import { Injectable } from "@angular/core";
+import { BaseService } from "../../shared/base.service";
+import { Http, Headers, Response } from "@angular/http";
+import { Observable } from "rxjs";
+import { Account } from "../account.model";
 
 @Injectable()
 export class AccountService extends BaseService {
@@ -63,14 +63,15 @@ export class AccountService extends BaseService {
       })
   };
 
-  updateAccount = (account: Account) => {
+  updateAccount = (id: string, account: Account) => {
     const token = localStorage.getItem('token');
     const body = JSON.stringify(account);
     const headers = new Headers({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
-    return this.http.put(this.baseUrl + '/accounts/' + account._id, body, { headers: headers })
+    console.log(body);
+    return this.http.put(this.baseUrl + '/accounts/' + id, body, { headers: headers })
       .map((response: Response) => response.json())
       .catch((error: Response) => {
         return Observable.throw(error.json())
