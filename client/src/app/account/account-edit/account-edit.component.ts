@@ -1,9 +1,8 @@
-import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { AccountService } from "../account-service/account.service";
-import { Account } from "../account.model";
-import { Subscription } from "rxjs";
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AccountService } from '../account-service/account.service';
+import { Account } from '../account.model';
 
 @Component({
   selector: 'cash-edit-account',
@@ -11,11 +10,9 @@ import { Subscription } from "rxjs";
   templateUrl: 'account-edit.component.html'
 })
 
-export class AccountEditComponent implements OnInit, OnDestroy {
+export class AccountEditComponent implements OnInit {
   private accountEditForm: FormGroup;
-  private accountSubscription: Subscription;
   private isNew = true;
-  private accountId: string;
   private account: Account;
 
   constructor(private route: ActivatedRoute, private accountService: AccountService, private router: Router) {
@@ -23,36 +20,9 @@ export class AccountEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // this.accountService.selectedAcc.subscribe(
-    //   (data: Account) => {
-    //     console.log('Data is: ' + JSON.stringify(data));
-    //     this.account = data;
-    //     console.log('Account is: ' + JSON.stringify(this.account));
-    //   }
-    // );
-    //
-    // this.isNew = !this.account;
-    this.accountSubscription = this.route.params.subscribe(
-      (params: any) => {
-        if (params.hasOwnProperty('id')) {
-          this.isNew = false;
-          //The plus sign converts it into a number.
-          this.accountId = params['id'];
-          this.accountService.getAccount(this.accountId).subscribe(
-            (data) => {
-              this.account = data;
-            });
-        } else {
-          this.isNew = true;
-          this.account = null;
-        }
-        this.initForm();
-      }
-    );
-  }
-
-  ngOnDestroy() {
-    // this.accountService.selectedAcc.unsubscribe();
+    this.account = this.route.snapshot.data['account'];
+    this.isNew = !this.account;
+    this.initForm();
   }
 
   private initForm() {
@@ -97,7 +67,7 @@ export class AccountEditComponent implements OnInit, OnDestroy {
     );
 
     this.accountService.saveAccount(account).subscribe(
-      data => {
+      () => {
         this.router.navigateByUrl('/accounts');
       }, error => {
         console.log('There was an error saving the account: ' + error)

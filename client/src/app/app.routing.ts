@@ -1,9 +1,10 @@
-import { Routes, RouterModule } from "@angular/router";
-import { SignUpComponent } from "./signup/signup.component";
-import { SignInComponent } from "./signin/signin.component";
-import { HomeComponent } from "./home/home.component";
-import { AccountComponent } from "./account/account.component";
-import { AccountEditComponent } from "./account/account-edit/account-edit.component";
+import { Routes, RouterModule } from '@angular/router';
+import { SignUpComponent } from './signup/signup.component';
+import { SignInComponent } from './signin/signin.component';
+import { HomeComponent } from './home/home.component';
+import { AccountComponent } from './account/account.component';
+import { AccountEditComponent } from './account/account-edit/account-edit.component';
+import AccountResolver from './account/account-resolver';
 
 const APP_ROUTERS: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -12,7 +13,7 @@ const APP_ROUTERS: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'accounts', component: AccountComponent },
   { path: 'accounts/new', component: AccountEditComponent },
-  { path: 'accounts/:id/edit', component: AccountEditComponent }
+  { path: 'accounts/:id/edit', component: AccountEditComponent, resolve: { account: AccountResolver } }
   // { path: 'accounts', loadChildren: './account/account.module#AccountModule' }
 ];
 

@@ -1,22 +1,15 @@
-import { Injectable } from "@angular/core";
-import { BaseService } from "../../shared/base.service";
-import { Http, Headers, Response } from "@angular/http";
-import { Observable } from "rxjs";
-import { Account } from "../account.model";
+import { Injectable } from '@angular/core';
+import { BaseService } from '../../shared/base.service';
+import { Http, Headers, Response } from '@angular/http';
+import { Observable } from 'rxjs';
+import { Account } from '../account.model';
 
 @Injectable()
 export class AccountService extends BaseService {
 
-  // selectedAcc = new EventEmitter<Account>();
-
   constructor(private http: Http) {
     super()
   }
-
-  // selectedAccount(account: Account) {
-  //   console.log('emitting account: ' + JSON.stringify(account));
-  //   this.selectedAcc.emit(account);
-  // }
 
   getAccounts = () => {
     const token = localStorage.getItem('token');
@@ -40,7 +33,6 @@ export class AccountService extends BaseService {
   };
 
   getAccount = (id: string) => {
-    console.log('Making request for id: ' + id);
     const token = localStorage.getItem('token');
     const headers = new Headers({
       'Content-Type': 'application/json',
@@ -65,6 +57,20 @@ export class AccountService extends BaseService {
       'Authorization': `Bearer ${token}`
     });
     return this.http.post(this.baseUrl + '/accounts', body, { headers: headers })
+      .map((response: Response) => response.json())
+      .catch((error: Response) => {
+        return Observable.throw(error.json())
+      })
+  };
+
+  updateAccount = (account: Account) => {
+    const token = localStorage.getItem('token');
+    const body = JSON.stringify(account);
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.put(this.baseUrl + '/accounts/' + account._id, body, { headers: headers })
       .map((response: Response) => response.json())
       .catch((error: Response) => {
         return Observable.throw(error.json())
