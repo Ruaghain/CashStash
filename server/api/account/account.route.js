@@ -20,6 +20,7 @@ router.use('/', function (req, res, next) {
   });
 });
 
+//TODO: Implement swagger for this.
 router.post('/', function (req, res, next) {
   var account = new Account({
     name: req.body.name,
@@ -38,6 +39,23 @@ router.post('/', function (req, res, next) {
 
     res.status(201).json({
       message: 'Account created',
+      obj: result
+    });
+  });
+});
+
+//TODO: Need to fix this so a new record doesn't get saved to the database.
+router.put('/:id', function (req, res, next) {
+  Account.findOneAndUpdate({ _id: req.param.id }, { name: req.body.name }, function (err, result) {
+    if (err) {
+      return res.status(500).json({
+        message: 'An error occurred',
+        error: err
+      })
+    }
+
+    res.status(201).json({
+      message: 'Account updated',
       obj: result
     });
   });
