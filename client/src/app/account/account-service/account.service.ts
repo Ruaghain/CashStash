@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BaseService } from "../../shared/base.service";
-import { Http, Headers, Response } from "@angular/http";
+import { Headers, Http, Response } from "@angular/http";
 import { Observable } from "rxjs";
 import { Account } from "../account.model";
 
@@ -15,7 +15,7 @@ export class AccountService extends BaseService {
     const token = localStorage.getItem('token');
     const headers = new Headers({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'x-access-token': `${token}`
     });
     return this.http.get(this.baseUrl + '/accounts', { headers: headers })
       .map((response: Response) => response.json().obj)
@@ -36,7 +36,7 @@ export class AccountService extends BaseService {
     const token = localStorage.getItem('token');
     const headers = new Headers({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'x-access-token': `${token}`
     });
     return this.http.get(this.baseUrl + '/accounts/' + id, { headers: headers })
       .map((response: Response) => response.json().obj)
@@ -54,7 +54,7 @@ export class AccountService extends BaseService {
     const body = JSON.stringify(account);
     const headers = new Headers({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'x-access-token': `${token}`
     });
     return this.http.post(this.baseUrl + '/accounts', body, { headers: headers })
       .map((response: Response) => response.json())
@@ -68,7 +68,7 @@ export class AccountService extends BaseService {
     const body = JSON.stringify(account);
     const headers = new Headers({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'x-access-token': `${token}`
     });
     console.log(body);
     return this.http.put(this.baseUrl + '/accounts/' + id, body, { headers: headers })

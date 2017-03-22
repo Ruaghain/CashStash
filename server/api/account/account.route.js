@@ -8,17 +8,17 @@ var Account = require('./account.model');
 //This method is hit on all subsequent requests.
 //Position matters - the get request won't be taken into account. The secret needs to match the
 //secret used when generating the jwt key.
-// router.use('/', function (req, res, next) {
-//   jwt.verify(req.query.token, 'secret', function (err, decoded) {
-//     if (err) {
-//       return res.status(401).json({
-//         title: 'Not Authenticated',
-//         error: err
-//       })
-//     }
-//     next();
-//   });
-// });
+router.use('/', function (req, res, next) {
+  jwt.verify(req.headers['x-access-token'], 'secret', function (err, decoded) {
+    if (err) {
+      return res.status(401).json({
+        title: 'Not Authenticated',
+        error: err
+      })
+    }
+    next();
+  });
+});
 
 //TODO: Implement swagger for this.
 router.post('/', function (req, res, next) {
@@ -44,7 +44,6 @@ router.post('/', function (req, res, next) {
   });
 });
 
-//TODO: Need to fix this so a new record doesn't get saved to the database.
 router.put('/:id', function (req, res, next) {
   Account.findByIdAndUpdate(req.params.id, req.body, function (err, result) {
     if (err) {
