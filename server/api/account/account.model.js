@@ -15,10 +15,10 @@ var accountSchema = new Schema({
   //   type: ObjectId,
   //   ref: 'CurrencySchema'
   // },
-  // user: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'User'
-  // },
+  _user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
   // transactions: [{
   //   type: Schema.Types.ObjectId,
   //   ref: 'Transaction'
@@ -44,7 +44,6 @@ accountSchema.path('name').validate(function (value, respond) {
   },
   'The specified account name is already in use.'
 );
-
 
 module.exports = mongoose.model('Account', accountSchema);
 

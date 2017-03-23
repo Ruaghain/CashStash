@@ -16,13 +16,15 @@ router.use('/', function (req, res, next) {
         error: err
       })
     }
+    res.locals.user = decoded.user;
     next();
   });
 });
 
 //TODO: Implement swagger for this.
-router.post('/', function (req, res, next) {
+router.post('/', function (req, res) {
   var account = new Account({
+    _user: res.locals.user._id,
     name: req.body.name,
     number: req.body.number,
     openingBalance: req.body.openingBalance,
@@ -44,7 +46,7 @@ router.post('/', function (req, res, next) {
   });
 });
 
-router.put('/:id', function (req, res, next) {
+router.put('/:id', function (req, res) {
   Account.findByIdAndUpdate(req.params.id, req.body, function (err, result) {
     if (err) {
       return res.status(500).json({
@@ -60,8 +62,8 @@ router.put('/:id', function (req, res, next) {
   });
 });
 
-router.get('/', function (req, res, next) {
-  Account.find().exec(function (err, messages) {
+router.get('/', function (req, res) {
+  Account.find({ _user: res.locals.user._id }).exec(function (err, messages) {
     if (err) {
       return res.status(500).json({
         title: 'An error occurred',
@@ -75,7 +77,7 @@ router.get('/', function (req, res, next) {
   });
 });
 
-router.get('/:id', function (req, res, next) {
+router.get('/:id', function (req, res) {
   Account.findOne({ _id: req.params.id }).exec(function (err, account) {
     if (err) {
       return res.status(500).json({

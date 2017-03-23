@@ -1,6 +1,3 @@
-// import errors from './components/errors';
-// import path from 'path';
-
 module.exports = function(app) {
 
   app.use('/api/v1/auth', require('./api/auth/auth.route'));
