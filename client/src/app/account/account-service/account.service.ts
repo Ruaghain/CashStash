@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { BaseService } from "../../shared/base.service";
-import { Headers, Http, Response } from "@angular/http";
-import { Observable } from "rxjs";
-import { Account } from "../account.model";
+import { Injectable } from '@angular/core';
+import { BaseService } from '../../shared/base.service';
+import { Http, Response } from '@angular/http';
+import { Observable } from 'rxjs';
+import { Account } from '../account.model';
 
 @Injectable()
 export class AccountService extends BaseService {
@@ -12,12 +12,7 @@ export class AccountService extends BaseService {
   }
 
   getAccounts = () => {
-    const token = localStorage.getItem('token');
-    const headers = new Headers({
-      'Content-Type': 'application/json',
-      'x-access-token': `${token}`
-    });
-    return this.http.get(this.baseUrl + '/accounts', { headers: headers })
+    return this.http.get(this.baseUrl + '/accounts', { headers: super.getHeaders() })
       .map((response: Response) => response.json().obj)
       .map((accounts: Array<Account>) => {
         let result: Array<Account> = [];
@@ -33,12 +28,7 @@ export class AccountService extends BaseService {
   };
 
   getAccount = (id: string) => {
-    const token = localStorage.getItem('token');
-    const headers = new Headers({
-      'Content-Type': 'application/json',
-      'x-access-token': `${token}`
-    });
-    return this.http.get(this.baseUrl + '/accounts/' + id, { headers: headers })
+    return this.http.get(this.baseUrl + '/accounts/' + id, { headers: super.getHeaders() })
       .map((response: Response) => response.json().obj)
       .map((account: Account) => {
         if (account) {
@@ -50,13 +40,8 @@ export class AccountService extends BaseService {
   };
 
   saveAccount = (account: Account) => {
-    const token = localStorage.getItem('token');
     const body = JSON.stringify(account);
-    const headers = new Headers({
-      'Content-Type': 'application/json',
-      'x-access-token': `${token}`
-    });
-    return this.http.post(this.baseUrl + '/accounts', body, { headers: headers })
+    return this.http.post(this.baseUrl + '/accounts', body, { headers: super.getHeaders() })
       .map((response: Response) => response.json())
       .catch((error: Response) => {
         return Observable.throw(error.json())
@@ -64,14 +49,9 @@ export class AccountService extends BaseService {
   };
 
   updateAccount = (id: string, account: Account) => {
-    const token = localStorage.getItem('token');
     const body = JSON.stringify(account);
-    const headers = new Headers({
-      'Content-Type': 'application/json',
-      'x-access-token': `${token}`
-    });
     console.log(body);
-    return this.http.put(this.baseUrl + '/accounts/' + id, body, { headers: headers })
+    return this.http.put(this.baseUrl + '/accounts/' + id, body, { headers: super.getHeaders() })
       .map((response: Response) => response.json())
       .catch((error: Response) => {
         return Observable.throw(error.json())
