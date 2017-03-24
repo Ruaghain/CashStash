@@ -1,7 +1,7 @@
-import { async, TestBed, inject } from "@angular/core/testing";
-import { AccountService } from "./account.service";
-import { HttpModule, Http, BaseRequestOptions, ResponseOptions, Response } from "@angular/http";
-import { MockBackend } from "@angular/http/testing";
+import { async, inject, TestBed } from '@angular/core/testing';
+import { AccountService } from './account.service';
+import { BaseRequestOptions, Http, HttpModule, Response, ResponseOptions } from '@angular/http';
+import { MockBackend } from '@angular/http/testing';
 
 describe("AccountService", () => {
   beforeEach(async(() => {
@@ -26,20 +26,22 @@ describe("AccountService", () => {
 
   describe("getAccounts()", () => {
 
-    const mockResponse = [
-      {
-        name: 'Current',
-        number: '123456789',
-        openingBalance: -200.00,
-        balance: 100.00
-      },
-      {
-        name: 'Credit Card',
-        number: '987654321',
-        openingBalance: 0.00,
-        balance: -500.00
-      }
-    ];
+    const mockResponse = {
+      obj: [
+        {
+          name: 'Current',
+          number: '123456789',
+          openingBalance: -200.00,
+          balance: 100.00
+        },
+        {
+          name: 'Credit Card',
+          number: '987654321',
+          openingBalance: 0.00,
+          balance: -500.00
+        }
+      ]
+    };
 
     it("should return all of the accounts", inject([AccountService, MockBackend], (accountService: any, mockBackend: any) => {
       mockBackend.connections.subscribe((connection: any) => {

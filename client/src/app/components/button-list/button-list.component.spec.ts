@@ -1,8 +1,8 @@
-import { ButtonListComponent } from "./button-list.component";
-import { TestBed, async, ComponentFixture } from "@angular/core/testing";
-import { ButtonListItemComponent } from "./button-list-item/button-list-item.component";
-import { ButtonListItem } from "./button-list-item/button-list-item";
-import { By } from "@angular/platform-browser";
+import { ButtonListComponent } from './button-list.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ButtonListItemComponent } from './button-list-item/button-list-item.component';
+import { ButtonListItem } from './button-list-item/button-list-item';
+import { By } from '@angular/platform-browser';
 
 describe("ButtonListComponent", () => {
 
@@ -32,8 +32,10 @@ describe("ButtonListComponent", () => {
     let creditButton;
 
     beforeEach(() => {
-      currentButton = new ButtonListItem('Current');
-      creditButton = new ButtonListItem('Credit Card');
+      currentButton = new ButtonListItem();
+      currentButton.addLabel('Current');
+      creditButton = new ButtonListItem();
+      creditButton.addLabel('Credit Card');
 
       buttonList.push(currentButton);
       buttonList.push(creditButton);
