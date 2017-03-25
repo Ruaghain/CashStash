@@ -1,6 +1,6 @@
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AccountService } from "../account-service/account.service";
 import { Account } from "../account.model";
 
@@ -12,8 +12,9 @@ import { Account } from "../account.model";
 
 export class AccountEditComponent implements OnInit {
   private accountEditForm: FormGroup;
-  private isNew = true;
-  private account: Account;
+  private account: Account = null;
+  private accountIsNew: boolean = true;
+  private formTitle: string = 'Add Account';
 
   constructor(private route: ActivatedRoute, private accountService: AccountService, private router: Router) {
 
@@ -21,7 +22,7 @@ export class AccountEditComponent implements OnInit {
 
   ngOnInit() {
     this.account = this.route.snapshot.data['account'];
-    this.isNew = !this.account;
+    this.accountIsNew = !this.account;
     this.initForm();
   }
 
@@ -31,7 +32,8 @@ export class AccountEditComponent implements OnInit {
     let accountOpeningBalance = '';
     let accountBalance = '';
 
-    if (!this.isNew) {
+    if (!this.accountIsNew) {
+      this.formTitle = 'Edit Account';
       accountName = this.account.name;
       accountNumber = this.account.number;
       accountOpeningBalance = String(this.account.openingBalance);
@@ -58,7 +60,7 @@ export class AccountEditComponent implements OnInit {
     })
   };
 
-  onSubmit = () => {
+  onSubmit() {
     const account = new Account(
       this.accountEditForm.value.name,
       this.accountEditForm.value.number,
@@ -66,7 +68,7 @@ export class AccountEditComponent implements OnInit {
       this.accountEditForm.value.balance
     );
 
-    if (this.isNew) {
+    if (this.accountIsNew) {
       this.accountService.saveAccount(account).subscribe(
         () => {
           this.router.navigateByUrl('/accounts');
@@ -75,8 +77,7 @@ export class AccountEditComponent implements OnInit {
         }
       );
     } else {
-      this.accountService.updateAccount(this.account._id, account).subscribe(
-        () => {
+      this.accountService.updateAccount(this.account._id, account).subscribe(() => {
           this.router.navigateByUrl('/accounts');
         }, error => {
           console.log('There was an error saving the account: ' + JSON.stringify(error))
@@ -85,7 +86,24 @@ export class AccountEditComponent implements OnInit {
     }
   };
 
-  onCancel = () => {
+  onCancel() {
     this.router.navigateByUrl('/accounts');
+  };
+
+  onDelete() {
+    this.accountService.deleteAccount(this.account._id).subscribe(() => {
+        this.router.navigateByUrl('/accounts');
+      }, error => {
+        console.log('There was an error deleting the account: ' + JSON.stringify(error))
+      }
+    );
+  };
+
+  isNew() {
+    return this.accountIsNew;
+  }
+
+  getFormTitle() {
+    return this.formTitle;
   }
 }

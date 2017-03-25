@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ButtonListItem } from '../components/button-list/button-list-item/button-list-item';
-import { Router } from '@angular/router';
-import { AccountService } from './account-service/account.service';
-import { Account } from './account.model';
+import { Component, OnInit } from "@angular/core";
+import { ButtonListItem } from "../components/button-list/button-list-item/button-list-item";
+import { Router } from "@angular/router";
+import { AccountService } from "./account-service/account.service";
+import { Account } from "./account.model";
 
 @Component({
   selector: 'cash-account',
@@ -31,11 +31,11 @@ export class AccountComponent implements OnInit {
     );
   }
 
-  onAccountAdd = () => {
+  onAccountAdd() {
     this.router.navigateByUrl('/accounts/new');
   };
 
-  onAccountSelected = (event: any) => {
+  onAccountSelected(event: any) {
     let url = `/accounts/${event.associatedObject._id}/edit`;
     this.router.navigateByUrl(url);
   };

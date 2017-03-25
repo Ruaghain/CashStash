@@ -14,7 +14,7 @@ import { AccountEditComponent } from "./account/account-edit/account-edit.compon
 import { AccountService } from "./account/account-service/account.service";
 // import { AccountModule } from "./account/account.module";
 import { SharedModule } from "./shared/shared.module";
-import AccountResolver from './account/account-resolver';
+import AccountResolver from "./account/account.resolver";
 
 @NgModule({
   declarations: [

@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { BaseService } from '../../shared/base.service';
-import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs';
-import { Account } from '../account.model';
+import { Injectable } from "@angular/core";
+import { BaseService } from "../../shared/base.service";
+import { Http, Response } from "@angular/http";
+import { Observable } from "rxjs";
+import { Account } from "../account.model";
 
 @Injectable()
 export class AccountService extends BaseService {
@@ -11,7 +11,7 @@ export class AccountService extends BaseService {
     super()
   }
 
-  getAccounts = () => {
+  getAccounts() {
     return this.http.get(this.baseUrl + '/accounts', { headers: super.getHeaders() })
       .map((response: Response) => response.json().obj)
       .map((accounts: Array<Account>) => {
@@ -27,7 +27,7 @@ export class AccountService extends BaseService {
       })
   };
 
-  getAccount = (id: string) => {
+  getAccount(id: string) {
     return this.http.get(this.baseUrl + '/accounts/' + id, { headers: super.getHeaders() })
       .map((response: Response) => response.json().obj)
       .map((account: Account) => {
@@ -39,7 +39,7 @@ export class AccountService extends BaseService {
       })
   };
 
-  saveAccount = (account: Account) => {
+  saveAccount(account: Account) {
     const body = JSON.stringify(account);
     return this.http.post(this.baseUrl + '/accounts', body, { headers: super.getHeaders() })
       .map((response: Response) => response.json())
@@ -48,10 +48,18 @@ export class AccountService extends BaseService {
       })
   };
 
-  updateAccount = (id: string, account: Account) => {
+  updateAccount(id: string, account: Account) {
     const body = JSON.stringify(account);
     console.log(body);
     return this.http.put(this.baseUrl + '/accounts/' + id, body, { headers: super.getHeaders() })
+      .map((response: Response) => response.json())
+      .catch((error: Response) => {
+        return Observable.throw(error.json())
+      })
+  }
+
+  deleteAccount(id: string) {
+    return this.http.delete(this.baseUrl + '/accounts/' + id, { headers: super.getHeaders() })
       .map((response: Response) => response.json())
       .catch((error: Response) => {
         return Observable.throw(error.json())

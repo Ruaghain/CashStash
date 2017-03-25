@@ -1,5 +1,5 @@
 <div class="account-edit-component">
-  <h2>Add Account</h2>
+  <h2>{{getFormTitle()}}</h2>
   <form [formGroup]="accountEditForm" id="account-edit" (ngSubmit)="onSubmit()">
     <div class="cash-form-group">
       <label for="name">Account Name:</label>
@@ -37,9 +37,10 @@
         formControlName="balance"
       />
     </div>
-    <div class = "cash-form-group">
-      <button class = "cash-save" type = "submit">Save</button>
-      <button class = "cash-cancel" (click) = "onCancel()">Cancel</button>
+    <div class="cash-form-group">
+      <button class="cash-save" type="submit">Save</button>
+      <button *ngIf="!isNew()" class="cash-delete" (click)="onDelete()">Delete</button>
+      <button class="cash-cancel" (click)="onCancel()">Cancel</button>
     </div>
   </form>
 </div>

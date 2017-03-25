@@ -1,9 +1,9 @@
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 
-import { AccountService } from './account-service/account.service';
-import { Account } from './account.model';
+import { AccountService } from "./account-service/account.service";
+import { Account } from "./account.model";
 
 @Injectable()
 export default class AccountResolver implements Resolve<Account> {

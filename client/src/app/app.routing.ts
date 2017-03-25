@@ -1,10 +1,10 @@
-import { Routes, RouterModule } from '@angular/router';
-import { SignUpComponent } from './signup/signup.component';
-import { SignInComponent } from './signin/signin.component';
-import { HomeComponent } from './home/home.component';
-import { AccountComponent } from './account/account.component';
-import { AccountEditComponent } from './account/account-edit/account-edit.component';
-import AccountResolver from './account/account-resolver';
+import { RouterModule, Routes } from "@angular/router";
+import { SignUpComponent } from "./signup/signup.component";
+import { SignInComponent } from "./signin/signin.component";
+import { HomeComponent } from "./home/home.component";
+import { AccountComponent } from "./account/account.component";
+import { AccountEditComponent } from "./account/account-edit/account-edit.component";
+import AccountResolver from "./account/account.resolver";
 
 const APP_ROUTERS: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
