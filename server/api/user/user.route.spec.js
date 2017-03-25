@@ -1,30 +1,36 @@
-var request = require("request");
+var express = require("express");
+var request = require("supertest");
+var bodyParser = require('body-parser');
 
-var base_url = "http://localhost:3000/";
+const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-describe('User API Router:', function () {
+describe('User API Router:', () => {
 
-  describe('POST /', function () {
-    it('successfully creates a new user', function (done) {
-      var body = {
-        userName: 'TestUser',
-        firstName: 'One',
-        lastName: 'User',
-        email: 'one_user@mailinator.com',
-        password: 'Passw0rd'
-      };
-      request.post({
-        url: base_url + 'api/v1/users/',
-        json: body
-      }, function (error, response, body) {
-        expect(response.statusCode).toBe(201);
-        expect(body).toBeDefined();
-        expect(body.message).toEqual('User created');
-        expect(body.obj.userName).toEqual('TestUser');
-        expect(body.obj.firstName).toEqual('One');
-        expect(body.obj.lastName).toEqual('User');
-        done();
-      });
+  describe('POST /', () => {
+    var body = {
+      userName: 'TestUser',
+      firstName: 'One',
+      lastName: 'User',
+      email: 'one_user@mailinator.com',
+      password: 'Passw0rd'
+    };
+
+    beforeEach(() => {
+      app.post('/users', (req, res) => {
+        res.status(201).json(req.body)
+      })
+    });
+
+    it('successfully creates a new user', () => {
+      request(app).post('/users').send(body)
+        .end((err, res) => {
+          expect(res.body.userName, 'TestUser');
+          expect(res.body.firstName, 'One');
+          expect(res.body.lastName, 'User');
+          expect(res.body.email, 'one_user@mailinator.com');
+        });
     });
   });
 });

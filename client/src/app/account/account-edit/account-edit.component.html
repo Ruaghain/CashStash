@@ -1,0 +1,46 @@
+<div class="account-edit-component">
+  <h2>{{getFormTitle()}}</h2>
+  <form [formGroup]="accountEditForm" id="account-edit" (ngSubmit)="onSubmit()">
+    <div class="cash-form-group">
+      <label for="name">Account Name:</label>
+      <input
+        id="name"
+        class="cash-textbox"
+        type="text"
+        formControlName="name"
+      />
+    </div>
+    <div class="cash-form-group">
+      <label for="number">Account Number:</label>
+      <input
+        id="number"
+        class="cash-textbox"
+        type="text"
+        formControlName="number"
+      />
+    </div>
+    <div class="cash-form-group">
+      <label for="openingBalance">Opening Balance:</label>
+      <input
+        id="openingBalance"
+        class="cash-textbox"
+        type="text"
+        formControlName="openingBalance"
+      />
+    </div>
+    <div class="cash-form-group">
+      <label for="balance">Balance:</label>
+      <input
+        id="balance"
+        class="cash-textbox"
+        type="text"
+        formControlName="balance"
+      />
+    </div>
+    <div class="cash-form-group">
+      <button class="cash-save" type="submit">Save</button>
+      <button *ngIf="!isNew()" class="cash-delete" (click)="onDelete()">Delete</button>
+      <button class="cash-cancel" (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
+</div>

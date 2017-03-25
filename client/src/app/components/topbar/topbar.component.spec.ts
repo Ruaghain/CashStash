@@ -6,7 +6,7 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { DebugElement } from "@angular/core";
 import { AuthService } from "../../auth/auth.service";
 import { HttpModule } from "@angular/http";
-import { NavbarComponent } from "./navbar/navbar.component";
+import { NavbarComponent } from "../navbar/navbar.component";
 
 describe("TopbarComponent", () => {
   let component: TopbarComponent;

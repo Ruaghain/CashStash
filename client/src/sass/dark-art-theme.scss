@@ -59,7 +59,16 @@ $button-border-colour: $dusty-white;
   @include button($background: $dusty-blue, $text-colour: $button-text-colour)
 }
 
+
+.cash-save {
+  @include button($background: $irish-green, $text-colour: $button-text-colour)
+}
+
 .cash-cancel {
+  @include button($background: $dusty-yellow, $text-colour: $button-text-colour)
+}
+
+.cash-delete {
   @include button($background: $dusty-red, $text-colour: $button-text-colour)
 }
 

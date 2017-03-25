@@ -54,6 +54,13 @@ userSchema
     };
   });
 
+// Non-sensitive info we'll be putting in the token
+userSchema
+  .virtual('fullName')
+  .get(function () {
+    return this.firstName + ' ' + this.lastName;
+  });
+
 /**
  * Validations
  */
