@@ -1,15 +1,13 @@
 var webpack = require('webpack');
 var path = require('path');
-// var HtmlWebpackPlugin = require('html-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var helpers = require('./../helpers');
 
 module.exports = {
-  target: 'node',
-
   entry: {
-    // vendor: './client/src/app/vendor.ts',
-    // polyfills: './client/src/app/polyfills.ts',
-    app: './client/src/app/main.ts'
+    'polyfills': './client/src/app/polyfills.ts',
+    'vendor': './client/src/app/vendor.ts',
+    'app': './client/src/app/main.ts'
   },
 
   resolve: {
@@ -33,7 +31,11 @@ module.exports = {
       {
         test: /\.ts$/,
         loaders: [
-          'awesome-typescript-loader',
+          {
+            loader: 'awesome-typescript-loader',
+            options: { configFileName: helpers.root('tsconfig.json') }
+          },
+          // 'awesome-typescript-loader',
           'angular2-template-loader',
           'angular2-router-loader'
         ]
@@ -41,11 +43,13 @@ module.exports = {
       {
         test: /\.html$/,
         loader: 'html-loader'
-      },
+      }
+      ,
       {
         test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
         loader: 'file-loader?name=assets/[name].[hash].[ext]'
-      },
+      }
+      ,
       {
         test: /\.(scss)$/,
         exclude: [/\.global\.scss$/],
@@ -53,7 +57,8 @@ module.exports = {
           'raw-loader',
           'sass-loader'
         ]
-      },
+      }
+      ,
       {
         test: /\.global\.scss$/,
         loaders: [
@@ -65,24 +70,18 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        resolve: {},
-        ts: {
-          configFileName: 'tsconfig.json'
-        },
-        tslint: {
-          configuration: require('./../typescript/tslint.json')
-        }
-      }
+    new webpack.ContextReplacementPlugin(
+      // The (\\|\/) piece accounts for path separators in *nix and Windows
+      /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+      helpers.root('./client/src'), // location of your src
+      {} // a map of your routes
+    ),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: ['app', 'vendor', 'polyfills']
+    }),
+    new HtmlWebpackPlugin({
+      template: './server/views/index.html'
     })
-
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: ['app', 'vendor', 'polyfills']
-    // }),
-
-    // new HtmlWebpackPlugin({
-    //   template: './server/views/index.html'
-    // })
   ]
-};
+}
+;

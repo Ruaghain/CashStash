@@ -8,12 +8,11 @@ import { AuthService } from "../../auth/auth.service";
   templateUrl: 'navbar.component.html'
 })
 
-export class NavbarComponent extends OnInit {
+export class NavbarComponent implements OnInit {
 
   private navItems: NavigationItem[] = [];
 
   constructor(private authService: AuthService) {
-    super();
   }
 
   ngOnInit(): void {
