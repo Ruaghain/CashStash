@@ -29,7 +29,17 @@ module.exports = {
         test: /\.scss$/,
         loaders: ['raw-loader', 'sass-loader']
       },
-    ]
+      {
+        enforce: 'post',
+        test: /\.ts$/,
+        loader: 'istanbul-instrumenter-loader',
+        exclude: [
+          'node_modules',
+          'testing/**/*.*',
+          /\.spec\.ts$/
+        ]
+      }
+    ],
   },
   plugins: [
     new webpack.ContextReplacementPlugin(
