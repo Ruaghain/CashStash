@@ -9,14 +9,16 @@ module.exports = {
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.ts$/,
-        loaders:
-          [
-            'awesome-typescript-loader',
-            'angular2-template-loader'
-          ]
+        loaders: [
+          {
+            loader: 'awesome-typescript-loader',
+            options: { configFileName: helpers.root('tsconfig.json') }
+          },
+          'angular2-template-loader'
+        ]
       },
       {
         test: /\.html$/,
@@ -25,7 +27,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loaders: [ 'raw-loader', 'sass-loader' ]
+        loaders: ['raw-loader', 'sass-loader']
       },
     ]
   },
