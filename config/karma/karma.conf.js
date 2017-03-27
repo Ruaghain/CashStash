@@ -1,4 +1,4 @@
-var webpackConfig = require('./../webpack/webpack.test.js');
+var webpackConfig = require('./../webpack/webpack.test');
 
 module.exports = function (config) {
   var _config = {
@@ -20,26 +20,29 @@ module.exports = function (config) {
       stats: 'errors-only'
     },
 
-    plugins: [
-      require("karma-webpack"),
-      require("karma-jasmine"),
-      require("karma-coverage"),
-      require("karma-chrome-launcher"),
-      require("karma-sourcemap-loader"),
-      require("karma-phantomjs-launcher")
-    ],
-
     webpackServer: {
       noInfo: true
     },
 
-    reporters: ['progress', 'coverage'],
+    phantomjsLauncher: {
+      // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
+      exitOnResourceError: true
+    },
+
+    reporters: ['progress', 'coverage-istanbul'],
+
     port: 9876,
     colors: true,
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_DEBUG,
     autoWatch: false,
-    browsers: ['PhantomJS'],
-    singleRun: true
+    browsers: ['Chrome'],
+    singleRun: true,
+
+    coverageIstanbulReporter: {
+      // reports: [ 'html', 'text-summary', 'json', 'json-summary', 'text' ],
+      reports: ['html'],
+      fixWebpackSourcePaths: true
+    }
   };
 
   config.set(_config);

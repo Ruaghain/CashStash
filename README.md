@@ -1,5 +1,7 @@
 # CashStash
 
+[ ![Codeship Status for Ruaghain/CashStash](https://app.codeship.com/projects/7035fcb0-ffeb-0133-202a-66a4d3edd024/status?branch=master)](https://app.codeship.com/projects/152980)
+
 A light weight money tracking application.
 
 ## Development

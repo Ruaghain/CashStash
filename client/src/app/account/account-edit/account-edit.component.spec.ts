@@ -144,7 +144,6 @@ function createComponent() {
   fixture.detectChanges();
   return fixture.whenStable().then(() => {
     // 2nd change detection displays the async-fetched account
-    console.log('executing detect changes again.');
     fixture.detectChanges();
   });
 }
