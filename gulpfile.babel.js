@@ -147,9 +147,9 @@ gulp.task('start:server', () => {
 gulp.task('test:client', (done) => {
   new KarmaServer({
     configFile: `${__dirname}/${paths.karma}`,
-    singleRun: false,
+    singleRun: true,
     autoWatch: true,
-    browsers: ['Chrome']
+    browsers: ['PhantomJS']
   }, err => {
     done(err);
     process.exit(err);
