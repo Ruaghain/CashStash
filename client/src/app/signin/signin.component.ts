@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "../auth/auth.service";
 import { User } from "../auth/user.model";
 import { Router } from "@angular/router";
@@ -35,11 +35,7 @@ export class SignInComponent implements OnInit {
       this.signInForm.value.password
     );
 
-    this.authService.signin(user).subscribe(
-      data => {
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('userId', data.userId);
-        localStorage.setItem('fullName', data.fullName);
+    this.authService.signin(user).subscribe(() => {
         this.router.navigateByUrl('/');
       },
       error => {

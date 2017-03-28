@@ -1,4 +1,4 @@
-import { Http, Headers, Response } from "@angular/http";
+import { Headers, Http, Response } from "@angular/http";
 import { User } from "./user.model";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
@@ -19,6 +19,12 @@ export class AuthService extends BaseService {
     });
     return this.http.post(this.baseUrl + '/auth/signup', body, { headers: headers })
       .map((response: Response) => response.json())
+      .map(data => {
+        if (data) {
+          localStorage.setItem('token', data.token);
+          return true;
+        }
+      })
       .catch((error: Response) => {
         return Observable.throw(error.json())
       })
@@ -30,8 +36,12 @@ export class AuthService extends BaseService {
       'Content-Type': 'application/json'
     });
     return this.http.post(this.baseUrl + '/auth/signin', body, { headers: headers })
-      .map((response: Response) => {
-        return response.json()
+      .map((response: Response) => response.json())
+      .map(data => {
+        if (data) {
+          localStorage.setItem('token', data.token);
+          return true;
+        }
       })
       .catch((error: Response) => {
         localStorage.clear();
@@ -45,12 +55,11 @@ export class AuthService extends BaseService {
   };
 
   isLoggedIn = () => {
-    return localStorage.getItem('userId') != null;
+    return localStorage.getItem('token') != null;
   };
 
-  //Can get the full name from the token - need to decode it from base64.
   getFullName = () => {
-    //console.log(window.atob(localStorage.getItem('token')));
-    return localStorage.getItem('fullName');
+    let user = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).user;
+    return (user.firstName + ' ' + user.lastName);
   }
 }

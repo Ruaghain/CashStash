@@ -1,5 +1,5 @@
-import { TestBed, async, inject } from "@angular/core/testing";
-import { HttpModule, Http, BaseRequestOptions, Response, ResponseOptions } from "@angular/http";
+import { async, inject, TestBed } from "@angular/core/testing";
+import { BaseRequestOptions, Http, HttpModule, Response, ResponseOptions } from "@angular/http";
 import { MockBackend } from "@angular/http/testing";
 import { AuthService } from "./auth.service";
 import { User } from "./user.model";
@@ -41,8 +41,8 @@ describe("AuthService", () => {
         })));
       });
 
-      authService.signup(new User('UserName', 'Password', 'FirstName', 'LastName', 'one.user@email.com')).subscribe((user: any) => {
-        expect(user.userName).toEqual('User Name');
+      authService.signup(new User('UserName', 'Password', 'FirstName', 'LastName', 'one.user@email.com')).subscribe((result: boolean) => {
+        expect(result).toEqual(true);
       });
     }));
 

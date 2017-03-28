@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { User } from "../auth/user.model";
 import { AuthService } from "../auth/auth.service";
 import { Router } from "@angular/router";
@@ -46,17 +46,8 @@ export class SignUpComponent implements OnInit {
     );
 
     this.authService.signup(user).subscribe(
-      data => {
-        //There must be a better way of doing this
-        this.authService.signin(user).subscribe(
-          data => {
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('userId', data.userId);
-            localStorage.setItem('fullName', data.fullName);
-          }, error => {
-            console.log('There was an error logging in created user: ' + error);
-          }
-        );
+      () => {
+        this.router.navigateByUrl('/');
       },
       error => {
         console.error('There was an error signing up the user. ' + error);
