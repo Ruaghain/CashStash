@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed, async } from "@angular/core/testing";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { By } from "@angular/platform-browser";
 import { APP_BASE_HREF } from "@angular/common";
 import { TopbarComponent } from "./topbar.component";
 import { RouterTestingModule } from "@angular/router/testing";
 import { DebugElement } from "@angular/core";
-import { AuthService } from "../../auth/auth.service";
+import { AuthService } from "../../auth/auth-service/auth.service";
 import { HttpModule } from "@angular/http";
 import { NavbarComponent } from "../navbar/navbar.component";
 

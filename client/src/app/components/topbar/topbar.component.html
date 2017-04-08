@@ -13,10 +13,10 @@
     </div>
     <div fxFlex fxLayout="row" fxLayoutAlign="end" *ngIf="!isUserLoggedIn()">
       <div>
-        <a class="item" [routerLink]="['signup']">Sign Up</a>
+        <a class="item" [routerLink]="['auth/signup']">Sign Up</a>
       </div>
       <div>
-        <a class="item" [routerLink]="['signin']">Login</a>
+        <a class="item" [routerLink]="['auth/signin']">Login</a>
       </div>
     </div>
   </div>

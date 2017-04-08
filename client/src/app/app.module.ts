@@ -2,28 +2,19 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { HttpModule } from "@angular/http";
 import { NgModule } from "@angular/core";
-import { SignInComponent } from "./signin/signin.component";
-import { SignUpComponent } from "./signup/signup.component";
-import { HomeComponent } from "./home/home.component";
+
 import { AppComponent } from "./app.component";
-import { AuthService } from "./auth/auth.service";
+import { HomeComponent } from "./home/home.component";
 import { routing } from "./app.routing";
+import { AuthModule } from "./auth/auth.module";
+import { AccountModule } from "./account/account.module";
 import { WraithModule } from "./components/wraith.module";
-import { AccountComponent } from "./account/account.component";
-import { AccountEditComponent } from "./account/account-edit/account-edit.component";
-import { AccountService } from "./account/account-service/account.service";
-// import { AccountModule } from "./account/account.module";
 import { SharedModule } from "./shared/shared.module";
-import AccountResolver from "./account/account.resolver";
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignUpComponent,
-    SignInComponent,
-    HomeComponent,
-    AccountEditComponent,
-    AccountComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -31,13 +22,9 @@ import AccountResolver from "./account/account.resolver";
     SharedModule,
     ReactiveFormsModule,
     HttpModule,
-    // AccountModule,
+    AccountModule,
+    AuthModule,
     WraithModule
-  ],
-  providers: [
-    AuthService,
-    AccountService,
-    AccountResolver
   ],
   bootstrap: [
     AppComponent
