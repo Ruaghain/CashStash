@@ -15,6 +15,8 @@ function requiredProcessEnv(name) {
 var all = {
   env: process.env.NODE_ENV,
 
+  logging: process.env.LOGGING_LEVEL || 'ERROR',
+
   // Root path of server
   root: path.normalize(__dirname + '/../../..'),
 
@@ -22,14 +24,14 @@ var all = {
   port: process.env.PORT || 9000,
 
   // Server IP
-  ip: process.env.IP || '0.0.0.0',
+  ip: process.env.IP || '127.0.0.1',
 
   // Should we populate the DB with sample data?
   seedDB: false,
 
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
-    session: 'cash-stash-secret'
+    session: process.env.SECRET || 'secret'
   },
 
   // MongoDB connection options

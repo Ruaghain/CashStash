@@ -33,7 +33,10 @@ const paths = {
       `${clientPath}/**/*.html`,
       `${clientPath}/**/!(*.spec).ts`,
       `${clientPath}/**/*.scss`
-    ]
+    ],
+    test: {
+      unit: [`${clientPath}/src/**/*.spec.ts`]
+    }
   },
   server: {
     scripts: [
@@ -138,7 +141,8 @@ gulp.task('start:server', () => {
   process.env.NODE_ENV = process.env.NODE_ENV || 'development';
   config = require(`./${serverPath}/config/environment`);
   return nodemon({
-    script: `./${serverPath}/app.js`
+    script: `./${serverPath}/app.js`,
+    args: ['--trace-sync-io']
   }).on('error', (error) => {
     console.log('There was an error: ' + error);
   });
@@ -149,6 +153,7 @@ gulp.task('test:client', (done) => {
     configFile: `${__dirname}/${paths.karma}`,
     singleRun: true,
     autoWatch: true,
+    reporters: ['progress', 'coverage-istanbul'],
     browsers: ['PhantomJS']
   }, err => {
     done(err);
@@ -160,7 +165,6 @@ gulp.task('test:server', (cb) => {
   runSequence(
     'env:all',
     'env:test',
-    //'start:server',
     'jasmine:unit',
     cb);
 });

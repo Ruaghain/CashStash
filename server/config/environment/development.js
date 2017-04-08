@@ -4,6 +4,7 @@
 // ==================================
 module.exports = {
 
+  logging: 'TRACE',
   port: process.env.PORT || 3000,
   // MongoDB connection options
   mongo: {

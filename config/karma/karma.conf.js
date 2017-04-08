@@ -29,7 +29,7 @@ module.exports = function (config) {
       exitOnResourceError: true
     },
 
-    reporters: ['progress', 'coverage-istanbul'],
+    reporters: ['progress'],
 
     port: 9876,
     colors: true,

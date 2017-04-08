@@ -2,10 +2,13 @@ var express = require('express');
 var mongoose = require('mongoose');
 var config = require('./config/environment');
 var http = require('http');
+var logger = require('./utils/logging').log;
 
+//Can I use something better than global.Promise
+mongoose.Promise = global.Promise;
 mongoose.connect(config.mongo.uri, config.mongo.options);
-mongoose.connection.on('error', function(err) {
-  console.error('MongoDB connection error: ' + err);
+mongoose.connection.on('error', function (err) {
+  logger.error('MongoDB connection error: ' + err);
   process.exit(-1);
 });
 
@@ -15,10 +18,9 @@ var server = http.createServer(app);
 require('./config/express')(app);
 require('./routes')(app);
 
-// Start server
 function startServer() {
-  server.listen(config.port, config.ip, function() {
-    console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
+  server.listen(config.port, config.ip, function () {
+    logger.info('STARTING - Express Server. Listening on port "%d", in "%s" mode', config.port, app.get('env'));
   });
 }
 

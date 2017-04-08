@@ -1,10 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
+var config = require('./../../config/environment');
+var logger = require('./../../utils/logging').log;
 
 var User = require('./../user/user.model');
 
 router.post('/signup', function (req, res, next) {
+  logger.debug('Signing up new user: "%s"', req.body.userName);
   var user = new User({
     userName: req.body.userName,
     firstName: req.body.firstName,
@@ -14,6 +17,7 @@ router.post('/signup', function (req, res, next) {
   });
   user.save(function (err, result) {
     if (err) {
+      logger.error('There was an error saving the new user: %s', err);
       //Need to return here because you want it to return immediately, and not execute
       //the last code - below this return statement.
       return res.status(500).json({
@@ -21,6 +25,7 @@ router.post('/signup', function (req, res, next) {
         error: err
       })
     }
+    logger.debug('New user was successfully saved.');
     //Don't need return here as it's the last statement.
     res.status(201).json({
       message: 'User created',
@@ -30,8 +35,10 @@ router.post('/signup', function (req, res, next) {
 });
 
 router.post('/signin', function (req, res, next) {
+  logger.debug('Signing in user: "%s"', req.body.userName);
   User.findOne({ userName: req.body.userName }, function (err, user) {
     if (err) {
+      logger.error('There was an error finding the user');
       return res.status(500).json({
         title: 'An error occurred finding the user.',
         error: err
@@ -39,6 +46,7 @@ router.post('/signin', function (req, res, next) {
     }
     //Use this error message as it gives nothing away with regards to credentials.
     if (!user) {
+      logger.error('User was not found.');
       return res.status(401).json({
         title: 'Login failed',
         error: { message: 'Invalid login credentials.' }
@@ -46,6 +54,7 @@ router.post('/signin', function (req, res, next) {
     }
 
     if (!user.authenticate(req.body.password)) {
+      logger.error('Could not authenticate passed in user.');
       return res.status(401).json({
         title: 'Login failed',
         error: { message: 'Invalid login credentials.' }
@@ -59,11 +68,14 @@ router.post('/signin', function (req, res, next) {
       role: user.role
     };
 
-    var token = jwt.sign({ user: tokenObject }, 'secret', { expiresIn: 7200 });
+    logger.debug('Generating JWT token for user.');
+    var token = jwt.sign({ user: tokenObject }, config.secrets.session, { expiresIn: 7200 });
     res.status(200).json({
       message: 'Successfully logged in.',
       token: token
-    })
+    });
+
+    logger.debug('Successfully logged in user.');
   });
 });
 
