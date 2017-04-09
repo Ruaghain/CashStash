@@ -1,14 +1,15 @@
-import { Headers, Http, Response } from "@angular/http";
-import { User } from "../user.model";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import "rxjs/Rx";
-import { BaseService } from "../../shared/base.service";
+import { Headers, Http, Response } from '@angular/http';
+import { User } from '../user.model';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import 'rxjs/Rx';
+import { BaseRequestService } from '../../shared/base-request.service';
+import { FlashService } from '../../components/flash/flash.service';
 
 @Injectable()
-export class AuthService extends BaseService {
+export class AuthService extends BaseRequestService {
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private flashService: FlashService) {
     super();
   }
 
@@ -45,7 +46,7 @@ export class AuthService extends BaseService {
       })
       .catch((error: Response) => {
         localStorage.clear();
-        // this.errorService.handleError(error.json());
+        this.flashService.error(error.json().error.message);
         return Observable.throw(error.json())
       });
   };

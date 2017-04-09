@@ -1,10 +1,11 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { By } from "@angular/platform-browser";
-import { AuthSignInComponent } from "./auth-signin.component";
-import { AuthService } from "../auth-service/auth.service";
-import { HttpModule } from "@angular/http";
-import { Router } from "@angular/router";
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
+import { AuthSignInComponent } from './auth-signin.component';
+import { AuthService } from '../auth-service/auth.service';
+import { HttpModule } from '@angular/http';
+import { Router } from '@angular/router';
+import { FlashService } from '../../components/flash/flash.service';
 
 describe('SignInComponent', () => {
   let fixture: ComponentFixture<AuthSignInComponent>;
@@ -23,7 +24,8 @@ describe('SignInComponent', () => {
       declarations: [AuthSignInComponent],
       providers: [
         { provide: Router, useValue: mockRouter },
-        AuthService
+        AuthService,
+        FlashService
       ]
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(AuthSignInComponent);

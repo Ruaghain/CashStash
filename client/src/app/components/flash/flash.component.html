@@ -1,0 +1,6 @@
+<div [@flashState]="currentState()" class="flash-component" [ngClass]="getMessageType()">
+  <div>
+    <span class="message">{{getMessage()}}</span>
+    <span *ngIf="!hasTimeout()" class="close-btn" (click)="hideFlash()">&times;</span>
+  </div>
+</div>

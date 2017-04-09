@@ -1,0 +1,52 @@
+.flash-component {
+  color: #c8c8c8;
+  bottom: 0;
+  overflow: hidden;
+  position: fixed;
+  opacity: 0;
+  right: 0;
+  text-align: center;
+  width: 100%;
+  z-index: 2000;
+  height: 50px;
+  box-shadow: 0 0 5px black;
+
+  > div {
+    padding-top: 15px;
+  }
+
+  .message {
+    padding-top: 15px;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  .close-btn {
+    float: right;
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    padding-right: 10px;
+
+    :hover {
+      color: black;
+    }
+  }
+
+  &.success {
+    background-color: #0B5904
+  }
+
+  &.information {
+    background-color: #9b9914;
+  }
+
+  &.error {
+    background-color: #721d01;
+  }
+}

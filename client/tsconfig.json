@@ -18,7 +18,7 @@
     ],
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
-    "outDir": "dist",
+    "outDir": "dist-dev",
     "typeRoots": [
       "node_modules/@types/"
     ]
@@ -29,7 +29,7 @@
   "exclude": [
     "node_modules",
     "src/**/*.aot.ts",
-    "dist"
+    "dist-dev"
   ],
   "awesomeTypescriptLoaderOptions": {
     "forkChecker": true,

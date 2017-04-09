@@ -1,6 +1,6 @@
 import { Headers } from '@angular/http';
 
-export class BaseService {
+export class BaseRequestService {
 
   protected baseUrl: string = process.env.SERVER_URL;
 

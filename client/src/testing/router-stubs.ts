@@ -1,10 +1,12 @@
 // export for convenience.
-export { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
+export { ActivatedRoute, Router, RouterLink, RouterOutlet, Event } from '@angular/router';
 
-import { Component, Directive, Injectable, Input } from "@angular/core";
-import { NavigationExtras } from "@angular/router";
+import { Observable } from 'rxjs/Observable';
+import { Component, Directive, Injectable, Input } from '@angular/core';
+import { NavigationExtras, NavigationStart } from '@angular/router';
 // Only implements params and part of snapshot.params
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+
 
 @Directive({
   selector: '[routerLink]',
@@ -27,13 +29,21 @@ export class RouterOutletStubComponent {
 
 @Injectable()
 export class RouterStub {
+  private url: string;
+
   navigate(commands: any[], extras?: NavigationExtras) {
   }
 
   navigateByUrl(url: string, extras?: NavigationExtras) {
+    this.url = url;
   }
-}
 
+  private navigationStart = new NavigationStart(0, 'http://www.test.com');
+  public events = new Observable((observer: any) => {
+    observer.next(this.navigationStart);
+    observer.complete();
+  });
+}
 
 @Injectable()
 export class ActivatedRouteStub {
