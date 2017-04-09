@@ -154,7 +154,7 @@ gulp.task('test:client', (done) => {
     singleRun: true,
     autoWatch: true,
     reporters: ['progress', 'coverage-istanbul'],
-    browsers: ['PhantomJS']
+    browsers: ['Chrome']
   }, err => {
     done(err);
     process.exit(err);

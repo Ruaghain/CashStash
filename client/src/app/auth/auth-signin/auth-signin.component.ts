@@ -1,16 +1,16 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { AuthService } from "../auth/auth.service";
-import { User } from "../auth/user.model";
+import { AuthService } from "../auth-service/auth.service";
+import { User } from "../user.model";
 import { Router } from "@angular/router";
 
 @Component({
   selector: 'cash-signin',
-  styleUrls: ['./signin.component.scss'],
-  templateUrl: './signin.component.html'
+  styleUrls: ['./auth-signin.component.scss'],
+  templateUrl: './auth-signin.component.html'
 })
 
-export class SignInComponent implements OnInit {
+export class AuthSignInComponent implements OnInit {
 
   private signInForm: FormGroup;
 

@@ -1,9 +1,9 @@
 import { Headers, Http, Response } from "@angular/http";
-import { User } from "./user.model";
+import { User } from "../user.model";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import "rxjs/Rx";
-import { BaseService } from "../shared/base.service";
+import { BaseService } from "../../shared/base.service";
 
 @Injectable()
 export class AuthService extends BaseService {

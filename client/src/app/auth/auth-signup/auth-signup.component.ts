@@ -1,15 +1,15 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { User } from "../auth/user.model";
-import { AuthService } from "../auth/auth.service";
+import { User } from "../user.model";
+import { AuthService } from "../auth-service/auth.service";
 import { Router } from "@angular/router";
 
 @Component({
   selector: 'cash-signup',
-  styleUrls: ['./signup.component.scss'],
-  templateUrl: './signup.component.html'
+  styleUrls: ['./auth-signup.component.scss'],
+  templateUrl: './auth-signup.component.html'
 })
-export class SignUpComponent implements OnInit {
+export class AuthSignUpComponent implements OnInit {
 
   private signUpForm: FormGroup;
 

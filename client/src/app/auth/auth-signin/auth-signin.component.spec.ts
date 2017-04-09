@@ -1,13 +1,13 @@
-import { ComponentFixture, async, TestBed } from "@angular/core/testing";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
-import { SignInComponent } from "./signin.component";
-import { AuthService } from "../auth/auth.service";
+import { AuthSignInComponent } from "./auth-signin.component";
+import { AuthService } from "../auth-service/auth.service";
 import { HttpModule } from "@angular/http";
 import { Router } from "@angular/router";
 
 describe('SignInComponent', () => {
-  let fixture: ComponentFixture<SignInComponent>;
+  let fixture: ComponentFixture<AuthSignInComponent>;
 
   let mockRouter = {
     navigateByUrl: jasmine.createSpy('navigateByUrl')
@@ -20,13 +20,13 @@ describe('SignInComponent', () => {
         ReactiveFormsModule,
         HttpModule
       ],
-      declarations: [SignInComponent],
+      declarations: [AuthSignInComponent],
       providers: [
         { provide: Router, useValue: mockRouter },
         AuthService
       ]
     }).compileComponents().then(() => {
-      fixture = TestBed.createComponent(SignInComponent);
+      fixture = TestBed.createComponent(AuthSignInComponent);
       fixture.detectChanges();
     })
   }));

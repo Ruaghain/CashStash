@@ -1,19 +1,19 @@
-import { FakeAccountService } from "../../testing/services/fake-account.service";
-import { ActivatedRouteStub, RouterStub } from "../../testing/router-stubs";
+import { FakeAccountService } from "../../../testing/services/fake-account.service";
+import { ActivatedRouteStub, RouterStub } from "../../../testing/router-stubs";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { AccountComponent } from "./account.component";
+import { AccountListComponent } from "./account-list.component";
 import { Router } from "@angular/router";
-import { AccountService } from "./account-service/account.service";
+import { AccountService } from "../account-service/account.service";
 import { HttpModule } from "@angular/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
-import { WraithModule } from "../components/wraith.module";
+import { WraithModule } from "../../components/wraith.module";
 
 let activatedRoute: ActivatedRouteStub;
-let component: AccountComponent;
-let fixture: ComponentFixture<AccountComponent>;
+let component: AccountListComponent;
+let fixture: ComponentFixture<AccountListComponent>;
 
-describe('AccountComponent', () => {
+describe('AccountListComponent', () => {
   let fakeAccountService: FakeAccountService;
   let fakeRouter: RouterStub;
 
@@ -31,7 +31,7 @@ describe('AccountComponent', () => {
           WraithModule
         ],
         declarations: [
-          AccountComponent
+          AccountListComponent
         ],
         providers: [
           { provide: AccountService, useClass: FakeAccountService },
@@ -79,7 +79,7 @@ describe('AccountComponent', () => {
 });
 
 function createComponent() {
-  fixture = TestBed.createComponent(AccountComponent);
+  fixture = TestBed.createComponent(AccountListComponent);
   component = fixture.componentInstance;
 
   // 1st change detection triggers ngOnInit which gets an account
