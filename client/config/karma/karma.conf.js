@@ -30,6 +30,7 @@ module.exports = function (config) {
     },
 
     reporters: ['progress'],
+    // reporters: ['progress', 'coverage-istanbul'],
 
     port: 9876,
     colors: true,

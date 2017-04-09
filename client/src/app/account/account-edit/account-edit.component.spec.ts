@@ -7,7 +7,7 @@ import { AccountService } from '../account-service/account.service';
 import { ActivatedRoute, ActivatedRouteStub, Router, RouterStub } from '../../../testing';
 import { ACCOUNTS, FakeAccountService } from '../../../testing/services/fake-account.service';
 import { Account } from '../account.model';
-import { FlashService } from '../../components/flash/flash.service';
+import { WraithModule } from '../../components/wraith.module';
 
 let activatedRoute: ActivatedRouteStub;
 let component: AccountEditComponent;
@@ -28,7 +28,8 @@ describe('AccountEditComponent', () => {
         imports: [
           FormsModule,
           ReactiveFormsModule,
-          HttpModule
+          HttpModule,
+          WraithModule
         ],
         declarations: [
           AccountEditComponent
@@ -36,8 +37,7 @@ describe('AccountEditComponent', () => {
         providers: [
           { provide: ActivatedRoute, useValue: activatedRoute },
           { provide: AccountService, useClass: FakeAccountService },
-          { provide: Router, useClass: RouterStub },
-          FlashService
+          { provide: Router, useClass: RouterStub }
         ]
       }).compileComponents();
 

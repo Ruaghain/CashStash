@@ -2,6 +2,5 @@
   <div>
     <wraith-button-list [buttons]="buttons" (buttonSelected)="onAccountSelected($event)"></wraith-button-list>
   </div>
-  <button class="cash-save" (click)="onAccountAdd()">Add Account
-  </button>
+  <button class="cash-save" (click)="onAccountAdd()">{{'account.account_list.account_add' | i18n}}</button>
 </div>

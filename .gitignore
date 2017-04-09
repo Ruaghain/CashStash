@@ -37,3 +37,4 @@ Thumbs.db
 /client/dist-prod/
 /server/node_modules/
 /client/node_modules/
+/client/coverage/

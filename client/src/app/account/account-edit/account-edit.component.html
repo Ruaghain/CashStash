@@ -2,7 +2,7 @@
   <h2>{{getFormTitle()}}</h2>
   <form [formGroup]="accountEditForm" id="account-edit" (ngSubmit)="onSubmit()">
     <div class="cash-form-group">
-      <label for="name">Account Name:</label>
+      <label for="name">{{'account.account_edit.account_name' | i18n}}</label>
       <input
         id="name"
         class="cash-textbox"
@@ -11,7 +11,7 @@
       />
     </div>
     <div class="cash-form-group">
-      <label for="number">Account Number:</label>
+      <label for="number">{{'account.account_edit.account_number' | i18n}}</label>
       <input
         id="number"
         class="cash-textbox"
@@ -20,7 +20,7 @@
       />
     </div>
     <div class="cash-form-group">
-      <label for="openingBalance">Opening Balance:</label>
+      <label for="openingBalance">{{'account.account_edit.account_opening_balance' | i18n}}</label>
       <input
         id="openingBalance"
         class="cash-textbox"
@@ -29,7 +29,7 @@
       />
     </div>
     <div class="cash-form-group">
-      <label for="balance">Balance:</label>
+      <label for="balance">{{'account.account_edit.account_balance' | i18n}}</label>
       <input
         id="balance"
         class="cash-textbox"
@@ -38,9 +38,11 @@
       />
     </div>
     <div class="cash-form-group">
-      <button class="cash-save" type="submit">Save</button>
-      <button *ngIf="!isNew()" class="cash-delete" (click)="onDelete()">Delete</button>
-      <button class="cash-cancel" (click)="onCancel()">Cancel</button>
+      <button class="cash-save" type="submit">{{'account.account_edit.account_save' | i18n}}</button>
+      <button *ngIf="!isNew()" class="cash-delete" (click)="onDelete()">{{'account.account_edit.account_delete' |
+        i18n}}
+      </button>
+      <button class="cash-cancel" (click)="onCancel()">{{'account.account_edit.account_cancel' | i18n}}</button>
     </div>
   </form>
 </div>

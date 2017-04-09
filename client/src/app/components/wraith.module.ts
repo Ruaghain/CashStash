@@ -7,6 +7,8 @@ import { SharedModule } from '../shared/shared.module';
 import { FlashComponent } from './flash/flash.component';
 import { FlashService } from './flash/flash.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { I18nService } from './i18n/i18n.service';
+import { I18nPipe } from './i18n/i18n.pipe';
 
 @NgModule({
   declarations: [
@@ -14,10 +16,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ButtonListItemComponent,
     TopbarComponent,
     NavbarComponent,
-    FlashComponent
+    FlashComponent,
+    I18nPipe
   ],
   providers: [
-    FlashService
+    FlashService,
+    I18nService
   ],
   imports: [
     SharedModule,
@@ -27,7 +31,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ButtonListComponent,
     TopbarComponent,
     NavbarComponent,
-    FlashComponent
+    FlashComponent,
+    I18nPipe
   ]
 })
 
