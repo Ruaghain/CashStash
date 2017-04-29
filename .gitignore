@@ -1,7 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/dist
+/client/dist
 /tmp
 
 # dependencies
@@ -33,3 +33,7 @@ testem.log
 Thumbs.db
 /coverage/
 /server/logs/
+/client/dist-dev/
+/client/dist-prod/
+/server/node_modules/
+/client/node_modules/

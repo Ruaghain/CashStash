@@ -1,0 +1,51 @@
+{
+  "name": "cash-stash-server",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": "6.9.4"
+  },
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "gulp test:client"
+  },
+  "dependencies": {
+    "ajv": "4.11.6",
+    "bcryptjs": "^2.4.0",
+    "body-parser": "~1.15.2",
+    "cookie-parser": "~1.4.3",
+    "core-js": "^2.4.1",
+    "debug": "~2.2.0",
+    "express": "~4.14.0",
+    "hbs": "~3.1.0",
+    "helmet": "3.5.0",
+    "jsonwebtoken": "^7.2.1",
+    "lodash": "^4.17.4",
+    "log4js": "^1.1.1",
+    "mongoose": "4.9.7",
+    "mongoose-unique-validator": "^1.0.5",
+    "morgan": "~1.6.1",
+    "reflect-metadata": "^0.1.9",
+    "serve-favicon": "~2.3.0",
+    "swagger-express": "^1.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^7.0.14",
+    "del": "^2.2.2",
+    "del-cli": "^0.2.0",
+    "gulp": "^3.9.1",
+    "gulp-env": "^0.4.0",
+    "gulp-jasmine-node": "^1.0.7",
+    "gulp-load-plugins": "^1.4.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-watch": "^4.3.11",
+    "install": "^0.8.9",
+    "jasmine-node": "^1.14.5",
+    "nodemon": "^1.11.0",
+    "open": "0.0.5",
+    "request": "^2.79.0",
+    "run-sequence": "^1.2.2",
+    "supertest": "^3.0.0",
+    "v8-profiler": "5.7.0"
+  }
+}

@@ -1,7 +1,7 @@
 // re-export for tester convenience
-import { Observable } from "rxjs";
-import { Account } from "../../app/account/account.model";
-import { AccountService } from "../../app/account/account-service/account.service";
+import { Observable } from 'rxjs';
+import { Account } from '../../app/account/account.model';
+import { AccountService } from '../../app/account/account-service/account.service';
 export { Account } from './../../app/account/account.model';
 export { AccountService } from './../../app/account/account-service/account.service';
 
@@ -11,7 +11,7 @@ export let ACCOUNTS: Account[] = [
   new Account('Savings', '345678901', 0.00, 0.37, '3')
 ];
 
-export class FakeAccountService implements AccountService {
+export class FakeAccountService extends AccountService {
   accounts = ACCOUNTS.map(a => a.clone());
 
   getAccounts(): Observable<any> {

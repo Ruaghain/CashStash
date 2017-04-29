@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { BaseService } from "../../shared/base.service";
-import { Http, Response } from "@angular/http";
-import { Observable } from "rxjs";
-import { Account } from "../account.model";
+import { Injectable } from '@angular/core';
+import { BaseService } from '../../shared/base.service';
+import { Http, Response } from '@angular/http';
+import { Observable } from 'rxjs';
+import { Account } from '../account.model';
 
 @Injectable()
 export class AccountService extends BaseService {
