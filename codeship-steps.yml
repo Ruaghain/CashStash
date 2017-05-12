@@ -1,0 +1,2 @@
+- service: angular
+  command: yarn run test

@@ -1,8 +1,8 @@
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { AccountService } from "../account-service/account.service";
-import { Account } from "../account.model";
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AccountService } from '../account-service/account.service';
+import { Account } from '../account.model';
 
 @Component({
   selector: 'cash-edit-account',
@@ -20,13 +20,13 @@ export class AccountEditComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.account = this.route.snapshot.data['account'];
     this.accountIsNew = !this.account;
     this.initForm();
   }
 
-  private initForm() {
+  private initForm(): void {
     let accountName = '';
     let accountNumber = '';
     let accountOpeningBalance = '';
@@ -60,7 +60,7 @@ export class AccountEditComponent implements OnInit {
     })
   };
 
-  onSubmit() {
+  onSubmit(): void {
     const account = new Account(
       this.accountEditForm.value.name,
       this.accountEditForm.value.number,
@@ -86,11 +86,11 @@ export class AccountEditComponent implements OnInit {
     }
   };
 
-  onCancel() {
+  onCancel(): void {
     this.router.navigateByUrl('/accounts');
   };
 
-  onDelete() {
+  onDelete(): void {
     this.accountService.deleteAccount(this.account._id).subscribe(() => {
         this.router.navigateByUrl('/accounts');
       }, error => {
@@ -99,11 +99,11 @@ export class AccountEditComponent implements OnInit {
     );
   };
 
-  isNew() {
+  isNew(): boolean {
     return this.accountIsNew;
   }
 
-  getFormTitle() {
+  getFormTitle(): string {
     return this.formTitle;
   }
 }

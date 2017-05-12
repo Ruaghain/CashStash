@@ -2,8 +2,8 @@
 
 import webpack from "webpack";
 import webpackStream from "webpack-stream";
-import webpackDev from "./config/webpack/webpack.dev";
-import webpackTest from "./config/webpack/webpack.test";
+import webpackDev from "./client/config/webpack/webpack.development";
+import webpackTest from "./client/config/webpack/webpack.test";
 import gulp from "gulp";
 import del from "del";
 import jasmineNode from "gulp-jasmine-node";
@@ -151,7 +151,7 @@ gulp.task('start:server', () => {
 gulp.task('test:client', (done) => {
   new KarmaServer({
     configFile: `${__dirname}/${paths.karma}`,
-    singleRun: true,
+    singleRun: false,
     autoWatch: true,
     reporters: ['progress', 'coverage-istanbul'],
     browsers: ['Chrome']

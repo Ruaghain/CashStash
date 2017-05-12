@@ -1,6 +1,6 @@
-import { TestBed, async, ComponentFixture } from "@angular/core/testing";
-import { ButtonListItemComponent } from "./button-list-item.component";
-import { ButtonListItem } from "./button-list-item";
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ButtonListItemComponent } from './button-list-item.component';
+import { ButtonListItem } from './button-list-item';
 
 describe("ButtonListItemComponent", () => {
 
@@ -25,6 +25,6 @@ describe("ButtonListItemComponent", () => {
   });
 
   it('should display name of provided button', () => {
-    let button = fixture.nativeElement.querySelector('.button-name');
+    fixture.nativeElement.querySelector('.button-name');
   });
 });
