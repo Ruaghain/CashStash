@@ -13,6 +13,7 @@
     "webpack:build-dev": "webpack --env=development",
     "webpack:build-prod": "webpack --env=production",
     "test": "karma start",
+    "test:coverage": "karma start --reporters coverage-istanbul",
     "build:aot": "ngc -p ./tsconfig-aot.json"
   },
   "dependencies": {

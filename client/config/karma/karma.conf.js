@@ -39,8 +39,7 @@ module.exports = function (config) {
     singleRun: true,
 
     coverageIstanbulReporter: {
-      // reports: [ 'html', 'text-summary', 'json', 'json-summary', 'text' ],
-      reports: ['html'],
+      reports: ['lcov'],
       fixWebpackSourcePaths: true
     }
   };
