@@ -1,2 +1,2 @@
 - service: angular
-  command: yarn run test
+  command: yarn run test:coverage
