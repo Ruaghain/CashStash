@@ -5,7 +5,10 @@ module.exports = {
   devtool: 'inline-source-map',
 
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: [
+      '.js',
+      '.ts'
+    ]
   },
 
   module: {
@@ -35,7 +38,7 @@ module.exports = {
         loader: 'istanbul-instrumenter-loader',
         exclude: [
           'node_modules',
-          'testing/**/*.*',
+          // 'testing/**/*.*',
           /\.spec\.ts$/
         ]
       }
@@ -44,8 +47,8 @@ module.exports = {
   plugins: [
     new webpack.ContextReplacementPlugin(
       // The (\\|\/) piece accounts for path separators in *nix and Windows
-      /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
-      helpers.root('./client/src'), // location of your src
+      /angular(\\|\/)core(\\|\/)@angular/,
+      helpers.root('./src'),
       {} // a map of your routes
     )
   ]

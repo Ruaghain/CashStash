@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
-import { BaseService } from '../../shared/base.service';
-import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs';
-import { Account } from '../account.model';
+import { Injectable } from "@angular/core";
+import { BaseRequestService } from "../../shared/base-request.service";
+import { Http, Response } from "@angular/http";
+import { Observable } from "rxjs";
+import { Account } from "../account.model";
+import { FlashService } from "../../components/flash/flash.service";
 
 @Injectable()
-export class AccountService extends BaseService {
+export class AccountService extends BaseRequestService {
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private flashService: FlashService) {
     super()
   }
 
@@ -23,6 +24,7 @@ export class AccountService extends BaseService {
         }
         return result
       }).catch((error: Response) => {
+        this.flashService.error(error.json().message);
         return Observable.throw(error.json())
       })
   };

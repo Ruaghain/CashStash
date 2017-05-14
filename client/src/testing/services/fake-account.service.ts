@@ -1,4 +1,3 @@
-// re-export for tester convenience
 import { Observable } from 'rxjs';
 import { Account } from '../../app/account/account.model';
 import { AccountService } from '../../app/account/account-service/account.service';

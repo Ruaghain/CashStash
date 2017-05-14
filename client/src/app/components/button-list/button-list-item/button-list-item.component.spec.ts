@@ -25,6 +25,6 @@ describe("ButtonListItemComponent", () => {
   });
 
   it('should display name of provided button', () => {
-    fixture.nativeElement.querySelector('.button-name');
+    //let button = fixture.nativeElement.querySelector('.button-name');
   });
 });

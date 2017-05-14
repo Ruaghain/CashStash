@@ -1,12 +1,13 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { By } from "@angular/platform-browser";
-import { HttpModule } from "@angular/http";
-import { AccountEditComponent } from "./account-edit.component";
-import { AccountService } from "../account-service/account.service";
-import { ActivatedRoute, ActivatedRouteStub, Router, RouterStub } from "../../../testing";
-import { ACCOUNTS, FakeAccountService } from "../../../testing/services/fake-account.service";
-import { Account } from "../account.model";
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
+import { AccountEditComponent } from './account-edit.component';
+import { AccountService } from '../account-service/account.service';
+import { ActivatedRoute, ActivatedRouteStub, Router, RouterStub } from '../../../testing';
+import { ACCOUNTS, FakeAccountService } from '../../../testing/services/fake-account.service';
+import { Account } from '../account.model';
+import { FlashService } from '../../components/flash/flash.service';
 
 let activatedRoute: ActivatedRouteStub;
 let component: AccountEditComponent;
@@ -36,6 +37,7 @@ describe('AccountEditComponent', () => {
           { provide: ActivatedRoute, useValue: activatedRoute },
           { provide: AccountService, useClass: FakeAccountService },
           { provide: Router, useClass: RouterStub },
+          FlashService
         ]
       }).compileComponents();
 
