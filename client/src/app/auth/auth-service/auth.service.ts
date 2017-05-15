@@ -1,6 +1,6 @@
 import { Headers, Http, Response } from '@angular/http';
-import { User } from '../user.model';
 import { Injectable } from '@angular/core';
+import { User } from '../user.model';
 import { Observable } from 'rxjs';
 import 'rxjs/Rx';
 import { BaseRequestService } from '../../shared/base-request.service';
