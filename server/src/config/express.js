@@ -1,4 +1,8 @@
 var express = require('express');
+var swaggerParser = require('swagger-parser');
+var swaggerize = require('swaggerize-express');
+var swaggerUI = require('express-swagger-ui');
+
 var mongoose = require('mongoose');
 var config = require('./environment/index');
 
@@ -36,5 +40,21 @@ module.exports = function (app) {
     } else {
       next();
     }
+  });
+
+  swaggerParser.validate('api.yml').then((api) => {
+    swaggerUI({
+      app: app,
+      swaggerUrl: '/api/v1/swagger.json',
+      localPath: '/'
+    });
+
+    app.use(swaggerize({
+      api: api,
+      docspath: '/swagger.json',
+      handlers: '../handlers'
+    }));
+  }).catch((err) => {
+    logger.log.error(err);
   });
 };

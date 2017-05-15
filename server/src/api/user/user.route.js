@@ -19,15 +19,21 @@ router.post('/', function (req, res) {
       //Need to return here because you want it to return immediately, and not execute
       //the last code - below this return statement.
       return res.status(500).json({
-        title: 'An error occurred',
-        error: err
+        message: 'An error occurred',
+        result: [
+          {
+            error: err
+          }
+        ]
       })
     }
     logger.debug('Successfully created the new user.');
     //Don't need return here as it's the last statement.
     res.status(201).json({
       message: 'User created',
-      obj: result
+      result: [
+        result
+      ]
     })
   }).then()
 });

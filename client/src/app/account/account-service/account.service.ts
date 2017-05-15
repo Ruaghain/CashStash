@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
-import { BaseRequestService } from "../../shared/base-request.service";
-import { Http, Response } from "@angular/http";
-import { Observable } from "rxjs";
-import { Account } from "../account.model";
-import { FlashService } from "../../components/flash/flash.service";
+import { Injectable } from '@angular/core';
+import { BaseRequestService } from '../../shared/base-request.service';
+import { Http, Response } from '@angular/http';
+import { Observable } from 'rxjs';
+import { Account } from '../account.model';
+import { FlashService } from '../../components/flash/flash.service';
 
 @Injectable()
 export class AccountService extends BaseRequestService {
@@ -14,7 +14,7 @@ export class AccountService extends BaseRequestService {
 
   getAccounts() {
     return this.http.get(this.baseUrl + '/accounts', { headers: super.getHeaders() })
-      .map((response: Response) => response.json().obj)
+      .map((response: Response) => response.json().result)
       .map((accounts: Array<Account>) => {
         let result: Array<Account> = [];
         if (accounts) {
@@ -24,14 +24,14 @@ export class AccountService extends BaseRequestService {
         }
         return result
       }).catch((error: Response) => {
-        this.flashService.error(error.json().message);
+        this.flashService.error(error.json().message + ' (' + error.json().result[0].error.message + ')');
         return Observable.throw(error.json())
       })
   };
 
   getAccount(id: string) {
     return this.http.get(this.baseUrl + '/accounts/' + id, { headers: super.getHeaders() })
-      .map((response: Response) => response.json().obj)
+      .map((response: Response) => response.json().result[0])
       .map((account: Account) => {
         if (account) {
           return new Account(account.name, account.number, account.openingBalance, account.balance, account._id);

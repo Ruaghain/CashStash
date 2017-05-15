@@ -1,8 +1,8 @@
-import { async, inject, TestBed } from "@angular/core/testing";
-import { AccountService } from "./account.service";
-import { BaseRequestOptions, Http, HttpModule, Response, ResponseOptions } from "@angular/http";
-import { MockBackend } from "@angular/http/testing";
-import { FlashService } from "../../components/flash/flash.service";
+import { async, inject, TestBed } from '@angular/core/testing';
+import { AccountService } from './account.service';
+import { BaseRequestOptions, Http, HttpModule, Response, ResponseOptions } from '@angular/http';
+import { MockBackend } from '@angular/http/testing';
+import { FlashService } from '../../components/flash/flash.service';
 
 describe("AccountService", () => {
   beforeEach(async(() => {
@@ -29,7 +29,7 @@ describe("AccountService", () => {
   describe("getAccounts()", () => {
 
     const mockResponse = {
-      obj: [
+      result: [
         {
           name: 'Current',
           number: '123456789',
