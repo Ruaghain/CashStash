@@ -28,15 +28,18 @@ router.post('/signup', function (req, res, next) {
       //Need to return here because you want it to return immediately, and not execute
       //the last code - below this return statement.
       return res.status(500).json({
-        title: 'An error occurred',
+        message: 'An error occurred',
         error: err
       })
     }
     logger.debug('New user was successfully saved.');
+
+    var token = setTokenInformation(result);
+
     //Don't need return here as it's the last statement.
     res.status(201).json({
       message: 'User created',
-      obj: result
+      token: token
     })
   })
 });
@@ -47,7 +50,7 @@ router.post('/signin', function (req, res, next) {
     if (err) {
       logger.error('There was an error finding the user');
       return res.status(500).json({
-        title: 'An error occurred finding the user.',
+        message: 'An error occurred finding the user.',
         error: err
       });
     }
@@ -55,7 +58,7 @@ router.post('/signin', function (req, res, next) {
     if (!user) {
       logger.error('User was not found.');
       return res.status(401).json({
-        title: 'Login failed',
+        message: 'Login failed',
         error: { message: 'Invalid login credentials.' }
       });
     }
@@ -63,20 +66,14 @@ router.post('/signin', function (req, res, next) {
     if (!user.authenticate(req.body.password)) {
       logger.error('Could not authenticate passed in user.');
       return res.status(401).json({
-        title: 'Login failed',
+        message: 'Login failed',
         error: { message: 'Invalid login credentials.' }
       });
     }
 
-    var tokenObject = {
-      _id: user._id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      role: user.role
-    };
 
-    logger.debug('Generating JWT token for user.');
-    var token = jwt.sign({ user: tokenObject }, config.secrets.session, { expiresIn: 7200 });
+    var token = setTokenInformation(user);
+
     res.status(200).json({
       message: 'Successfully logged in.',
       token: token
@@ -85,5 +82,22 @@ router.post('/signin', function (req, res, next) {
     logger.debug('Successfully logged in user.');
   });
 });
+
+/**
+ * This method generates a JWT token for the passed in user, and returns the signed value back to the calling function.
+ *
+ * @param user
+ * @returns {*}
+ */
+function setTokenInformation(user) {
+  var tokenObject = {
+    _id: user._id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    role: user.role
+  };
+  logger.debug('Generating JWT token for user.');
+  return jwt.sign({ user: tokenObject }, config.secrets.session, { expiresIn: 7200 });
+}
 
 module.exports = router;
