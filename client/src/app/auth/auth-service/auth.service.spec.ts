@@ -33,8 +33,11 @@ describe("AuthService", () => {
     it('should return a successfully created user', inject([AuthService, MockBackend], (authService: any, mockBackend: any) => {
 
       const mockResponse = {
-        userName: "User Name",
-        password: "Password"
+        result: [
+          {
+            token: '1234567'
+          }
+        ]
       };
 
       mockBackend.connections.subscribe((connection: any) => {

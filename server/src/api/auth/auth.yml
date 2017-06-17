@@ -1,0 +1,88 @@
+signup:
+  post:
+    summary: Adds new user to the CashStash.
+    description: |
+      Creates a new user in the CashStash system, and returns a token back to the user.
+    parameters:
+      - name: body
+        in: body
+        description: The User object that needs to be created and signed into the application.
+        required: true
+        schema:
+          $ref: '#/definitions/User'
+    responses:
+      201:
+        description: The users token.
+        schema:
+          $ref: '#/definitions/Token'
+      default:
+        description: Unexpected Error
+        schema:
+          $ref: '../../../api.yml#/definitions/Response'
+    security: []
+signin:
+  post:
+    summary: Signs in an existing user
+    description: |
+      Signs in an existing user with the given username and password
+    parameters:
+      - name: body
+        in: body
+        description: The username and the password of the existing user.
+        required: true
+        schema:
+          $ref: '#/definitions/Credentials'
+    responses:
+      200:
+        description: The users token.
+        schema:
+          $ref: '#/definitions/Token'
+      401:
+        description: Login Failed
+        schema:
+          $ref: '../../../api.yml#/definitions/Response'
+      default:
+        description: Unexpected Error
+        schema:
+          $ref: '../../../api.yml#/definitions/Response'
+    security: []
+definitions:
+  Credentials:
+    type: object
+    properties:
+      userName:
+        type: string
+        description: This is the users username.
+      password:
+        type: string
+        format: password
+        description: This is the users password.
+  User:
+    type: object
+    properties:
+      userName:
+        type: string
+        description: This is the users username.
+      firstName:
+        type: string
+        description: This is the users first name.
+      lastName:
+        type: string
+        description: This is the users last name.
+      email:
+        type: string
+        format: email
+        description: This is the users email address.
+      password:
+        type: string
+        format: password
+        description: This is the users password.
+  Token:
+    type: object
+    properties:
+      message:
+        type: string
+        description: The message returned from the server
+      token:
+        type: string
+        description: The token of the user who sucesfully signed in

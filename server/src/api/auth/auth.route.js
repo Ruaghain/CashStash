@@ -9,7 +9,8 @@ var User = require('../user/user.model');
 router.get('/test', function (req, res) {
   logger.info('We are in the test.');
   res.status(200).json({
-    message: 'server is up - YEEEEOOOOOOWWWW!!'
+    message: 'server is up - YEEEEOOOOOOWWWW!!',
+    result: []
   });
 });
 
@@ -29,7 +30,11 @@ router.post('/signup', function (req, res, next) {
       //the last code - below this return statement.
       return res.status(500).json({
         message: 'An error occurred',
-        error: err
+        result: [
+          {
+            error: err
+          }
+        ]
       })
     }
     logger.debug('New user was successfully saved.');
@@ -39,7 +44,11 @@ router.post('/signup', function (req, res, next) {
     //Don't need return here as it's the last statement.
     res.status(201).json({
       message: 'User created',
-      token: token
+      result: [
+        {
+          token: token
+        }
+      ]
     })
   })
 });
@@ -51,7 +60,11 @@ router.post('/signin', function (req, res, next) {
       logger.error('There was an error finding the user');
       return res.status(500).json({
         message: 'An error occurred finding the user.',
-        error: err
+        result: [
+          {
+            error: err
+          }
+        ]
       });
     }
     //Use this error message as it gives nothing away with regards to credentials.
@@ -59,7 +72,11 @@ router.post('/signin', function (req, res, next) {
       logger.error('User was not found.');
       return res.status(401).json({
         message: 'Login failed',
-        error: { message: 'Invalid login credentials.' }
+        result: [
+          {
+            message: 'Invalid login credentials.'
+          }
+        ]
       });
     }
 
@@ -67,7 +84,11 @@ router.post('/signin', function (req, res, next) {
       logger.error('Could not authenticate passed in user.');
       return res.status(401).json({
         message: 'Login failed',
-        error: { message: 'Invalid login credentials.' }
+        result: [
+          {
+            message: 'Invalid login credentials.'
+          }
+        ]
       });
     }
 
@@ -76,7 +97,11 @@ router.post('/signin', function (req, res, next) {
 
     res.status(200).json({
       message: 'Successfully logged in.',
-      token: token
+      result: [
+        {
+          token: token
+        }
+      ]
     });
 
     logger.debug('Successfully logged in user.');

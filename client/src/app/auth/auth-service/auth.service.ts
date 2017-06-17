@@ -22,7 +22,7 @@ export class AuthService extends BaseRequestService {
       .map((response: Response) => response.json())
       .map(data => {
         if (data) {
-          localStorage.setItem('token', data.token);
+          localStorage.setItem('token', data.result[0].token);
           return true;
         }
       })
@@ -40,13 +40,13 @@ export class AuthService extends BaseRequestService {
       .map((response: Response) => response.json())
       .map(data => {
         if (data) {
-          localStorage.setItem('token', data.token);
+          localStorage.setItem('token', data.result[0].token);
           return true;
         }
       })
       .catch((error: Response) => {
         localStorage.clear();
-        this.flashService.error(error.json().error.message);
+        this.flashService.error(error.json().result[0].error.message);
         return Observable.throw(error.json())
       });
   };
