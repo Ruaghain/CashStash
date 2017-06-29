@@ -1,7 +1,11 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import { Document, Model, model, Schema } from 'mongoose';
+import { IAccount } from './account';
 
-var accountSchema = new Schema({
+export interface IAccountModel extends IAccount, Document {
+
+}
+
+export let AccountSchema: Schema = new Schema({
   name: String,
   number: String,
   // accountType: {
@@ -19,17 +23,16 @@ var accountSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
-  // transactions: [{
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'Transaction'
-  // }]
+// transactions: [{
+//   type: Schema.Types.ObjectId,
+//   ref: 'Transaction'
+// }]
 });
 
-// Validate account name is not already taken
-accountSchema.path('name').validate(function (value, respond) {
+AccountSchema.path('name').validate((value: any, respond: any) => {
     const self = this;
     return this.constructor.findOne({ name: value }).exec()
-      .then(function (account) {
+      .then((account: any) => {
         if (account) {
           if (self.id === account.id) {
             return respond(true);
@@ -38,12 +41,11 @@ accountSchema.path('name').validate(function (value, respond) {
         }
         return respond(true);
       })
-      .catch(function (err) {
+      .catch((err: any) => {
         throw err;
       });
   },
   'The specified account name is already in use.'
 );
 
-module.exports = mongoose.model('Account', accountSchema);
-
+export const Account: Model<IAccountModel> = model<IAccountModel>('Account', AccountSchema);
