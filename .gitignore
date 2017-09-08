@@ -3,6 +3,13 @@
 # compiled output
 /client/dist
 /tmp
+/server/logs/
+/server/dist/
+/server/node_modules/
+/client/dist-dev/
+/client/dist-prod/
+/client/node_modules/
+/client/coverage/
 
 # dependencies
 /node_modules
@@ -31,10 +38,3 @@ testem.log
 #System Files
 .DS_Store
 Thumbs.db
-/coverage/
-/server/logs/
-/client/dist-dev/
-/client/dist-prod/
-/server/node_modules/
-/client/node_modules/
-/client/coverage/
