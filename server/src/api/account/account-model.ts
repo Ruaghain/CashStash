@@ -31,7 +31,7 @@ export let AccountSchema: Schema = new Schema({
 
 AccountSchema.path('name').validate((value: any, respond: any) => {
     const self = this;
-    return this.constructor.findOne({ name: value }).exec()
+    return Account.findOne({ name: value }).exec()
       .then((account: any) => {
         if (account) {
           if (self.id === account.id) {
