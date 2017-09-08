@@ -10,7 +10,7 @@ export class Log4JLogger implements Logger {
     this.level = level;
     log4js.loadAppender('file');
     // log4js.configure('./log4js-configuration.json', { reloadSecs: 120 });
-    log4js.configure('server/src/config/log/log4js-configuration.json', { reloadSecs: 120 });
+    log4js.configure('./src/config/log/log4js-configuration.json', { reloadSecs: 120 });
     this.log = log4js.getLogger('cash-stash');
     this.log.setLevel(this.level);
   }
