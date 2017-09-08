@@ -75,7 +75,7 @@ export class CashStashServer extends CashStashBase {
     this.app.use((req, res, next) => {
       res.setHeader('Access-Control-Allow-Origin', '*');
       res.setHeader('Access-Control-Allow-Headers', 'origin, x-requested-with, content-type, accept, x-access-token');
-      res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS');
+      res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PUT, PATCH, DELETE, OPTIONS');
 
       //CORS requires that an OPTIONS request is made first. Just return 200 for these.
       if ('OPTIONS' === req.method) {
