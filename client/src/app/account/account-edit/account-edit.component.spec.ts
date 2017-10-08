@@ -14,7 +14,7 @@ let fixture: ComponentFixture<AccountEditComponent>;
 
 describe('AccountEditComponent', () => {
 
-  let fakeAccountService: FakeAccountService;
+  let mockAccountService: FakeAccountService;
   let fakeRouter: RouterStub;
 
   beforeEach(() => {
@@ -38,10 +38,10 @@ describe('AccountEditComponent', () => {
           { provide: AccountService, useClass: FakeAccountService },
           { provide: Router, useClass: RouterStub }
         ]
-      }).compileComponents();
-
-      fakeAccountService = TestBed.get(AccountService);
-      fakeRouter = TestBed.get(Router);
+      }).compileComponents().then(() => {
+        mockAccountService = TestBed.get(AccountService);
+        fakeRouter = TestBed.get(Router);
+      });
     }));
 
     describe('for an existing account', () => {
@@ -72,10 +72,10 @@ describe('AccountEditComponent', () => {
       });
 
       it('updates the existing account', () => {
-        spyOn(fakeAccountService, 'updateAccount').and.callThrough();
+        spyOn(mockAccountService, 'updateAccount').and.callThrough();
         let form = fixture.debugElement.query(By.css('form'));
         form.triggerEventHandler('submit', null);
-        expect(fakeAccountService.updateAccount).toHaveBeenCalled();
+        expect(mockAccountService.updateAccount).toHaveBeenCalled();
       });
 
       it('correctly navigates to account list', () => {
@@ -92,10 +92,10 @@ describe('AccountEditComponent', () => {
         });
 
         it('deletes the account', () => {
-          spyOn(fakeAccountService, 'deleteAccount').and.callThrough();
+          spyOn(mockAccountService, 'deleteAccount').and.callThrough();
           let deleteButton = fixture.debugElement.query(By.css('.cash-delete'));
           deleteButton.triggerEventHandler('click', null);
-          expect(fakeAccountService.deleteAccount).toHaveBeenCalled();
+          expect(mockAccountService.deleteAccount).toHaveBeenCalled();
         });
 
         it('correctly navigates to account list', () => {
@@ -120,11 +120,11 @@ describe('AccountEditComponent', () => {
 
       it('creates a new account', () => {
         // let fakeAccountService = TestBed.get(AccountService);
-        spyOn(fakeAccountService, 'saveAccount').and.callThrough();
+        spyOn(mockAccountService, 'saveAccount').and.callThrough();
 
         let form = fixture.debugElement.query(By.css('form'));
         form.triggerEventHandler('submit', null);
-        expect(fakeAccountService.saveAccount).toHaveBeenCalled();
+        expect(mockAccountService.saveAccount).toHaveBeenCalled();
       });
 
       it('correctly navigates to account list', () => {

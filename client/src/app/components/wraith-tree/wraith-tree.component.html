@@ -1,0 +1,13 @@
+<div>
+  <div class="wraith-tree" [draggable]="true" (dragstart)="drag($event)" (drop)="onDrop($event)" (dragover)="allowDrop($event)"
+       [ngClass]="{'node-expanded' : node.isExpanded() && node.hasChildren(), 'node-collapsed' : !node.isExpanded() && node.hasChildren(), 'node-child': !node.hasChildren()}"
+       (click)="nodeClick($event)">{{node.getName()}}
+  </div>
+  <div *ngIf="node.isExpanded()">
+    <ul class="wraith-tree-node" *ngFor="let childNode of node.getChildren();" (click)="nodeClick($event)">
+      <li>
+        <wraith-tree [node]="childNode"></wraith-tree>
+      </li>
+    </ul>
+  </div>
+</div>

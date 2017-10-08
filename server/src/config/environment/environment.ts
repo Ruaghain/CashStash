@@ -6,7 +6,6 @@ export class Environment {
   private logging: string;
   private root: string;
   private ipAddress: string;
-  private seedDatabase: boolean;
   private secret: string;
   getMongoUrl = () => {
     return 'mongodb://' + this.ipAddress + '/' + this.databaseName;
@@ -45,7 +44,6 @@ export class Environment {
     this.port = process.env.PORT || 3000;
     // this.ipAddress = process.env.IP || '192.168.99.100';
     this.ipAddress = process.env.IP || 'localhost';
-    this.seedDatabase = false;
     this.secret = process.env.SECRET || 'secret';
     this.databaseName = process.env.databaseName || 'cash-stash';
     // this.databaseName = process.env.databaseName || 'cash-stash-development';
