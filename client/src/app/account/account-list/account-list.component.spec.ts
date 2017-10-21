@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { AccountService } from '../account-service/account.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { WraithModule } from '../../components/wraith.module';
+import { CashModule } from '../../components/cash.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 let fixture: ComponentFixture<AccountListComponent>;
@@ -21,7 +21,7 @@ describe('AccountListComponent', () => {
           FormsModule,
           ReactiveFormsModule,
           HttpClientTestingModule,
-          WraithModule
+          CashModule
         ],
         declarations: [
           AccountListComponent
@@ -32,7 +32,6 @@ describe('AccountListComponent', () => {
         ]
       }).compileComponents();
 
-      // fakeAccountService = TestBed.get(AccountService);
       fakeRouter = TestBed.get(Router);
     }));
 
@@ -73,8 +72,6 @@ describe('AccountListComponent', () => {
 
 function createComponent() {
   fixture = TestBed.createComponent(AccountListComponent);
-  // component = fixture.componentInstance;
-
   // 1st change detection triggers ngOnInit which gets an account
   fixture.detectChanges();
   return fixture.whenStable().then(() => {

@@ -1,6 +1,6 @@
-import {HttpHeaders} from "@angular/common/http";
+import { HttpHeaders } from '@angular/common/http';
 
-export class BaseRequestService {
+export class WraithBaseRequest {
 
   protected baseUrl: string = process.env.SERVER_URL;
 

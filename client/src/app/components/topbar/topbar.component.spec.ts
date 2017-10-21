@@ -1,15 +1,14 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { By } from "@angular/platform-browser";
-import { APP_BASE_HREF } from "@angular/common";
-import { TopbarComponent } from "./topbar.component";
-import { RouterTestingModule } from "@angular/router/testing";
-import { DebugElement } from "@angular/core";
-import { AuthService } from "../../auth/auth-service/auth.service";
-import { HttpModule } from "@angular/http";
-import { NavbarComponent } from "../navbar/navbar.component";
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { APP_BASE_HREF } from '@angular/common';
+import { TopbarComponent } from './topbar.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { DebugElement } from '@angular/core';
+import { AuthService } from '../../auth/auth-service/auth.service';
+import { NavbarComponent } from '../navbar/navbar.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe("TopbarComponent", () => {
-  // let component: TopbarComponent;
   let fixture: ComponentFixture<TopbarComponent>;
   let debugElement: DebugElement;
   let element: HTMLElement;
@@ -31,7 +30,7 @@ describe("TopbarComponent", () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        HttpModule
+        HttpClientTestingModule
       ],
       declarations: [TopbarComponent, NavbarComponent],
       providers: [
@@ -40,12 +39,10 @@ describe("TopbarComponent", () => {
       ]
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(TopbarComponent);
-      // component = fixture.componentInstance;
-
-      authService = TestBed.get(AuthService);
-
       fixture.detectChanges();
     });
+
+    authService = TestBed.get(AuthService);
   }));
 
   it('should be an instance of TopbarComponent', () => {

@@ -36,6 +36,6 @@ import { I18nPipe } from './i18n/i18n.pipe';
   ]
 })
 
-export class WraithModule {
+export class CashModule {
 
 }

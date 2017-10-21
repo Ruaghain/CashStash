@@ -1,5 +1,4 @@
 var webpack = require('webpack');
-var path = require('path');
 var helpers = require('../helpers');
 
 module.exports = function (env) {
@@ -35,7 +34,6 @@ module.exports = function (env) {
               loader: 'awesome-typescript-loader',
               options: { configFileName: helpers.root('tsconfig.json') }
             },
-            // 'awesome-typescript-loader',
             'angular2-template-loader',
             'angular2-router-loader'
           ]

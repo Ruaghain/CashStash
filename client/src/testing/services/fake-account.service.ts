@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 import { Account } from '../../app/account/account.model';
 import { AccountService } from '../../app/account/account-service/account.service';
+
 export { Account } from './../../app/account/account.model';
 export { AccountService } from './../../app/account/account-service/account.service';
 
@@ -16,6 +17,10 @@ export class FakeAccountService extends AccountService {
   getAccounts(): Observable<any> {
     return Observable.of(this.accounts);
   };
+
+  // getAccounts(): Array<Account> {
+  //   return ACCOUNTS;
+  // };
 
   getAccount(id: string): Observable<any> {
     let account = this.accounts.find(a => a._id === id);

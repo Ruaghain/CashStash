@@ -29,7 +29,7 @@ wraith-navbar {
   grid-area: navbar;
 }
 
-:host router-outlet + * {
+router-outlet + * {
   grid-area: content;
 }
 

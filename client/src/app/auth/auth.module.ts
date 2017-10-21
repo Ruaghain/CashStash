@@ -1,12 +1,12 @@
-import { NgModule } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
-import { SharedModule } from "../shared/shared.module";
-import { WraithModule } from "../components/wraith.module";
-import { AuthSignUpComponent } from "./auth-signup/auth-signup.component";
-import { AuthSignInComponent } from "./auth-signin/auth-signin.component";
-import { AuthService } from "./auth-service/auth.service";
-import { AuthComponent } from "./auth.component";
-import { authRouting } from "./auth.routing";
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
+import { CashModule } from '../components/cash.module';
+import { AuthSignUpComponent } from './auth-signup/auth-signup.component';
+import { AuthSignInComponent } from './auth-signin/auth-signin.component';
+import { AuthService } from './auth-service/auth.service';
+import { AuthComponent } from './auth.component';
+import { authRouting } from './auth.routing';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { authRouting } from "./auth.routing";
     authRouting,
     SharedModule,
     ReactiveFormsModule,
-    WraithModule
+    CashModule
   ],
   providers: [
     AuthService,
