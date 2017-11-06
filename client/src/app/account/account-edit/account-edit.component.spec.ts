@@ -1,16 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
 import { AccountEditComponent } from './account-edit.component';
 import { AccountService } from '../account-service/account.service';
 import { ActivatedRoute, ActivatedRouteStub, Router, RouterStub } from '../../../testing';
 import { ACCOUNTS, FakeAccountService } from '../../../testing/services/fake-account.service';
 import { Account } from '../account.model';
 import { WraithModule } from '../../components/wraith.module';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 let activatedRoute: ActivatedRouteStub;
-let component: AccountEditComponent;
 let fixture: ComponentFixture<AccountEditComponent>;
 
 describe('AccountEditComponent', () => {
@@ -28,7 +27,7 @@ describe('AccountEditComponent', () => {
         imports: [
           FormsModule,
           ReactiveFormsModule,
-          HttpModule,
+          HttpClientTestingModule,
           WraithModule
         ],
         declarations: [
@@ -140,7 +139,7 @@ describe('AccountEditComponent', () => {
 
 function createComponent() {
   fixture = TestBed.createComponent(AccountEditComponent);
-  component = fixture.componentInstance;
+  // component = fixture.componentInstance;
 
   // 1st change detection triggers ngOnInit which gets an account
   fixture.detectChanges();

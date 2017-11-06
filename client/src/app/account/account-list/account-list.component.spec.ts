@@ -1,25 +1,18 @@
-import { FakeAccountService } from "../../../testing/services/fake-account.service";
-import { ActivatedRouteStub, RouterStub } from "../../../testing/router-stubs";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { AccountListComponent } from "./account-list.component";
-import { Router } from "@angular/router";
-import { AccountService } from "../account-service/account.service";
-import { HttpModule } from "@angular/http";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { By } from "@angular/platform-browser";
-import { WraithModule } from "../../components/wraith.module";
+import { FakeAccountService } from '../../../testing/services/fake-account.service';
+import { RouterStub } from '../../../testing/router-stubs';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { AccountListComponent } from './account-list.component';
+import { Router } from '@angular/router';
+import { AccountService } from '../account-service/account.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
+import { WraithModule } from '../../components/wraith.module';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-let activatedRoute: ActivatedRouteStub;
-let component: AccountListComponent;
 let fixture: ComponentFixture<AccountListComponent>;
 
 describe('AccountListComponent', () => {
-  let fakeAccountService: FakeAccountService;
   let fakeRouter: RouterStub;
-
-  beforeEach(() => {
-    activatedRoute = new ActivatedRouteStub();
-  });
 
   describe('Account list', () => {
     beforeEach(async(() => {
@@ -27,7 +20,7 @@ describe('AccountListComponent', () => {
         imports: [
           FormsModule,
           ReactiveFormsModule,
-          HttpModule,
+          HttpClientTestingModule,
           WraithModule
         ],
         declarations: [
@@ -39,7 +32,7 @@ describe('AccountListComponent', () => {
         ]
       }).compileComponents();
 
-      fakeAccountService = TestBed.get(AccountService);
+      // fakeAccountService = TestBed.get(AccountService);
       fakeRouter = TestBed.get(Router);
     }));
 
@@ -80,7 +73,7 @@ describe('AccountListComponent', () => {
 
 function createComponent() {
   fixture = TestBed.createComponent(AccountListComponent);
-  component = fixture.componentInstance;
+  // component = fixture.componentInstance;
 
   // 1st change detection triggers ngOnInit which gets an account
   fixture.detectChanges();

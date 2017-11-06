@@ -14,7 +14,7 @@ describe('FlashComponent', () => {
   let fixture: ComponentFixture<FlashComponent>;
   let localFlashService: FlashService;
   let debugElement: DebugElement;
-  let element: HTMLElement;
+  // let element: HTMLElement;
 
   beforeEach(async(() => {
 
@@ -35,7 +35,7 @@ describe('FlashComponent', () => {
       fixture = TestBed.createComponent(FlashComponent);
       component = fixture.componentInstance;
       debugElement = fixture.debugElement;
-      element = debugElement.nativeElement;
+      // element = debugElement.nativeElement;
 
       localFlashService = TestBed.get(FlashService);
 

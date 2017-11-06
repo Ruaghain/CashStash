@@ -1,32 +1,27 @@
-import { async, inject, TestBed } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 import { AccountService } from './account.service';
-import { BaseRequestOptions, Http, HttpModule, Response, ResponseOptions } from '@angular/http';
-import { MockBackend } from '@angular/http/testing';
 import { FlashService } from '../../components/flash/flash.service';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-describe("AccountService", () => {
+describe('AccountService', () => {
+  let accountService: AccountService;
+  let httpMock: HttpTestingController;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpModule
+        HttpClientTestingModule
       ],
       providers: [
         AccountService,
-        FlashService,
-        {
-          provide: Http,
-          useFactory: (mockBackend: any, options: any) => {
-            return new Http(mockBackend, options);
-          },
-          deps: [MockBackend, BaseRequestOptions]
-        },
-        MockBackend,
-        BaseRequestOptions
+        FlashService
       ]
     });
+    accountService = TestBed.get(AccountService);
+    httpMock = TestBed.get(HttpTestingController);
   }));
 
-  describe("getAccounts()", () => {
+  describe('getAccounts()', () => {
 
     const mockResponse = {
       result: [
@@ -45,19 +40,51 @@ describe("AccountService", () => {
       ]
     };
 
-    it("should return all of the accounts", inject([AccountService, MockBackend], (accountService: any, mockBackend: any) => {
-      mockBackend.connections.subscribe((connection: any) => {
-        connection.mockRespond(new Response(new ResponseOptions({
-          body: JSON.stringify(mockResponse)
-        })));
-      });
-
-      //TODO: should accounts reference an account model instead of any?
-      accountService.getAccounts().subscribe((accounts: any) => {
+    it('should return all of the accounts', (done) => {
+      accountService.getAccounts().subscribe((accounts) => {
         expect(accounts.length).toEqual(2);
         expect(accounts[0].name).toEqual('Current');
         expect(accounts[0].number).toEqual('123456789');
-      })
-    }))
+        done();
+      });
+
+      const request = httpMock.expectOne('undefined/accounts');
+      expect(request.request.method).toEqual('GET');
+
+      request.flush(mockResponse);
+
+      httpMock.verify();
+
+    });
+  });
+
+  describe('getAccount()', () => {
+
+    const mockResponse = {
+      result: [
+        {
+          name: 'Current',
+          number: '123456789',
+          openingBalance: -200.00,
+          balance: 100.00
+        }
+      ]
+    };
+
+    it('should return all of the accounts', (done) => {
+      accountService.getAccount('1').subscribe((account) => {
+        expect(account.name).toEqual('Current');
+        expect(account.number).toEqual('123456789');
+        done();
+      });
+
+      const request = httpMock.expectOne('undefined/accounts/1');
+      expect(request.request.method).toEqual('GET');
+
+      request.flush(mockResponse);
+
+      httpMock.verify();
+
+    });
   });
 });

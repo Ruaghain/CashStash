@@ -1,8 +1,12 @@
 @import '../../app.component.global';
 
 .top-bar {
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   padding: 5px 5px 0 5px;
-  height: $top-bar-height;
   background-color: $top-bar-colour;
 
   .header {
@@ -11,10 +15,31 @@
     @extend .cash-top-bar-header;
   }
 
-  .item {
-    cursor: pointer;
-    color: $top-bar-header-colour;
-    @extend .cash-top-bar-item;
+  .items {
+    display: inherit;
+    list-style: none;
+
+    .item {
+      cursor: pointer;
+      color: $top-bar-header-colour;
+      @extend .cash-top-bar-item;
+
+      a:hover {
+        color: $top-bar-hover-colour;
+      }
+
+      a {
+        color: $top-bar-header-colour;
+        text-align: center;
+        padding: 5px 5px;
+        text-decoration: none;
+      }
+
+    }
+  }
+
+  @include small-screen {
+    max-width: $small-width;
   }
 
   a:hover {

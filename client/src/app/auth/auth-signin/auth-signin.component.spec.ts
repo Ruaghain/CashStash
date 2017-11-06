@@ -3,9 +3,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { AuthSignInComponent } from './auth-signin.component';
 import { AuthService } from '../auth-service/auth.service';
-import { HttpModule } from '@angular/http';
 import { Router } from '@angular/router';
 import { FlashService } from '../../components/flash/flash.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('SignInComponent', () => {
   let fixture: ComponentFixture<AuthSignInComponent>;
@@ -19,7 +19,7 @@ describe('SignInComponent', () => {
       imports: [
         FormsModule,
         ReactiveFormsModule,
-        HttpModule
+        HttpClientTestingModule
       ],
       declarations: [AuthSignInComponent],
       providers: [

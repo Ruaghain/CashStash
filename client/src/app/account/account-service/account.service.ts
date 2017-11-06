@@ -1,70 +1,70 @@
-import { Injectable } from '@angular/core';
-import { BaseRequestService } from '../../shared/base-request.service';
-import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs';
-import { Account } from '../account.model';
-import { FlashService } from '../../components/flash/flash.service';
+import {Injectable} from '@angular/core';
+import {BaseRequestService} from '../../shared/base-request.service';
+import {Observable} from 'rxjs';
+import {Account} from '../account.model';
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {FlashService} from "../../components/flash/flash.service";
 
 @Injectable()
 export class AccountService extends BaseRequestService {
 
-  constructor(private http: Http, private flashService: FlashService) {
+  constructor(private httpClient: HttpClient, private flashService: FlashService) {
     super()
   }
 
-  getAccounts() {
-    return this.http.get(this.baseUrl + '/accounts', { headers: super.getHeaders() })
-      .map((response: Response) => response.json().result)
+  getAccounts(): Observable<any> {
+    return this.httpClient.get(this.baseUrl + '/accounts', {headers: super.getAuthHeaders()})
+      .map((data: any) => data.result)
       .map((accounts: Array<Account>) => {
         let result: Array<Account> = [];
         if (accounts) {
-          accounts.forEach((account) => {
+          accounts.forEach((account: any) => {
             result.push(new Account(account.name, account.number, account.openingBalance, account.balance, account._id))
-          })
+          });
         }
         return result
-      }).catch((error: Response) => {
-        this.flashService.error(error.json().message + ' (' + error.json().result[0].error.message + ')');
-        return Observable.throw(error.json())
+      }).catch((error: HttpErrorResponse) => {
+        this.flashService.error(error.name + ' (' + error.message + ')');
+        return Observable.throw(error)
       })
   };
 
   getAccount(id: string) {
-    return this.http.get(this.baseUrl + '/accounts/' + id, { headers: super.getHeaders() })
-      .map((response: Response) => response.json().result[0])
+    return this.httpClient.get(this.baseUrl + '/accounts/' + id, {headers: super.getAuthHeaders()})
+      .map((data: any) => data.result[0])
       .map((account: Account) => {
         if (account) {
           return new Account(account.name, account.number, account.openingBalance, account.balance, account._id);
         }
-      }).catch((error: Response) => {
-        return Observable.throw(error.json())
+      }).catch((error: HttpErrorResponse) => {
+        return Observable.throw(error)
       })
   };
 
   saveAccount(account: Account) {
     const body = JSON.stringify(account);
-    return this.http.post(this.baseUrl + '/accounts', body, { headers: super.getHeaders() })
-      .map((response: Response) => response.json())
-      .catch((error: Response) => {
-        return Observable.throw(error.json())
+    return this.httpClient.post(this.baseUrl + '/accounts', body, {headers: super.getAuthHeaders()})
+      .map((data: any) => data)
+      .catch((error: HttpErrorResponse) => {
+        return Observable.throw(error)
       })
   };
 
   updateAccount(id: string, account: Account) {
     const body = JSON.stringify(account);
     console.log(body);
-    return this.http.put(this.baseUrl + '/accounts/' + id, body, { headers: super.getHeaders() })
-      .map((response: Response) => response.json())
-      .catch((error: Response) => {
-        return Observable.throw(error.json())
+    return this.httpClient.put(this.baseUrl + '/accounts/' + id, body, {headers: super.getAuthHeaders()})
+      .map((data: any) => data)
+      .catch((error: HttpErrorResponse) => {
+        return Observable.throw(error)
       })
   }
 
   deleteAccount(id: string) {
-    return this.http.delete(this.baseUrl + '/accounts/' + id, { headers: super.getHeaders() })
-      .map((response: Response) => response.json())
-      .catch((error: Response) => {
-        return Observable.throw(error.json())
+    return this.httpClient.delete(this.baseUrl + '/accounts/' + id, {headers: super.getAuthHeaders()})
+      .map((data: any) => data)
+      .catch((error: HttpErrorResponse) => {
+        return Observable.throw(error)
       })
   }
 }

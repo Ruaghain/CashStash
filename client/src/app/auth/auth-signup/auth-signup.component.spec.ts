@@ -3,9 +3,9 @@ import { By } from '@angular/platform-browser';
 import { AuthSignUpComponent } from './auth-signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../auth-service/auth.service';
-import { HttpModule } from '@angular/http';
 import { Router } from '@angular/router';
 import { FlashService } from '../../components/flash/flash.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe("SignupComponent", () => {
   let fixture: ComponentFixture<AuthSignUpComponent>;
@@ -19,7 +19,7 @@ describe("SignupComponent", () => {
       imports: [
         FormsModule,
         ReactiveFormsModule,
-        HttpModule
+        HttpClientTestingModule
       ],
       declarations: [AuthSignUpComponent],
       providers: [

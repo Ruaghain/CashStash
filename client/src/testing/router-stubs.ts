@@ -29,13 +29,13 @@ export class RouterOutletStubComponent {
 
 @Injectable()
 export class RouterStub {
-  private url: string;
+  // private url: string;
 
   navigate(commands: any[], extras?: NavigationExtras) {
   }
 
   navigateByUrl(url: string, extras?: NavigationExtras) {
-    this.url = url;
+    // this.url = url;
   }
 
   private navigationStart = new NavigationStart(0, 'http://www.test.com');
