@@ -5,6 +5,13 @@
   margin-bottom: 30px;
 
   ul {
+    display: flex;
+    align-items: center;
+
+    @include small-screen {
+      display: block;
+    }
+
     margin: 0;
     padding: 0;
     list-style: none;

@@ -1,6 +1,11 @@
 export const LANG_ES_NAME = 'es';
 
 export const LANG_ES_TRANSLATIONS = {
+  topbar: {
+    logout: 'Logout',
+    signup: 'Sign Up',
+    login: 'Login'
+  },
   account: {
     accounts: 'Cuentas',
     account_edit: {

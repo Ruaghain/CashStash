@@ -9,7 +9,7 @@ import { HttpModule } from "@angular/http";
 import { NavbarComponent } from "../navbar/navbar.component";
 
 describe("TopbarComponent", () => {
-  let component: TopbarComponent;
+  // let component: TopbarComponent;
   let fixture: ComponentFixture<TopbarComponent>;
   let debugElement: DebugElement;
   let element: HTMLElement;
@@ -40,7 +40,7 @@ describe("TopbarComponent", () => {
       ]
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(TopbarComponent);
-      component = fixture.componentInstance;
+      // component = fixture.componentInstance;
 
       authService = TestBed.get(AuthService);
 

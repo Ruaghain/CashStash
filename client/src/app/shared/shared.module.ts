@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { TRANSLATION_PROVIDERS } from './i18n/translation-provider';
 
@@ -11,7 +10,6 @@ import { TRANSLATION_PROVIDERS } from './i18n/translation-provider';
   exports: [
     CommonModule,
     RouterModule,
-    FlexLayoutModule,
     FormsModule
   ],
   providers: [

@@ -1,55 +1,48 @@
-import { async, inject, TestBed } from '@angular/core/testing';
-import { BaseRequestOptions, Http, HttpModule, Response, ResponseOptions } from '@angular/http';
-import { MockBackend } from '@angular/http/testing';
+import { async, TestBed } from '@angular/core/testing';
 import { AuthService } from './auth.service';
 import { User } from '../user.model';
 import { FlashService } from '../../components/flash/flash.service';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-describe("AuthService", () => {
+describe('AuthService', () => {
+
+  let authService: AuthService;
+  let httpMock: HttpTestingController;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpModule
+        HttpClientTestingModule
       ],
       providers: [
         AuthService,
-        FlashService,
-        {
-          provide: Http,
-          useFactory: (mockBackend: any, options: any) => {
-            return new Http(mockBackend, options);
-          },
-          deps: [MockBackend, BaseRequestOptions]
-        },
-        MockBackend,
-        BaseRequestOptions
+        FlashService
       ]
     });
+    authService = TestBed.get(AuthService);
+    httpMock = TestBed.get(HttpTestingController);
   }));
 
-  describe('signup()', () => {
+  describe('signup', () => {
 
-    it('should return a successfully created user', inject([AuthService, MockBackend], (authService: any, mockBackend: any) => {
+    const authResponse = {
+      result: [{
+        token: '1234567'
+      }]
+    };
 
-      const mockResponse = {
-        result: [
-          {
-            token: '1234567'
-          }
-        ]
-      };
-
-      mockBackend.connections.subscribe((connection: any) => {
-        connection.mockRespond(new Response(new ResponseOptions({
-          body: JSON.stringify(mockResponse)
-        })));
+    it('will return true for newly created user', (done) => {
+      authService.signup(new User('UserName', 'Password', 'FirstName', 'LastName', 'one.user@email.com')).subscribe((token: any) => {
+        expect(token).toBeTruthy();
+        done();
       });
 
-      authService.signup(new User('UserName', 'Password', 'FirstName', 'LastName', 'one.user@email.com')).subscribe((result: boolean) => {
-        expect(result).toEqual(true);
-      });
-    }));
+      const request = httpMock.expectOne('undefined/auth/signup');
+      expect(request.request.method).toEqual('POST');
 
+      request.flush(authResponse);
+
+      httpMock.verify();
+    });
   });
 });

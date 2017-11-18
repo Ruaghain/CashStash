@@ -1,24 +1,23 @@
-<div>
-  <div fxLayout="row" class="top-bar">
-    <div>
-      <a class="header" (click)="onHeaderClick()">Cash Stash</a>
-    </div>
-    <div fxFlex fxLayout="row" fxLayoutAlign="end" *ngIf="isUserLoggedIn()">
-      <div>
-        <a class="item">{{userFullName()}}</a>
-      </div>
-      <div>
-        <a class="item" (click)="logout()">Logout</a>
-      </div>
-    </div>
-    <div fxFlex fxLayout="row" fxLayoutAlign="end" *ngIf="!isUserLoggedIn()">
-      <div>
-        <a class="item" [routerLink]="['auth/signup']">Sign Up</a>
-      </div>
-      <div>
-        <a class="item" [routerLink]="['auth/signin']">Login</a>
-      </div>
-    </div>
+<div class="top-bar">
+  <div>
+    <a class="header" (click)="onHeaderClick()">Cash Stash</a>
   </div>
-  <wraith-navbar *ngIf="isUserLoggedIn()"></wraith-navbar>
+  <ul *ngIf="isUserLoggedIn();else notLoggedIn" class="items">
+    <li class="item">
+      <a>{{userFullName()}}</a>
+    </li>
+    <li class="item">
+      <a (click)="logout()">Logout</a>
+    </li>
+  </ul>
+  <ng-template #notLoggedIn>
+    <ul class="items">
+      <li class="item">
+        <a [routerLink]="['auth/signup']">Sign Up</a>
+      </li>
+      <li class="item">
+        <a [routerLink]="['auth/signin']">Login</a>
+      </li>
+    </ul>
+  </ng-template>
 </div>

@@ -1,6 +1,6 @@
-import { Component } from "@angular/core";
-import { AuthService } from "../../auth/auth-service/auth.service";
-import { Router } from "@angular/router";
+import { Component } from '@angular/core';
+import { AuthService } from '../../auth/auth-service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'wraith-topbar',

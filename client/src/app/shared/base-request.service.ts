@@ -1,14 +1,20 @@
-import { Headers } from '@angular/http';
+import {HttpHeaders} from "@angular/common/http";
 
 export class BaseRequestService {
 
   protected baseUrl: string = process.env.SERVER_URL;
 
-  protected getHeaders() {
+  protected getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
-    return new Headers({
+    return new HttpHeaders({
       'Content-Type': 'application/json',
       'x-access-token': `${token}`
+    });
+  }
+
+  protected getHeader(): HttpHeaders {
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
     });
   }
 }

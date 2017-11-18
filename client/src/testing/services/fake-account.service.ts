@@ -14,7 +14,7 @@ export class FakeAccountService extends AccountService {
   accounts = ACCOUNTS.map(a => a.clone());
 
   getAccounts(): Observable<any> {
-    return Observable.of(this.accounts)
+    return Observable.of(this.accounts);
   };
 
   getAccount(id: string): Observable<any> {

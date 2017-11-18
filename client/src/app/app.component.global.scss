@@ -1,12 +1,38 @@
 @import "../sass/dark-art-theme";
 
 .container {
-  min-height: 98vh;
+
+  display: grid;
+
+  grid-template-areas: "topbar" "navbar" "content" "footer";
+  grid-template-columns: 1fr;
+
+  grid-template-rows: auto auto 1fr auto;
+
+  wraith-topbar, wraith-navbar {
+    margin: 0;
+  }
+
+  height: 100vh;
 
   @include large-screen {
     width: auto;
     max-width: $large-width;
   }
-  margin-left: auto;
-  margin-right: auto;
+}
+
+wraith-topbar {
+  grid-area: topbar;
+}
+
+wraith-navbar {
+  grid-area: navbar;
+}
+
+:host router-outlet + * {
+  grid-area: content;
+}
+
+wraith-flash {
+  grid-area: footer;
 }

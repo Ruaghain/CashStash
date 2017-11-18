@@ -7,7 +7,7 @@ import { AuthService } from "../../auth/auth-service/auth.service";
 
 describe("NavbarComponent", () => {
 
-  let component: NavbarComponent;
+  // let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
   let element: HTMLElement;
   let authService: any;
@@ -32,7 +32,7 @@ describe("NavbarComponent", () => {
       ]
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(NavbarComponent);
-      component = fixture.componentInstance;
+      // component = fixture.componentInstance;
 
       authService = TestBed.get(AuthService);
 

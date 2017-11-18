@@ -14,6 +14,6 @@ export class FakeFlashService extends FlashService {
   }
 
   getFlashMessage(): Observable<FlashMessageType> {
-    return Observable.of({});
+    return Observable.of();
   }
 }

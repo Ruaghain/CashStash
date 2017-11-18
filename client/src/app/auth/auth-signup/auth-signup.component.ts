@@ -1,8 +1,8 @@
-import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { User } from "../user.model";
-import { AuthService } from "../auth-service/auth.service";
-import { Router } from "@angular/router";
+import {Component, OnInit} from "@angular/core";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {User} from "../user.model";
+import {AuthService} from "../auth-service/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'cash-signup',
@@ -45,14 +45,9 @@ export class AuthSignUpComponent implements OnInit {
       this.signUpForm.value.email
     );
 
-    this.authService.signup(user).subscribe(
-      () => {
-        this.router.navigateByUrl('/');
-      },
-      error => {
-        console.error('There was an error signing up the user. ' + error);
-      }
-    );
+    if (this.authService.signup(user)) {
+      this.router.navigateByUrl('/');
+    }
   };
 
   onCancel = () => {

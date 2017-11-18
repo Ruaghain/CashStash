@@ -1,8 +1,8 @@
-import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { AuthService } from "../auth-service/auth.service";
-import { User } from "../user.model";
-import { Router } from "@angular/router";
+import {Component, OnInit} from "@angular/core";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../auth-service/auth.service";
+import {User} from "../user.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'cash-signin',
@@ -35,14 +35,9 @@ export class AuthSignInComponent implements OnInit {
       this.signInForm.value.password
     );
 
-    this.authService.signin(user).subscribe(() => {
-        this.router.navigateByUrl('/');
-      },
-      error => {
-        this.signInForm.value.password.reset();
-        console.error(error)
-      }
-    )
+    if (this.authService.signin(user)) {
+      this.router.navigateByUrl('/');
+    }
   };
 
   onCancel = () => {
