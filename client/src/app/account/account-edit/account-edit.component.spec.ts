@@ -6,7 +6,7 @@ import { AccountService } from '../account-service/account.service';
 import { ActivatedRoute, ActivatedRouteStub, Router, RouterStub } from '../../../testing';
 import { ACCOUNTS, FakeAccountService } from '../../../testing/services/fake-account.service';
 import { Account } from '../account.model';
-import { WraithModule } from '../../components/wraith.module';
+import { CashModule } from '../../components/cash.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 let activatedRoute: ActivatedRouteStub;
@@ -28,7 +28,7 @@ describe('AccountEditComponent', () => {
           FormsModule,
           ReactiveFormsModule,
           HttpClientTestingModule,
-          WraithModule
+          CashModule
         ],
         declarations: [
           AccountEditComponent

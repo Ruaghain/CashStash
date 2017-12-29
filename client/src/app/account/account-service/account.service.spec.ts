@@ -48,7 +48,7 @@ describe('AccountService', () => {
         done();
       });
 
-      const request = httpMock.expectOne('undefined/accounts');
+      const request = httpMock.expectOne('undefined/account');
       expect(request.request.method).toEqual('GET');
 
       request.flush(mockResponse);
@@ -71,14 +71,14 @@ describe('AccountService', () => {
       ]
     };
 
-    it('should return all of the accounts', (done) => {
+    it('should return the required account', (done) => {
       accountService.getAccount('1').subscribe((account) => {
         expect(account.name).toEqual('Current');
         expect(account.number).toEqual('123456789');
         done();
       });
 
-      const request = httpMock.expectOne('undefined/accounts/1');
+      const request = httpMock.expectOne('undefined/account/1');
       expect(request.request.method).toEqual('GET');
 
       request.flush(mockResponse);

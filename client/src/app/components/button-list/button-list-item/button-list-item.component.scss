@@ -2,6 +2,11 @@
 
 .button-item {
   @include rounded(4px);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   cursor: pointer;
   border: 1px solid #616161;
   height: 50px;

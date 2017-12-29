@@ -90,8 +90,8 @@ export class CashStashServer extends CashStashBase {
     this.logger.debug('Setting up Routes');
 
     new AuthRoute(this.router, '/api/v1/auth');
-    new AccountRoute(this.router, '/api/v1/accounts');
-    new UserRoute(this.router, '/api/v1/users');
+    new AccountRoute(this.router, '/api/v1/account');
+    new UserRoute(this.router, '/api/v1/user');
     this.app.use(this.router);
   }
 }

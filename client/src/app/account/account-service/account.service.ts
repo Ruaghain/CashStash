@@ -1,70 +1,54 @@
-import {Injectable} from '@angular/core';
-import {BaseRequestService} from '../../shared/base-request.service';
-import {Observable} from 'rxjs';
-import {Account} from '../account.model';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {FlashService} from "../../components/flash/flash.service";
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Account } from '../account.model';
+import { HttpClient } from '@angular/common/http';
+import { FlashService } from '../../components/flash/flash.service';
+import { WraithRestDatasource } from '../../components/wraith-datasource/wraith.rest.datasource';
 
 @Injectable()
-export class AccountService extends BaseRequestService {
+export class AccountService extends WraithRestDatasource<Account> {
 
-  constructor(private httpClient: HttpClient, private flashService: FlashService) {
-    super()
+  constructor(httpClient: HttpClient, private flashService: FlashService) {
+    super(httpClient, 'account');
   }
 
-  getAccounts(): Observable<any> {
-    return this.httpClient.get(this.baseUrl + '/accounts', {headers: super.getAuthHeaders()})
-      .map((data: any) => data.result)
-      .map((accounts: Array<Account>) => {
-        let result: Array<Account> = [];
-        if (accounts) {
-          accounts.forEach((account: any) => {
-            result.push(new Account(account.name, account.number, account.openingBalance, account.balance, account._id))
-          });
-        }
-        return result
-      }).catch((error: HttpErrorResponse) => {
-        this.flashService.error(error.name + ' (' + error.message + ')');
+  getAccounts() {
+    return this.getAll()
+      .catch((error) => {
+        this.flashService.error(error);
         return Observable.throw(error)
-      })
+      });
   };
 
   getAccount(id: string) {
-    return this.httpClient.get(this.baseUrl + '/accounts/' + id, {headers: super.getAuthHeaders()})
-      .map((data: any) => data.result[0])
-      .map((account: Account) => {
-        if (account) {
-          return new Account(account.name, account.number, account.openingBalance, account.balance, account._id);
-        }
-      }).catch((error: HttpErrorResponse) => {
+    return this.get(id)
+      .catch((error) => {
+        this.flashService.error(error);
         return Observable.throw(error)
-      })
+      });
   };
 
   saveAccount(account: Account) {
-    const body = JSON.stringify(account);
-    return this.httpClient.post(this.baseUrl + '/accounts', body, {headers: super.getAuthHeaders()})
-      .map((data: any) => data)
-      .catch((error: HttpErrorResponse) => {
-        return Observable.throw(error)
-      })
+    return this.insert(account)
+      .catch((error) => {
+        this.flashService.error(error);
+        return Observable.throw(error);
+      });
   };
 
   updateAccount(id: string, account: Account) {
-    const body = JSON.stringify(account);
-    console.log(body);
-    return this.httpClient.put(this.baseUrl + '/accounts/' + id, body, {headers: super.getAuthHeaders()})
-      .map((data: any) => data)
-      .catch((error: HttpErrorResponse) => {
+    return this.update(id, account)
+      .catch((error) => {
+        this.flashService.error(error);
         return Observable.throw(error)
-      })
+      });
   }
 
   deleteAccount(id: string) {
-    return this.httpClient.delete(this.baseUrl + '/accounts/' + id, {headers: super.getAuthHeaders()})
-      .map((data: any) => data)
-      .catch((error: HttpErrorResponse) => {
+    return this.remove(id)
+      .catch((error) => {
+        this.flashService.error(error);
         return Observable.throw(error)
-      })
+      });
   }
 }

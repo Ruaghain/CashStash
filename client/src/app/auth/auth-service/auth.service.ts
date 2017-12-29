@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { User } from '../user.model';
 import { Observable } from 'rxjs';
-import { BaseRequestService } from '../../shared/base-request.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { FlashService } from '../../components/flash/flash.service';
+import { WraithBaseRequest } from '../../components/wraith-datasource/wraith.base-request';
 
 @Injectable()
-export class AuthService extends BaseRequestService {
+export class AuthService extends WraithBaseRequest {
 
   constructor(private httpClient: HttpClient, private flashService: FlashService) {
     super();

@@ -6,7 +6,7 @@ import { accountRouting } from './account.routing';
 import { AccountResolver } from './account.resolver';
 import { AccountService } from './account-service/account.service';
 import { AccountComponent } from './account.component';
-import { WraithModule } from '../components/wraith.module';
+import { CashModule } from '../components/cash.module';
 import { AccountListComponent } from './account-list/account-list.component';
 
 @NgModule({
@@ -18,7 +18,7 @@ import { AccountListComponent } from './account-list/account-list.component';
   imports: [
     SharedModule,
     ReactiveFormsModule,
-    WraithModule,
+    CashModule,
     accountRouting
   ],
   providers: [
