@@ -9,6 +9,8 @@ import { FlashService } from './flash/flash.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { I18nService } from './i18n/i18n.service';
 import { I18nPipe } from './i18n/i18n.pipe';
+import { WraithTreeComponent } from './wraith-tree/wraith-tree.component';
+import { WraithTreeService } from './wraith-tree/wraith-tree.service';
 
 @NgModule({
   declarations: [
@@ -17,11 +19,13 @@ import { I18nPipe } from './i18n/i18n.pipe';
     TopbarComponent,
     NavbarComponent,
     FlashComponent,
-    I18nPipe
+    I18nPipe,
+    WraithTreeComponent
   ],
   providers: [
     FlashService,
-    I18nService
+    I18nService,
+    WraithTreeService
   ],
   imports: [
     SharedModule,
@@ -32,7 +36,8 @@ import { I18nPipe } from './i18n/i18n.pipe';
     TopbarComponent,
     NavbarComponent,
     FlashComponent,
-    I18nPipe
+    I18nPipe,
+    WraithTreeComponent
   ]
 })
 

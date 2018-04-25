@@ -43,15 +43,13 @@ module.exports = function (env) {
           loader: 'html-loader'
         },
         {
-          test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-          loader: 'file-loader?name=assets/[name].[hash].[ext]'
-        },
-        {
           test: /\.(scss)$/,
           exclude: [/\.global\.scss$/],
           loaders: [
-            'raw-loader',
-            'sass-loader'
+            'to-string-loader',
+            'css-loader',
+            'resolve-url-loader',
+            'sass-loader?sourceMap=true'
           ]
         },
         {
@@ -61,6 +59,10 @@ module.exports = function (env) {
             'raw-loader',
             'sass-loader'
           ]
+        },
+        {
+          test: /\.(png|jpe?g|gif|svg)$/,
+          loader: 'url-loader?limit=8192&name=assets/[name].[ext]'
         }
       ]
     },

@@ -1,0 +1,25 @@
+.wraith-tree {
+
+  ul {
+    margin: 0;
+    list-style: none;
+  }
+
+  .node-expanded {
+    background: url("./minus.png") no-repeat top left;
+    background-size: 25px 25px;
+    padding-left: 30px;
+    padding-top: 5px;
+  }
+
+  .node-collapsed {
+    background: url("./plus.png") no-repeat top left;
+    background-size: 25px 25px;
+    padding-left: 30px;
+    padding-top: 5px;
+  }
+
+  .node-child {
+    padding-left: 30px;
+  }
+}
