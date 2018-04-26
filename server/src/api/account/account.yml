@@ -1,4 +1,4 @@
-accounts:
+account:
   get:
     summary: Gets a list of all the accounts.
     description: |

@@ -2,7 +2,7 @@
   $ref: ./api/auth/auth.yml#/signup
 /auth/signin:
   $ref: ./api/auth/auth.yml#/signin
-/accounts:
-  $ref: ./api/account/account.yml#/accounts
-/accounts/{id}:
+/account:
+  $ref: ./api/account/account.yml#/account
+/account/{id}:
   $ref: ./api/account/account.yml#/update
