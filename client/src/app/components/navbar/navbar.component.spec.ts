@@ -72,7 +72,7 @@ describe("NavbarComponent", () => {
     it('should display four list items', () => {
       element = fixture.nativeElement.querySelectorAll('ul>li');
       let navigationItems = Array.prototype.slice.call(element);
-      expect(navigationItems.length).toEqual(4, 'There should be four list items displayed.');
+      expect(navigationItems.length).toEqual(5, 'There should be four list items displayed.');
     });
 
     it('should display the correct item names', () => {
@@ -80,8 +80,9 @@ describe("NavbarComponent", () => {
       let navigationItems = Array.prototype.slice.call(element);
       expect(navigationItems[0].innerText).toEqual('Dashboard', 'The first item in the list should be called "Dashboard"');
       expect(navigationItems[1].innerText).toEqual('Accounts', 'The second item in the list should be called "Accounts"');
-      expect(navigationItems[2].innerText).toEqual('Reports', 'The third item in the list should be called "Reports"');
-      expect(navigationItems[3].innerText).toEqual('Administration', 'The fourth item in the list should be called "Administration"');
+      expect(navigationItems[2].innerText).toEqual('Categories', 'The third item in the list should be called "Categories"');
+      expect(navigationItems[3].innerText).toEqual('Reports', 'The third item in the list should be called "Reports"');
+      expect(navigationItems[4].innerText).toEqual('Administration', 'The fourth item in the list should be called "Administration"');
     });
   })
 });

@@ -7,6 +7,7 @@ export class Environment {
   private root: string;
   private ipAddress: string;
   private secret: string;
+  private mongoUrl: string;
   private port: number;
   private databaseName: string;
 
@@ -31,11 +32,15 @@ export class Environment {
   };
 
   getMongoUrl = () => {
-    return 'mongodb://' + this.ipAddress + '/' + this.databaseName;
+    return this.mongoUrl;
   };
 
   getPort = () => {
     return this.port;
+  };
+
+  getDatabaseName = () => {
+    return this.databaseName;
   };
 
   constructor() {
@@ -48,6 +53,7 @@ export class Environment {
     this.ipAddress = process.env.IP || 'localhost';
     this.secret = process.env.SECRET || 'secret';
     this.databaseName = process.env.databaseName || 'cash-stash';
+    this.mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/cash-stash';
     // this.databaseName = process.env.databaseName || 'cash-stash-development';
   }
 }

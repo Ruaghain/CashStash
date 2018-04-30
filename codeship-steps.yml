@@ -1,2 +1,7 @@
-- service: angular
-  command: yarn run test:coverage
+- type: parallel
+  services:
+  - angular
+  - express
+  steps:
+  - command: yarn run test:coverage
+  - command: yarn run test

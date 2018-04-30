@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { routing } from './app.routing';
 import { AuthModule } from './auth/auth.module';
 import { AccountModule } from './account/account.module';
+import {CategoryModule} from "./category/category.module";
 import { CashModule } from './components/cash.module';
 import { SharedModule } from './shared/shared.module';
 
@@ -23,6 +24,7 @@ import { SharedModule } from './shared/shared.module';
     ReactiveFormsModule,
     HttpClientModule,
     AccountModule,
+    CategoryModule,
     AuthModule,
     CashModule
   ],
