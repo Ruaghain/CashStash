@@ -12,7 +12,7 @@
   * express
   * angular
 
-As you can infer from above, it makes use of `MongoDB` as the database engine, `Express` as the web server, and `Angular 4` as the front-end. 
+As you can infer from above, it makes use of `MongoDB` as the database engine, `Express` as the web server, and `Angular 5` as the front-end. 
 By default runs on port `3000`. 
 
 ### Setup
@@ -20,6 +20,12 @@ By default runs on port `3000`.
  To get `CashStash` working on an environment, you will have to install the community edition of [Docker](https://www.docker.com/community-edition). 
  Once this has been done, follow the steps outlined below for your OS to get it up and running.
 
+ #### Linux
+ 
+ Run the following command:
+ 
+ * `docker-compose up`
+ 
  #### MacOS
 
  Navigate to the project root directory. Modify the `.env` file and set `DOCKER_HOST_IP` to `localhost`. 
@@ -29,7 +35,7 @@ By default runs on port `3000`.
 
  Once the setup has completed, navigate to `http://localhost:8000`
 
- #### Microsoft
+ #### Windows
 
  Getting docker working on MS (Pre Windows 10) takes a bit more work. To get it working, do the following:
 
@@ -44,6 +50,11 @@ By default runs on port `3000`.
   * `docker-compose up --build`
 
  The `--build` rebuilds all the source, and deploys it to the container.
+
+### Swagger
+
+The server deploys swagger for ease of use, and for documentation purposes. Once the server is up you'll automatically have access to it.
+Navigate to `http://localhost:3000/api/v1/`, and you'll be presented with the SwaggerUI, and have access to the relevant REST endpoints.
 
 ### Debugging
 

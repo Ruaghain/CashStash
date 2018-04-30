@@ -3,7 +3,7 @@ import { AuthSignUpComponent } from "./auth-signup/auth-signup.component";
 import { AuthSignInComponent } from "./auth-signin/auth-signin.component";
 import { AuthComponent } from "./auth.component";
 
-const ACCOUNT_ROUTES: Routes = [{
+const AUTH_ROUTES: Routes = [{
   path: 'auth', component: AuthComponent, children: [
     { path: '', component: AuthSignInComponent },
     { path: 'signin', component: AuthSignInComponent },
@@ -11,4 +11,4 @@ const ACCOUNT_ROUTES: Routes = [{
   ]
 }];
 
-export const authRouting = RouterModule.forChild(ACCOUNT_ROUTES);
+export const authRouting = RouterModule.forChild(AUTH_ROUTES);

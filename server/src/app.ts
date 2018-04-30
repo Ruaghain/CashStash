@@ -1,5 +1,5 @@
 import { CashStashServer } from './config/cash-stash-server';
-import { MongoDatabase } from './config/database/mongo-database';
+import {MongoDatabase} from "./config/database/mongo-database";
 
 const start = async () => {
 

@@ -5,7 +5,8 @@ const APP_ROUTERS: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'auth', loadChildren: './auth/auth.module#AuthModule' },
-  { path: 'accounts', loadChildren: './account/account.module#AccountModule' }
+  { path: 'accounts', loadChildren: './account/account.module#AccountModule' },
+  { path: 'category', loadChildren: './category/category.module#CategoryModule' }
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTERS);

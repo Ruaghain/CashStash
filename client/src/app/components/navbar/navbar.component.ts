@@ -18,6 +18,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.addNavigationItem(new NavigationItem('Dashboard', 'dashboard'));
     this.addNavigationItem(new NavigationItem('Accounts', 'accounts'));
+    this.addNavigationItem(new NavigationItem('Categories', 'category'));
     this.addNavigationItem(new NavigationItem('Reports', 'reports'));
     this.addNavigationItem(new NavigationItem('Administration', 'administration'));
   }
