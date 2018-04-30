@@ -19,7 +19,6 @@
     "core-js": "^2.4.1",
     "debug": "~2.2.0",
     "express": "~4.14.0",
-    "express-swagger-ui": "^0.1.0",
     "hbs": "~3.1.0",
     "helmet": "3.5.0",
     "jsonwebtoken": "^7.2.1",
@@ -30,10 +29,8 @@
     "morgan": "~1.6.1",
     "reflect-metadata": "^0.1.9",
     "serve-favicon": "~2.3.0",
-    "swagger-express": "^1.0.5",
-    "swagger-parser": "^3.4.1",
-    "swagger-ui-express": "^2.0.0",
-    "swaggerize-express": "^4.0.5"
+    "swagger-parser": "^4.1.0",
+    "swagger-ui-express": "^3.0.8"
   },
   "devDependencies": {
     "@types/body-parser": "^1.16.4",
@@ -45,8 +42,6 @@
     "@types/mongodb": "^2.2.7",
     "@types/mongoose": "^4.7.18",
     "@types/node": "^7.0.14",
-    "@types/swagger-parser": "^4.0.1",
-    "@types/swaggerize-express": "^4.0.28",
     "del": "^2.2.2",
     "del-cli": "^0.2.0",
     "gulp": "^3.9.1",

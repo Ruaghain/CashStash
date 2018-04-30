@@ -2,16 +2,14 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
 import * as http from 'http';
-import { Database } from './database/database';
-import { CashStashBase } from '../cash-stash-base';
-import { AccountRoute } from '../api/account/account-route';
-import { UserRoute } from '../api/user/user-route';
-import { AuthRoute } from '../api/auth/auth-route';
-import { Server } from 'net';
+import {Database} from './database/database';
+import {CashStashBase} from '../cash-stash-base';
+import {AccountRoute} from '../api/account/account-route';
+import {UserRoute} from '../api/user/user-route';
+import {AuthRoute} from '../api/auth/auth-route';
+import {Server} from 'net';
 import * as swaggerParser from 'swagger-parser';
-import * as swaggerize from 'swaggerize-express';
-
-// import * as swaggerUI from 'express-swagger-ui';
+import * as swaggerUi from 'swagger-ui-express';
 
 export class CashStashServer extends CashStashBase {
 
@@ -36,27 +34,21 @@ export class CashStashServer extends CashStashBase {
   async start() {
     swaggerParser.validate('api.yml').then(async (api) => {
       try {
+
         this.logger.debug('Swagger has been validated correctly');
-        // swaggerUI({
-        //   app: this.app,
-        //   swaggerUrl: '/api/v1/swagger.json',
-        //   localhostPath: '/api/'
-        // });
-        let swaggerHandler = swaggerize({
-          api: api,
-          docspath: '/swagger.json',
-          handlers: '../handlers'
+
+        let options = {
+          explorer : false
+        };
+        this.app.use('/api/v1/', swaggerUi.serve, swaggerUi.setup(api, options));
+
+        this.app.listen(this.environment.getPort(), '0.0.0.0', () => {
+          this.logger.info('STARTING - Express Server. Listening on port "%d", in "%s" mode', this.environment.getPort(), this.app.get('env'));
         });
-        this.app.use(swaggerHandler);
+
       } catch (e) {
         this.logger.error(e);
       }
-
-      this.app.listen(this.environment.getPort(), '0.0.0.0', () => {
-        this.logger.info('STARTING - Express Server. Listening on port "%d", in "%s" mode', this.environment.getPort(), this.app.get('env'));
-      });
-    }).catch((err) => {
-      this.logger.error(err);
     });
   }
 
@@ -68,7 +60,7 @@ export class CashStashServer extends CashStashBase {
     this.app.use(this.logger.config());
     // app.use(helmet());
 
-    this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(bodyParser.urlencoded({extended: false}));
     this.app.use(bodyParser.json());
     this.app.use(cookieParser());
 
