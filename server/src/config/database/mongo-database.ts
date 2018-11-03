@@ -8,16 +8,15 @@ export class MongoDatabase extends CashStashBase implements Database {
     super();
   }
 
-  public connect() {
-    this.logger.debug('Connecting to Mongo database.');
+  public async connect() {
+    console.debug('Connecting to Mongo database.');
 
     // mongoose.Promise = global.Promise;
-    mongoose.connect(this.environment.getMongoUrl());
-    mongoose.connection.on('error', (err: any) => {
-      this.logger.info('MongoDB connection error: ' + err);
+    try {
+      await mongoose.connect(this.environment.getMongoUrl());
+    } catch (err) {
+      console.error(`There was an error connecting to Mongoose: ${err}`);
       process.exit(-1);
-    });
-
+    }
   }
-
 }

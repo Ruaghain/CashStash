@@ -13,10 +13,10 @@ export class BaseRoute extends CashStashBase {
     this.router = router;
     if (isProtected) {
       this.router.use(this.path + '/', (req, res, next) => {
-        this.logger.debug('Preparing to verify JWT token');
-        jwt.verify(req.headers['x-access-token'], this.environment.getSecret(), (err: any, decoded: any) => {
+        console.debug('Preparing to verify JWT token');
+        jwt.verify(req.headers['x-access-token'].toString(), this.environment.getSecret(), (err: any, decoded: any) => {
           if (err) {
-            this.logger.error('There was an error verifying token: %s at %s', err.message, err.expiredAt);
+            console.error('There was an error verifying token: %s at %s', err.message, err.expiredAt);
             return res.status(401).json({
               message: 'Not Authenticated',
               result: [
@@ -26,7 +26,7 @@ export class BaseRoute extends CashStashBase {
               ]
             })
           }
-          this.logger.debug('Successfully validated JWT token');
+          console.debug('Successfully validated JWT token');
           res.locals.user = decoded.user;
           next();
         });

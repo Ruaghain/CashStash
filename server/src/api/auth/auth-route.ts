@@ -18,7 +18,7 @@ export class AuthRoute extends BaseRoute {
       lastName: user.lastName,
       role: user.role
     };
-    this.logger.debug('Generating JWT token for user.');
+    console.debug('Generating JWT token for user.');
     return jwt.sign({ user: tokenObject }, this.environment.getSecret(), { expiresIn: 7200 });
   };
 
@@ -30,9 +30,9 @@ export class AuthRoute extends BaseRoute {
   //   });
   // });
   private postSignUp = () => {
-    this.logger.debug('Setting up signup request for Authentication');
+    console.debug('Setting up signup request for Authentication');
     this.router.post(this.path + '/signup', (req, res, next) => {
-      this.logger.debug('Signing up new user: "%s"', req.body.userName);
+      console.debug('Signing up new user: "%s"', req.body.userName);
       let user = new User({
         userName: req.body.userName,
         firstName: req.body.firstName,
@@ -42,7 +42,7 @@ export class AuthRoute extends BaseRoute {
       });
       user.save((err, result) => {
         if (err) {
-          this.logger.error('There was an error saving the new user: %s', err);
+          console.error('There was an error saving the new user: %s', err);
           //Need to return here because you want it to return immediately, and not execute
           //the last code - below this return statement.
           return res.status(500).json({
@@ -54,7 +54,7 @@ export class AuthRoute extends BaseRoute {
             ]
           })
         }
-        this.logger.debug('New user was successfully saved.');
+        console.debug('New user was successfully saved.');
 
         let token = this.setTokenInformation(result);
 
@@ -71,12 +71,12 @@ export class AuthRoute extends BaseRoute {
     });
   };
   private postSignIn = () => {
-    this.logger.debug('Setting up signin request for Authentication');
+    console.debug('Setting up signin request for Authentication');
     this.router.post(this.path + '/signin', (req, res, next) => {
-      this.logger.debug('Signing in user: "%s"', req.body.userName);
+      console.debug('Signing in user: "%s"', req.body.userName);
       User.findOne({ userName: req.body.userName }, (err: any, user: any) => {
         if (err) {
-          this.logger.error('There was an error finding the user');
+          console.error('There was an error finding the user');
           return res.status(500).json({
             message: 'An error occurred finding the user.',
             result: [
@@ -88,7 +88,7 @@ export class AuthRoute extends BaseRoute {
         }
         //Use this error message as it gives nothing away with regards to credentials.
         if (!user) {
-          this.logger.error('User was not found.');
+          console.error('User was not found.');
           return res.status(401).json({
             message: 'Login failed',
             result: [
@@ -100,7 +100,7 @@ export class AuthRoute extends BaseRoute {
         }
 
         if (!user.authenticate(req.body.password)) {
-          this.logger.error('Could not authenticate passed in user.');
+          console.error('Could not authenticate passed in user.');
           return res.status(401).json({
             message: 'Login failed',
             result: [
@@ -123,7 +123,7 @@ export class AuthRoute extends BaseRoute {
           ]
         });
 
-        this.logger.debug('Successfully logged in user.');
+        console.debug('Successfully logged in user.');
       });
     });
   };
