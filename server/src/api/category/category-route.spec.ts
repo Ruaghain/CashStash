@@ -22,6 +22,5 @@ describe('Category API Router', () => {
 
     it('successfully requests all the accounts', () => {
     })
-
   });
 });
