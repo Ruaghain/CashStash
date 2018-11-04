@@ -21,10 +21,5 @@
   ],
   "exclude": [
     "node_modules"
-  ],
-  "awesomeTypescriptLoaderOptions": {
-    "useBabel": true,
-    "useCache": true,
-    "useTranspileModule": true
-  }
+  ]
 }
