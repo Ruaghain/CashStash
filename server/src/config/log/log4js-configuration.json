@@ -1,0 +1,15 @@
+{
+  "appenders": [
+    {
+      "type": "console"
+    },
+    {
+      "type": "dateFile",
+      "filename": "./logs/cash-stash.log",
+      "pattern": "-yyyy-MM-dd",
+      "alwaysIncludePattern": true,
+      "maxLogSize": 20480,
+      "category": "cash-stash"
+    }
+  ]
+}

@@ -5,9 +5,9 @@ import { User } from './user-model';
 export class UserRoute extends BaseRoute {
 
   private post = () => {
-    console.debug('Setting up POST request for User');
+    this.logger.debug('Setting up POST request for User');
     this.router.post(this.path + '/', (req, res) => {
-      console.debug('Saving new user "%s"', req.body.userName);
+      this.logger.debug('Saving new user "%s"', req.body.userName);
       let user = new User({
         userName: req.body.userName,
         firstName: req.body.firstName,
@@ -17,7 +17,7 @@ export class UserRoute extends BaseRoute {
       });
       user.save((err, result) => {
         if (err) {
-          console.error('There was an error saving user "%s"', user.userName);
+          this.logger.error('There was an error saving user "%s"', user.userName);
           //Need to return here because you want it to return immediately, and not execute
           //the last code - below this return statement.
           return res.status(500).json({
@@ -29,7 +29,7 @@ export class UserRoute extends BaseRoute {
             ]
           })
         }
-        console.debug('Successfully created the new user.');
+        this.logger.debug('Successfully created the new user.');
         //Don't need return here as it's the last statement.
         res.status(201).json({
           message: 'User created',
