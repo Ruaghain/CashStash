@@ -112,14 +112,15 @@ const validatePresenceOf = (value: any) => {
  * Pre-save hook
  * NOTE: Can't use fat-arrow syntax as it changes the scope and causes an error on 'this.isModified'
  */
-UserSchema.pre('save', function (next: any) {
+UserSchema.pre<IUserModel>('save', function (next: any) {
+  const user = this;
   // Handle new/update passwords
-  if (!this.isModified('password')) {
+  if (!user.isModified('password')) {
     return next();
   }
 
-  if (!validatePresenceOf(this.password)) {
-    if (authTypes.indexOf(this.provider) === -1) {
+  if (!validatePresenceOf(user.password)) {
+    if (authTypes.indexOf(user.provider) === -1) {
       return next(new Error('Invalid password'));
     } else {
       return next();
@@ -127,12 +128,12 @@ UserSchema.pre('save', function (next: any) {
   }
 
   // Make salt with a callback
-  this.makeSalt(16, (saltErr: any, salt: any) => {
+  UserSchema.methods.makeSalt(16, (saltErr: any, salt: any) => {
     if (saltErr) {
       return next(saltErr);
     }
     this.salt = salt;
-    this.encryptPassword(this.password, (encryptErr: any, hashedPassword: any) => {
+    UserSchema.methods.encryptPassword(this.password, (encryptErr: any, hashedPassword: any) => {
       if (encryptErr) {
         return next(encryptErr);
       }

@@ -6,9 +6,9 @@ export abstract class CashStashBase {
   protected logger: Logger;
   protected environment: Environment;
 
-  constructor() {
+  protected constructor() {
     //TODO: Need to make sure that these classes are singleton
     this.environment = new Environment();
-    this.logger = new Log4JLogger(this.environment.getLoggingLevel());
+    this.logger = new Log4JLogger();
   }
 }

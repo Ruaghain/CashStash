@@ -1,15 +1,29 @@
 {
-  "appenders": [
-    {
+  "appenders": {
+    "console": {
       "type": "console"
     },
-    {
+    "app": {
       "type": "dateFile",
       "filename": "./logs/cash-stash.log",
       "pattern": "-yyyy-MM-dd",
       "alwaysIncludePattern": true,
       "maxLogSize": 20480,
-      "category": "cash-stash"
+      "numBackups": 3
     }
-  ]
+  },
+  "categories": {
+    "default": {
+      "appenders": [
+        "console"
+      ],
+      "level": "DEBUG"
+    },
+    "cash-stash": {
+      "appenders": [
+        "app"
+      ],
+      "level": "DEBUG"
+    }
+  }
 }

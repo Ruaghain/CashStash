@@ -1,6 +1,6 @@
 import * as express from 'express';
-import {BaseRoute} from "../base-route";
-import {Category} from "./category-model";
+import { BaseRoute } from '../base-route';
+import { Category } from './category-model';
 
 export class CategoryRoute extends BaseRoute {
 

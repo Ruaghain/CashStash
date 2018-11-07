@@ -1,5 +1,5 @@
-import CategoryRoute from "./category-route";
-import {Category} from "./category-model";
+import CategoryRoute from './category-route';
+import { Category } from './category-model';
 import * as express from 'express';
 
 describe('Category API Router', () => {
@@ -9,7 +9,7 @@ describe('Category API Router', () => {
 
   describe('GET', () => {
 
-    beforeEach(function() {
+    beforeEach(function () {
       payload = {
         categories: [
           {
@@ -51,8 +51,8 @@ describe('Category API Router', () => {
       spyOn(Category, 'find').and.returnValue(categoryPromise);
       subject.UsersHandler.allUsers.get(req, res);
       expect(Category.find).toHaveBeenCalled();
-      console.log("Request is: " + JSON.stringify(req));
-      console.log("Response is: " + JSON.stringify(res));
+      console.log('Request is: ' + JSON.stringify(req));
+      console.log('Response is: ' + JSON.stringify(res));
       // expect(res.send).toHaveBeenCalledWith(payload);
     })
   });
