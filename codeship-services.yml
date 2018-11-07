@@ -3,15 +3,11 @@ angular:
   dockerfile_path: Dockerfile
   environment:
     - NODE_ENV=test
-  depends_on:
-    - express
 express:
   build: server
   dockerfile_path: Dockerfile
   environment:
     - NODE_ENV=test
     - MONGO_URL=mongodb://mongo/cash-stash-development
-  depends_on:
-    - mongo
 mongo:
   image: mongo:3.4.1

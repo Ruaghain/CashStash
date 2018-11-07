@@ -54,7 +54,7 @@ By default runs on port `3000`.
 ### Swagger
 
 The server deploys swagger for ease of use, and for documentation purposes. Once the server is up you'll automatically have access to it.
-Navigate to `http://localhost:8000/api/v1/`, and you'll be presented with the SwaggerUI, and have access to the relevant REST endpoints.
+Navigate to `http://localhost:3000/api/v1/`, and you'll be presented with the SwaggerUI, and have access to the relevant REST endpoints.
 
 ### Debugging
 

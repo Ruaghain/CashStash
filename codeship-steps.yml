@@ -3,5 +3,4 @@
   - angular
   - express
   steps:
-  - command: yarn run test:coverage
   - command: yarn run test

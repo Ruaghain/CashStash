@@ -3,6 +3,7 @@ services:
   angular:
     build: client
     image: cash-stash-client:1.0
+    network_mode: host
     environment:
       - SERVER_URL=http://${DOCKER_HOST_IP}:${SERVER_PORT}/api/v1
       - NODE_ENV=${NODE_ENV}
@@ -16,13 +17,14 @@ services:
 #    entrypoint: ["sh", "-c", "sleep infinity"]
     build: server
     image: cash-stash-server:1.0
+    network_mode: host
     environment:
       - IP=${DOCKER_HOST_IP}
       - PORT=${SERVER_PORT}
       - LOGGING_LEVEL=${LOGGING_LEVEL}
       - SECRET=${SECRET}
       - NODE_ENV=${NODE_ENV}
-      - MONGO_URL=mongodb://mongo/cash-stash
+      - MONGO_URL=mongodb://localhost/cash-stash
     ports:
       - '3000:3000'
     depends_on:
@@ -30,6 +32,7 @@ services:
     container_name: cash_server
   mongo:
     image: mongo:${MONGO_VERSION}
+    network_mode: host
     ports:
       - '27017:27017'
     container_name: cash_mongo
