@@ -6,7 +6,7 @@
     "build": "tsc",
     "start": "tsc && node dist/app.js",
     "test": "tsc && jasmine --config=./jasmine.json",
-    "test:coverage": "tsc && jasmine --config=./jasmine.json --coverage"
+    "test:coverage": "tsc && jasmine --config=./jasmine.json"
   },
   "dependencies": {
     "ajv": "6.5.5",
@@ -31,7 +31,6 @@
     "swagger-ui-express": "^4.0.1"
   },
   "devDependencies": {
-    "@types/supertest": "^2.0.6",
     "@types/body-parser": "^1.17.0",
     "@types/cookie-parser": "^1.4.1",
     "@types/crypto-js": "^3.1.43",
@@ -41,6 +40,7 @@
     "@types/mongodb": "^3.1.14",
     "@types/mongoose": "^5.3.1",
     "@types/node": "^10.12.3",
+    "@types/supertest": "^2.0.6",
     "del": "^3.0.0",
     "del-cli": "^1.1.0",
     "gulp": "^3.9.1",
@@ -52,7 +52,7 @@
     "install": "^0.12.2",
     "istanbul": "^0.4.5",
     "jasmine": "^3.3.0",
-    "jasmine-console-reporter": "^3.1.0",
+    "jasmine-spec-reporter": "4.2.1",
     "jasmine-node": "^1.16.2",
     "jasmine-supertest": "^1.0.0",
     "nodemon": "^1.18.6",
