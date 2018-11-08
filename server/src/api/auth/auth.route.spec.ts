@@ -19,11 +19,9 @@ describe('Auth API Router:', () => {
       password: 'Passw0rd'
     };
 
-    console.log(body);
-
     beforeEach(() => {
       app.post('/auth/signup', (req, res) => {
-        res.status(201).json(req.body)
+        res.status(201).json(body)
       });
     });
 
@@ -45,11 +43,9 @@ describe('Auth API Router:', () => {
       password: 'Passw0rd'
     };
 
-    console.log(body);
-
     beforeEach(() => {
       app.post('/auth/signin', function (req, res) {
-        res.status(201).json(req.body)
+        res.status(201).json(body)
       });
     });
 

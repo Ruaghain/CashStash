@@ -1,26 +1,27 @@
 import CategoryRoute from './category-route';
-import { Category } from './category-model';
 import * as express from 'express';
+import { Model } from 'mongoose';
+import { ICategoryModel } from './category-model';
 
 describe('Category API Router', () => {
-  let subject = new CategoryRoute(express.Router(), 'api/v1/category');
+  // let payload: ICategory[] = [
+  //   {
+  //     name: 'Groceries',
+  //     parent: null
+  //   },
+  //   {
+  //     name: 'Medical',
+  //     parent: null
+  //   }
+  // ];
+
+  let categoryMock = jasmine.createSpyObj<Model<ICategoryModel>>(['find']);
+
+  let subject = new CategoryRoute(express.Router(), 'api/v1/category', categoryMock);
   let req, res;
-  let payload;
 
   describe('GET', () => {
-
     beforeEach(function () {
-      payload = {
-        categories: [
-          {
-            name: 'Groceries'
-          },
-          {
-            name: 'Medical'
-          }
-        ]
-      };
-
       req = {
         query: {},
         params: {},
@@ -29,30 +30,29 @@ describe('Category API Router', () => {
 
       res = {
         status: jasmine.createSpy().and.callFake(msg => {
-          return msg;
+          return this;
         }),
         send: jasmine.createSpy().and.callFake(msg => {
-          return msg;
+          return this;
         })
       };
     });
 
-    let categoryPromise = {
-      exec: function () {
-        return {
-          then: function (success, fail) {
-            return success(payload);
-          }
-        }
-      }
-    };
+    // let categoryPromise = {
+    //   exec: function () {
+    //     return {
+    //       then: function (success, fail) {
+    //         return success(payload);
+    //       }
+    //     }
+    //   }
+    // };
 
     it('successfully gets the categories', () => {
-      spyOn(Category, 'find').and.returnValue(categoryPromise);
-      subject.UsersHandler.allUsers.get(req, res);
-      expect(Category.find).toHaveBeenCalled();
-      console.log('Request is: ' + JSON.stringify(req));
-      console.log('Response is: ' + JSON.stringify(res));
+      // spyOn(categoryMock, 'find').and.returnValue(payload);
+      let result = subject.CategoryHandler.allCategories.get(req, res);
+      expect(categoryMock.find).toHaveBeenCalled();
+      console.log(`Result is ${result}`);
       // expect(res.send).toHaveBeenCalledWith(payload);
     })
   });

@@ -1,11 +1,6 @@
 import * as express from 'express';
 
-// var request = require("supertest");
-// var bodyParser = require('body-parser');
-
 const app = express();
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
 
 describe('Account API Router:', () => {
 
@@ -18,11 +13,9 @@ describe('Account API Router:', () => {
       balance: -500
     };
 
-    console.log(body);
-
     beforeEach(() => {
       app.post('/accounts', (req, res) => {
-        res.status(201).json(req.body);
+        res.status(201).json(body);
       })
     });
 
@@ -56,8 +49,6 @@ describe('Account API Router:', () => {
       ]
     };
 
-    console.log(body);
-
     beforeEach(() => {
       app.get('/accounts', (req, res) => {
         res.status(200).json(body);
@@ -83,8 +74,6 @@ describe('Account API Router:', () => {
       openingBalance: 500.32,
       balance: -500
     };
-
-    console.log(body);
 
     beforeEach(() => {
       app.get('/accounts/1', (req, res) => {

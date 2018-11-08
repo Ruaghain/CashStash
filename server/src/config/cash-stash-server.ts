@@ -10,6 +10,7 @@ import * as swaggerParser from 'swagger-parser';
 import * as swaggerUi from 'swagger-ui-express';
 import CategoryRoute from "../api/category/category-route";
 import {Database} from "./database/database";
+import { Category } from '../api/category/category-model';
 
 export class CashStashServer extends CashStashBase {
 
@@ -79,7 +80,7 @@ export class CashStashServer extends CashStashBase {
     new AuthRoute(this.router, '/api/v1/auth');
     new AccountRoute(this.router, '/api/v1/account');
     new UserRoute(this.router, '/api/v1/user');
-    new CategoryRoute(this.router, '/api/v1/category');
+    new CategoryRoute(this.router, '/api/v1/category', Category);
     this.app.use(this.router);
   }
 }
