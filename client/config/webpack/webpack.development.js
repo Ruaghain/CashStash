@@ -1,9 +1,8 @@
 var webpack = require('webpack');
 var webpackMerge = require('webpack-merge');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var commonConfig = require('./webpack.common.js');
-var CleanWebpackPlugin = require('clean-webpack-plugin');
 var helpers = require('../helpers');
 
 module.exports = function (env) {
@@ -19,13 +18,15 @@ module.exports = function (env) {
     },
 
     plugins: [
-      new ExtractTextPlugin('[name].css'),
+      new MiniCssExtractPlugin({
+        // Options similar to the same options in webpackOptions.output
+        // all options are optional
+        filename: '[name].css',
+        chunkFilename: '[id].css',
+        ignoreOrder: false, // Enable to remove warnings about conflicting order
+      }),
       new HtmlWebpackPlugin({
         template: './src/index.html'
-      }),
-      new CleanWebpackPlugin(['dist-dev'], {
-        root: helpers.root('./'),
-        verbose: true
       })
     ],
 

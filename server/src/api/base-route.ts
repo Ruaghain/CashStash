@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { CashStashBase } from '../cash-stash-base';
+import {CashStashBase} from '../cash-stash-base';
 import * as jwt from 'jsonwebtoken';
 
 export class BaseRoute extends CashStashBase {
@@ -14,7 +14,7 @@ export class BaseRoute extends CashStashBase {
     if (isProtected) {
       this.router.use(this.path + '/', (req, res, next) => {
         this.logger.debug('Preparing to verify JWT token');
-        jwt.verify(req.headers['x-access-token'], this.environment.getSecret(), (err: any, decoded: any) => {
+        jwt.verify(req.header('x-access-token'), this.environment.getSecret(), (err: any, decoded: any) => {
           if (err) {
             this.logger.error('There was an error verifying token: %s at %s', err.message, err.expiredAt);
             return res.status(401).json({

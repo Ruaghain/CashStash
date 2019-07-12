@@ -1,6 +1,6 @@
-import { Observable } from 'rxjs';
-import { Account } from '../../app/account/account.model';
-import { AccountService } from '../../app/account/account-service/account.service';
+import {Observable, of} from 'rxjs';
+import {Account} from '../../app/account/account.model';
+import {AccountService} from '../../app/account/account-service/account.service';
 
 export { Account } from './../../app/account/account.model';
 export { AccountService } from './../../app/account/account-service/account.service';
@@ -15,7 +15,7 @@ export class FakeAccountService extends AccountService {
   accounts = ACCOUNTS.map(a => a.clone());
 
   getAccounts(): Observable<any> {
-    return Observable.of(this.accounts);
+    return of(this.accounts);
   };
 
   // getAccounts(): Array<Account> {
@@ -24,22 +24,22 @@ export class FakeAccountService extends AccountService {
 
   getAccount(id: string): Observable<any> {
     let account = this.accounts.find(a => a._id === id);
-    return Observable.of(account);
+    return of(account);
   }
 
   saveAccount(account: Account): Observable<any> {
-    return Observable.of(account)
+    return of(account)
   }
 
   updateAccount(id: string, account: Account): Observable<any> {
     let foundAccount = this.accounts.find(a => a._id === id);
-    return Observable.of(foundAccount);
+    return of(foundAccount);
   }
 
   deleteAccount(id: string): Observable<any> {
     let successMessage = {
       message: 'Account successfully deleted'
     };
-    return Observable.of(successMessage);
+    return of(successMessage);
   }
 }

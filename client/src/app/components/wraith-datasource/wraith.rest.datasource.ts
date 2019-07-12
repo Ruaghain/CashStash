@@ -1,7 +1,8 @@
-import { WraithDatasource } from './wraith.datasource';
-import { WraithBaseRequest } from './wraith.base-request';
-import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {WraithDatasource} from './wraith.datasource';
+import {WraithBaseRequest} from './wraith.base-request';
+import {catchError, finalize, map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 //TODO: Need to figure out how to create a custom parser for dealing with the response, specific to my application.
 export class WraithRestDatasource<T> extends WraithBaseRequest implements WraithDatasource<T> {
@@ -19,13 +20,13 @@ export class WraithRestDatasource<T> extends WraithBaseRequest implements Wraith
   insert(record: T): Observable<T> {
     console.debug('Inserting a new record.');
     const body = JSON.stringify(record);
-    return this.httpClient.post(this.baseUrl + '/' + this.entityName, body, { headers: super.getAuthHeaders() })
-      .map((data: any) => data.result)
-      .catch((error: HttpErrorResponse) => {
-        return Observable.throw(error.message)
-      }).finally(() => {
-        console.debug('Finished inserting new record.');
-      });
+    return this.httpClient.post(this.baseUrl + '/' + this.entityName, body, {headers: super.getAuthHeaders()})
+      .pipe(map((data: any) => data.result),
+        catchError((error: HttpErrorResponse) => {
+          return Observable.throw(error.message)
+        }), finalize(() => {
+          console.debug('Finished inserting new record.');
+        }));
   }
 
   /**
@@ -38,13 +39,13 @@ export class WraithRestDatasource<T> extends WraithBaseRequest implements Wraith
   update(id: string, record: T): Observable<T> {
     console.debug('Updating an existing record.');
     const body = JSON.stringify(record);
-    return this.httpClient.put(this.baseUrl + '/' + this.entityName + '/' + id, body, { headers: super.getAuthHeaders() })
-      .map((data: any) => data.result)
-      .catch((error: HttpErrorResponse) => {
-        return Observable.throw(error.message)
-      }).finally(() => {
-        console.debug('Finished updating existing record.')
-      });
+    return this.httpClient.put(this.baseUrl + '/' + this.entityName + '/' + id, body, {headers: super.getAuthHeaders()})
+      .pipe(map((data: any) => data.result),
+        catchError((error: HttpErrorResponse) => {
+          return Observable.throw(error.message)
+        }), finalize(() => {
+          console.debug('Finished updating existing record.')
+        }));
   }
 
   /**
@@ -55,13 +56,13 @@ export class WraithRestDatasource<T> extends WraithBaseRequest implements Wraith
    */
   remove(id: string): Observable<any> {
     console.debug('Deleting existing record.');
-    return this.httpClient.delete(this.baseUrl + '/' + this.entityName + '/' + id, { headers: super.getAuthHeaders() })
-      .map((data: any) => data.result)
-      .catch((error: HttpErrorResponse) => {
-        return Observable.throw(error.message)
-      }).finally(() => {
-        console.debug('Finished deleting existing record.')
-      });
+    return this.httpClient.delete(this.baseUrl + '/' + this.entityName + '/' + id, {headers: super.getAuthHeaders()})
+      .pipe(map((data: any) => data.result),
+        catchError((error: HttpErrorResponse) => {
+          return Observable.throw(error.message)
+        }), finalize(() => {
+          console.debug('Finished deleting existing record.')
+        }));
   }
 
   /**
@@ -72,15 +73,15 @@ export class WraithRestDatasource<T> extends WraithBaseRequest implements Wraith
    */
   get(id: string): Observable<T> {
     console.debug('Getting specific record.');
-    return this.httpClient.get(this.baseUrl + '/' + this.entityName + '/' + id, { headers: super.getAuthHeaders() })
-      .map((data: any) => data.result[0])
-      .map((record: T) => {
-        return record;
-      }).catch((error: HttpErrorResponse) => {
-        return Observable.throw(error.message)
-      }).finally(() => {
-        console.debug('Finished getting specific record.')
-      });
+    return this.httpClient.get(this.baseUrl + '/' + this.entityName + '/' + id, {headers: super.getAuthHeaders()})
+      .pipe(map((data: any) => data.result[0]),
+        map((record: T) => {
+          return record;
+        }), catchError((error: HttpErrorResponse) => {
+          return Observable.throw(error.message)
+        }), finalize(() => {
+          console.debug('Finished getting specific record.')
+        }));
   }
 
   /**
@@ -90,14 +91,14 @@ export class WraithRestDatasource<T> extends WraithBaseRequest implements Wraith
    */
   getAll(): Observable<T[]> {
     console.debug('Getting all records.');
-    return this.httpClient.get(this.baseUrl + '/' + this.entityName, { headers: super.getAuthHeaders() })
-      .map((data: any) => data.result)
-      .map((result: Array<T>) => {
-        return result
-      }).catch((error: HttpErrorResponse) => {
-        return Observable.throw(error.message)
-      }).finally(() => {
-        console.debug('Finished getting all records.')
-      })
+    return this.httpClient.get(this.baseUrl + '/' + this.entityName, {headers: super.getAuthHeaders()})
+      .pipe(map((data: any) => data.result),
+        map((result: Array<T>) => {
+          return result
+        }), catchError((error: HttpErrorResponse) => {
+          return Observable.throw(error.message)
+        }), finalize(() => {
+          console.debug('Finished getting all records.')
+        }));
   }
 }

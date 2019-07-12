@@ -1,13 +1,13 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FlashComponent } from './flash.component';
-import { RouterTestingModule } from '@angular/router/testing';
-import { HttpModule } from '@angular/http';
-import { FlashService } from './flash.service';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-import { Router } from '@angular/router';
-import { RouterStub } from '../../../testing/router-stubs';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {FlashComponent} from './flash.component';
+import {RouterTestingModule} from '@angular/router/testing';
+import {HttpClientModule} from '@angular/common/http';
+import {FlashService} from './flash.service';
+import {By} from '@angular/platform-browser';
+import {DebugElement} from '@angular/core';
+import {Router} from '@angular/router';
+import {RouterStub} from '../../../testing/router-stubs';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('FlashComponent', () => {
   let component: FlashComponent;
@@ -22,7 +22,7 @@ describe('FlashComponent', () => {
       imports: [
         RouterTestingModule,
         BrowserAnimationsModule,
-        HttpModule
+        HttpClientModule
       ],
       providers: [
         FlashService,

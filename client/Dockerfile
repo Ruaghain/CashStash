@@ -1,5 +1,5 @@
 # Create image based on yarn
-FROM arhea/yarn:6
+FROM mhart/alpine-node:12
 
 # Create directory where app will be placed
 RUN mkdir -p /usr/src/app
@@ -12,7 +12,7 @@ COPY package.json /usr/src/app
 COPY yarn.lock /usr/src/app
 
 # Install dependencies
-RUN yarn install
+RUN yarn install --ignore-engines
 
 # Get all the code needed to run the app
 COPY . /usr/src/app

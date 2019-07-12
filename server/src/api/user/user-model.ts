@@ -1,13 +1,13 @@
 import * as crypto from 'crypto'
-import { Document, Model, model, Schema } from 'mongoose';
-import { IUser } from './user';
+import {Document, Model, model, Schema} from 'mongoose';
+import {IUser} from './user';
 
 export interface IUserModel extends IUser, Document {
 }
 
 const authTypes = ['github', 'twitter', 'facebook', 'google'];
 
-export let UserSchema: Schema = new Schema({
+const UserSchema = new Schema({
   userName: { type: String, required: true },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
@@ -32,12 +32,12 @@ export let UserSchema: Schema = new Schema({
   salt: String
 });
 
-UserSchema.virtual('profile').get(() => {
-  return {
-    'name': this.name,
-    'role': this.role
-  };
-});
+// UserSchema.virtual('profile').get(() => {
+//   return {
+//     'name': this.name,
+//     'role': this.role
+//   };
+// });
 
 // Non-sensitive info we'll be putting in the token
 UserSchema.virtual('token').get(() => {
@@ -112,7 +112,7 @@ const validatePresenceOf = (value: any) => {
  * Pre-save hook
  * NOTE: Can't use fat-arrow syntax as it changes the scope and causes an error on 'this.isModified'
  */
-UserSchema.pre('save', function (next: any) {
+UserSchema.pre<IUserModel>('save', function (next: any) {
   // Handle new/update passwords
   if (!this.isModified('password')) {
     return next();
@@ -127,12 +127,12 @@ UserSchema.pre('save', function (next: any) {
   }
 
   // Make salt with a callback
-  this.makeSalt(16, (saltErr: any, salt: any) => {
+  UserSchema.methods.makeSalt(16, (saltErr: any, salt: any) => {
     if (saltErr) {
       return next(saltErr);
     }
     this.salt = salt;
-    this.encryptPassword(this.password, (encryptErr: any, hashedPassword: any) => {
+    UserSchema.methods.encryptPassword(this.password, (encryptErr: any, hashedPassword: any) => {
       if (encryptErr) {
         return next(encryptErr);
       }

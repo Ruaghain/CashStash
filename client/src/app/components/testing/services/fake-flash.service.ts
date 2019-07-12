@@ -1,6 +1,6 @@
-import { FlashService } from '../../flash/flash.service';
-import { FlashMessageType } from '../../flash/flash.message';
-import { Observable } from 'rxjs/Observable';
+import {FlashService} from '../../flash/flash.service';
+import {FlashMessageType} from '../../flash/flash.message';
+import {Observable, of} from 'rxjs';
 
 export class FakeFlashService extends FlashService {
 
@@ -14,6 +14,6 @@ export class FakeFlashService extends FlashService {
   }
 
   getFlashMessage(): Observable<FlashMessageType> {
-    return Observable.of();
+    return of();
   }
 }

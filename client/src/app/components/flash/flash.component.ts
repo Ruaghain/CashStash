@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FlashMessage, MessageType } from './flash.message';
-import { FlashService } from './flash.service';
-import { Subscription } from 'rxjs/Subscription';
-import { Event, NavigationStart, Router } from '@angular/router';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FlashMessage, MessageType} from './flash.message';
+import {FlashService} from './flash.service';
+import {Subscription} from 'rxjs';
+import {Event, NavigationStart, Router} from '@angular/router';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'wraith-flash',

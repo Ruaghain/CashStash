@@ -1,11 +1,11 @@
 // export for convenience.
 export { ActivatedRoute, Router, RouterLink, RouterOutlet, Event } from '@angular/router';
 
-import { Observable } from 'rxjs/Observable';
-import { Component, Directive, Injectable, Input } from '@angular/core';
-import { NavigationExtras, NavigationStart } from '@angular/router';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {Component, Directive, Injectable, Input} from '@angular/core';
+import {NavigationExtras, NavigationStart} from '@angular/router';
+
 // Only implements params and part of snapshot.params
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 
 @Directive({

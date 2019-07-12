@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 var webpackMerge = require('webpack-merge');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var optimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -18,24 +18,27 @@ module.exports = function (env) {
       publicPath: '/'
     },
 
+    // config: {
+    //   optimization: {
+    //     minimize: true
+    //   }
+    // },
+
     plugins: [
       new webpack.NoEmitOnErrorsPlugin(),
-      new ExtractTextPlugin('[name].[hash].css'),
+      new MiniCssExtractPlugin({
+        // Options similar to the same options in webpackOptions.output
+        // all options are optional
+        filename: '[name].css',
+        chunkFilename: '[id].css',
+        ignoreOrder: false, // Enable to remove warnings about conflicting order
+      }),
       new optimizeCssAssetsPlugin({
         cssProcessorOptions: {
           discardComments: {
             removeAll: true
           }
         }
-      }),
-      new webpack.optimize.UglifyJsPlugin({
-        output: {
-          comments: false
-        },
-        mangle: {
-          keep_fnames: true
-        },
-        sourceMap: true
       }),
       new webpack.LoaderOptionsPlugin({
         htmlLoader: {
@@ -49,10 +52,6 @@ module.exports = function (env) {
         minify: {
           collapseWhitespace: true
         }
-      }),
-      new CleanWebpackPlugin(['dist-prod'], {
-        root: helpers.root('./'),
-        verbose: true
       })
     ]
   })

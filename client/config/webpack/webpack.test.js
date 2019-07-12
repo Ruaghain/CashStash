@@ -30,15 +30,22 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loaders: ['raw-loader', 'sass-loader']
+        loaders: [
+          'to-string-loader',
+          'css-loader',
+          'sass-loader'
+        ]
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/,
+        loader: 'url-loader?limit=8192&name=assets/[name].[ext]'
       },
       {
         enforce: 'post',
         test: /\.ts$/,
         loader: 'istanbul-instrumenter-loader',
         exclude: [
-          'node_modules',
-          // 'testing/**/*.*',
+          '/node_modules',
           /\.spec\.ts$/
         ]
       }

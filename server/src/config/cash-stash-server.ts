@@ -15,7 +15,15 @@ export class CashStashServer extends CashStashBase {
 
   private app: express.Application;
   private router: express.Router;
-  private httpServer: Server;
+  private _httpServer: Server;
+
+  get httpServer(): Server {
+    return this._httpServer;
+  }
+
+  set httpServer(value: Server) {
+    this._httpServer = value;
+  }
 
   constructor(database: Database) {
     super();
@@ -25,7 +33,7 @@ export class CashStashServer extends CashStashBase {
 
     database.connect();
 
-    this.httpServer = http.createServer(this.app);
+    this._httpServer = http.createServer(this.app);
 
     this.setup();
     this.routes();
