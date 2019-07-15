@@ -17,13 +17,13 @@ module.exports = function (env) {
     },
 
     module: {
-      loaders: [
+      rules: [
         //JS LOADER
         {
           test: /\.js$/,
           loader: 'babel-loader',
           include: [
-            './client/src/app'
+            helpers.root('/client/src/app')
           ]
         },
         //TS LOADER
@@ -74,9 +74,6 @@ module.exports = function (env) {
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(env),
         'process.env.SERVER_URL': JSON.stringify(process.env.SERVER_URL || 'http://localhost:3000/api/v1')
-      }),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: ['app', 'vendor', 'polyfills']
       })
     ]
   }

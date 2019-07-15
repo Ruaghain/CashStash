@@ -18,6 +18,12 @@ module.exports = function (env) {
       publicPath: '/'
     },
 
+    // config: {
+    //   optimization: {
+    //     minimize: true
+    //   }
+    // },
+
     plugins: [
       new webpack.NoEmitOnErrorsPlugin(),
       new ExtractTextPlugin('[name].[hash].css'),
@@ -27,15 +33,6 @@ module.exports = function (env) {
             removeAll: true
           }
         }
-      }),
-      new webpack.optimize.UglifyJsPlugin({
-        output: {
-          comments: false
-        },
-        mangle: {
-          keep_fnames: true
-        },
-        sourceMap: true
       }),
       new webpack.LoaderOptionsPlugin({
         htmlLoader: {
@@ -49,10 +46,6 @@ module.exports = function (env) {
         minify: {
           collapseWhitespace: true
         }
-      }),
-      new CleanWebpackPlugin(['dist-prod'], {
-        root: helpers.root('./'),
-        verbose: true
       })
     ]
   })
