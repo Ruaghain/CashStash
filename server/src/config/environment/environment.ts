@@ -41,7 +41,8 @@ export class Environment {
     this.logging = process.env.LOGGING_LEVEL || 'ERROR';
     // this.logging = process.env.LOGGING_LEVEL || 'TRACE';
     this.root = path.normalize(__dirname + '/../../..');
-    this.port = process.env.PORT || 3000;
+    // this.port = process.env.PORT || 3000;
+    this.port = 3000;
     // this.ipAddress = process.env.IP || '192.168.99.100';
     this.ipAddress = process.env.IP || 'localhost';
     this.secret = process.env.SECRET || 'secret';

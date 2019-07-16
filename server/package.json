@@ -2,9 +2,6 @@
   "name": "cash-stash-server",
   "version": "0.0.1",
   "private": true,
-  "engines": {
-    "node": "12.6.0"
-  },
   "scripts": {
     "build": "tsc",
     "start": "tsc && node dist/app.js",
@@ -38,7 +35,6 @@
     "@types/crypto-js": "^3.1.43",
     "@types/express": "^4.17.0",
     "@types/jsonwebtoken": "^8.3.2",
-    "@types/log4js": "^2.3.5",
     "@types/mongodb": "^3.1.28",
     "@types/mongoose": "^5.5.8",
     "@types/node": "^12.6.2",

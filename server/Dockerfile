@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app
 
-RUN yarn install
+RUN yarn install --ignore-engines
 
 COPY . /usr/src/app
 

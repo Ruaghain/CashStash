@@ -8,14 +8,22 @@ import {AccountRoute} from '../api/account/account-route';
 import {UserRoute} from '../api/user/user-route';
 import {AuthRoute} from '../api/auth/auth-route';
 import {Server} from 'net';
-import * as swaggerParser from 'swagger-parser';
-import * as swaggerUi from 'swagger-ui-express';
+// import * as swaggerParser from 'swagger-parser';
+// import * as swaggerUi from 'swagger-ui-express';
 
 export class CashStashServer extends CashStashBase {
 
   private app: express.Application;
   private router: express.Router;
-  private httpServer: Server;
+  private _httpServer: Server;
+
+  get httpServer(): Server {
+    return this._httpServer;
+  }
+
+  set httpServer(value: Server) {
+    this._httpServer = value;
+  }
 
   constructor(database: Database) {
     super();
@@ -25,22 +33,22 @@ export class CashStashServer extends CashStashBase {
 
     database.connect();
 
-    this.httpServer = http.createServer(this.app);
+    this._httpServer = http.createServer(this.app);
 
     this.setup();
     this.routes();
   }
 
   async start() {
-    swaggerParser.validate('api.yml').then(async (api) => {
+    // swaggerParser.validate('api.yml').then(async (api) => {
       try {
 
         this.logger.debug('Swagger has been validated correctly');
 
-        let options = {
-          explorer : false
-        };
-        this.app.use('/api/v1/', swaggerUi.serve, swaggerUi.setup(api, options));
+        // let options = {
+        //   explorer : false
+        // };
+        // this.app.use('/api/v1/', swaggerUi.serve, swaggerUi.setup(api, options));
 
         this.app.listen(this.environment.getPort(), '0.0.0.0', () => {
           this.logger.info('STARTING - Express Server. Listening on port "%d", in "%s" mode', this.environment.getPort(), this.app.get('env'));
@@ -49,7 +57,7 @@ export class CashStashServer extends CashStashBase {
       } catch (e) {
         this.logger.error(e);
       }
-    });
+    // });
   }
 
   private setup() {

@@ -12,7 +12,7 @@ COPY package.json /usr/src/app
 COPY yarn.lock /usr/src/app
 
 # Install dependencies
-RUN yarn install
+RUN yarn install --ignore-engines
 
 # Get all the code needed to run the app
 COPY . /usr/src/app

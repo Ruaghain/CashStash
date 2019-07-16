@@ -1,4 +1,4 @@
-import { Logger } from './logger';
+import {Logger} from './logger';
 import * as log4js from 'log4js';
 
 export class Log4JLogger implements Logger {
@@ -8,11 +8,10 @@ export class Log4JLogger implements Logger {
 
   constructor(level: string) {
     this.level = level;
-    log4js.loadAppender('file');
-    // log4js.configure('./log4js-configuration.json', { reloadSecs: 120 });
-    log4js.configure('./src/config/log/log4js-configuration.json', { reloadSecs: 120 });
-    this.log = log4js.getLogger('cash-stash');
-    this.log.setLevel(this.level);
+    // log4js.configure('./log4js-configuration.json');
+    log4js.configure('./src/config/log/log4js-configuration.json');
+    this.log = log4js.getLogger('default');
+    // this.log.setLevel(this.level);
   }
 
   debug(message: string, ...args: any[]): void {
