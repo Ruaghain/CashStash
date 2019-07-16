@@ -1,8 +1,8 @@
-import { ButtonListComponent } from './button-list.component';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ButtonListItemComponent } from './button-list-item/button-list-item.component';
-import { ButtonListItem } from './button-list-item/button-list-item';
-import { By } from '@angular/platform-browser';
+import {ButtonListComponent} from './button-list.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ButtonListItemComponent} from './button-list-item/button-list-item.component';
+import {ButtonListItem} from './button-list-item/button-list-item';
+import {By} from '@angular/platform-browser';
 
 describe("ButtonListComponent", () => {
 
@@ -53,8 +53,8 @@ describe("ButtonListComponent", () => {
     });
 
     it('emits clicked button information', () => {
-      let selectedButton: ButtonListItem;
-      component.buttonSelected.subscribe((button: ButtonListItem) => selectedButton = button);
+      // let selectedButton: ButtonListItem;
+      // component.buttonSelected.subscribe((button: ButtonListItem) => selectedButton = button);
 
       let buttonClick = fixture.debugElement.query(By.css('.button-item'));
       buttonClick.triggerEventHandler('click', null);

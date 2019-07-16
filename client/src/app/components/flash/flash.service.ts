@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
-import { FlashMessage, FlashMessageType, MessageType } from './flash.message';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {FlashMessage, FlashMessageType, MessageType} from './flash.message';
+import {Observable, Subject} from 'rxjs';
 
 @Injectable()
 export class FlashService {
