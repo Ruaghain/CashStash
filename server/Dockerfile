@@ -1,4 +1,4 @@
-FROM arhea/yarn:6
+FROM mhart/alpine-node:12
 
 RUN mkdir -p /usr/src/app
 

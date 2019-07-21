@@ -1,5 +1,5 @@
 # Create image based on yarn
-FROM arhea/yarn:6
+FROM mhart/alpine-node:12
 
 # Create directory where app will be placed
 RUN mkdir -p /usr/src/app
