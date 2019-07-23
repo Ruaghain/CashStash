@@ -9,7 +9,7 @@ WORKDIR /usr/src/app
 
 # Copy dependecy definitions
 COPY package.json /usr/src/app
-COPY yarn.lock /usr/src/app
+#COPY yarn.lock /usr/src/app
 
 # Install dependencies
 RUN yarn install --ignore-engines
