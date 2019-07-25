@@ -27,11 +27,12 @@ describe("ButtonListComponent", () => {
   });
 
   describe('button functionality', () => {
-    let buttonList: ButtonListItem[] = [];
+    let buttonList: ButtonListItem[];
     let currentButton;
     let creditButton;
 
     beforeEach(() => {
+      buttonList = [];
       currentButton = new ButtonListItem();
       currentButton.addLabel('Current');
       creditButton = new ButtonListItem();

@@ -29,11 +29,11 @@ describe('WraithTreeComponent', () => {
   });
 
   describe('synchronous processing', () => {
-    let rootNode = new WraithTreeNode('-1', 'root', true);
+    let rootNode: WraithTreeNode = null;
     let event = {};
 
     beforeEach(() => {
-
+      rootNode = new WraithTreeNode('-1', 'root', true);
       let robotech = new WraithTreeNode('1', 'Robotech');
 
       let macross = new WraithTreeNode('1-1', 'Macross');
@@ -48,7 +48,7 @@ describe('WraithTreeComponent', () => {
       robotech.addChild(generation);
 
       rootNode.addChild(robotech);
-
+      debugger;
       event = {
         'dataTransfer': {
           getData: function() {
