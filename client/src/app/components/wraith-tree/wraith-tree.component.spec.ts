@@ -48,7 +48,6 @@ describe('WraithTreeComponent', () => {
       robotech.addChild(generation);
 
       rootNode.addChild(robotech);
-      debugger;
       event = {
         'dataTransfer': {
           getData: function() {
