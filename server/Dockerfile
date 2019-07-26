@@ -10,6 +10,6 @@ RUN yarn install --ignore-engines
 
 COPY . /usr/src/app
 
-EXPOSE 4000
+EXPOSE 3000
 
 CMD ["yarn", "run", "start"]

@@ -14,4 +14,6 @@ express:
   depends_on:
     - mongo
 mongo:
+  ports:
+    - '27017:27017'
   image: mongo:3.4.1
