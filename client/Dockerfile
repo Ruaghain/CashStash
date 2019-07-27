@@ -9,10 +9,10 @@ WORKDIR /usr/src/app
 
 # Copy dependecy definitions
 COPY package.json /usr/src/app
-COPY yarn.lock /usr/src/app
+COPY package-lock.json /usr/src/app
 
 # Install dependencies
-RUN yarn install --ignore-engines
+RUN npm install --ignore-engines
 
 # Get all the code needed to run the app
 COPY . /usr/src/app
@@ -21,4 +21,4 @@ COPY . /usr/src/app
 EXPOSE 8000
 
 # Serve the application
-CMD ["yarn", "run", "start:local-dev"]
+CMD ["npm", "run", "serve"]

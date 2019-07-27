@@ -1,6 +1,6 @@
-import { I18nService } from './components/i18n/i18n.service';
-import { Component, OnInit } from '@angular/core';
-require('./app.component.global.scss');
+import {I18nService} from './components/i18n/i18n.service';
+import {Component, OnInit} from '@angular/core';
+import './app.component.global.scss';
 
 @Component({
   selector: 'cash-app',

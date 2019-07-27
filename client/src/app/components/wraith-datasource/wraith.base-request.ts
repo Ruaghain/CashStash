@@ -1,7 +1,8 @@
-import { HttpHeaders } from '@angular/common/http';
+import {HttpHeaders} from '@angular/common/http';
 
 export class WraithBaseRequest {
 
+  // @ts-ignore
   protected baseUrl: string = process.env.SERVER_URL;
 
   protected getAuthHeaders(): HttpHeaders {

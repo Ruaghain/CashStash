@@ -55,14 +55,14 @@ describe('FlashComponent', () => {
 
   let messagesList = [
     {type: 'error', message: 'This is an error message', timeout: false},
-    // {type: 'information', message: 'This is an information message', timeout: true},
-    // {type: 'success', message: 'This is a success message', timeout: true}
+    {type: 'information', message: 'This is an information message', timeout: true},
+    {type: 'success', message: 'This is a success message', timeout: true}
   ];
   messagesList.forEach((messageItem) => {
     describe(messageItem.type, () => {
       beforeEach(() => {
         localFlashService[messageItem.type](messageItem.message);
-        // fixture.detectChanges();
+        fixture.detectChanges();
       });
 
       it('message is visible', () => {
@@ -70,9 +70,9 @@ describe('FlashComponent', () => {
         expect(currentState).toEqual('show', `Flash message should display a(n) ${messageItem.type} message`);
       });
 
-      // it('has the correct class name', () => {
-      //   expect(debugElement.query(By.css('.flash-component')).nativeElement.classList.contains(messageItem.type)).toBeTruthy();
-      // });
+      it('has the correct class name', () => {
+        expect(debugElement.query(By.css('.flash-component')).nativeElement.classList.contains(messageItem.type)).toBeTruthy();
+      });
 
       it('displays an error message', () => {
         fixture.detectChanges();

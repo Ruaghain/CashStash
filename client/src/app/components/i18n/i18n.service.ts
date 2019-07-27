@@ -1,6 +1,6 @@
-import { Inject, Injectable } from '@angular/core';
-import { TRANSLATIONS } from './i18n.translations';
-import * as _ from 'lodash';
+import {Inject, Injectable} from '@angular/core';
+import {TRANSLATIONS} from './i18n.translations';
+import * as _ from 'lodash'
 
 @Injectable()
 export class I18nService {
