@@ -1,5 +1,5 @@
 import {I18nService} from './components/i18n/i18n.service';
-import {Component, OnInit} from '@angular/core';
+import {Component, isDevMode, OnInit} from '@angular/core';
 import './app.component.global.scss';
 
 @Component({
@@ -12,6 +12,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (isDevMode()) {
+      console.log('👋 Development Mode!');
+    }
     this.i18nService.use('en');
   }
 }
