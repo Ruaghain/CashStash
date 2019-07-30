@@ -2,8 +2,10 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+//https://mherman.org/blog/dockerizing-an-angular-app/
 export const environment = {
-  production: false
+  production: false,
+  server_url: "http://192.168.99.100:3000/api/v1"
 };
 
 /*

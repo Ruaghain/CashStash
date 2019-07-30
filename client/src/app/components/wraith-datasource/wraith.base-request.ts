@@ -1,9 +1,9 @@
 import {HttpHeaders} from '@angular/common/http';
+import {environment} from "../../environments/environment";
 
 export class WraithBaseRequest {
 
-  // @ts-ignore
-  protected baseUrl: string = process.env.SERVER_URL;
+  protected baseUrl: string = environment.server_url;
 
   protected getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');

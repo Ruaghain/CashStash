@@ -26,6 +26,7 @@ COPY package-lock.json /usr/src/app
 
 # Install dependencies
 RUN npm install --ignore-engines
+RUN npm install -g @angular/cli
 
 # Get all the code needed to run the app
 COPY . /usr/src/app
