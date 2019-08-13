@@ -1,7 +1,7 @@
 {
   "appenders": {
     "app": {
-      "type": "dateFile",
+      "type": "console",
       "filename": "./logs/cash-stash.log",
       "pattern": "-yyyy-MM-dd",
       "alwaysIncludePattern": true,

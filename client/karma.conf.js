@@ -1,6 +1,8 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
+const process = require('process');
 process.env.CHROME_BIN = require('puppeteer').executablePath();
+console.log("Chrome direcotry is: ", process.env.CHROME_BIN);
 
 module.exports = function (config) {
   config.set({
@@ -24,21 +26,20 @@ module.exports = function (config) {
     reporters: ['progress', 'kjhtml'],
     port: 9876,
     colors: true,
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_DEBUG,
     autoWatch: true,
-    browsers: ['ChromeHeadless'],
+    reportSlowerThan: 90,
+    browsers: ['ChromeHeadlessNoSandbox'],
     customLaunchers: {
-      'ChromeHeadless': {
-        base: 'Chrome',
-        flags: [
-          '--no-sandbox',
-          '--headless',
-          '--disable-gpu',
-          '--remote-debugging-port=9222'
-        ]
-      }
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox', '--disable-dev-shm-usage'],
+      },
     },
-    singleRun: false,
-    restartOnFileChange: true
+    restartOnFileChange: true,
+    captureTimeout: 210000,
+    browserDisconnectTolerance: 3,
+    browserDisconnectTimeout: 210000,
+    browserNoActivityTimeout: 210000,
   });
 };
