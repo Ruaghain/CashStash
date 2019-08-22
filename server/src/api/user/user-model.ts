@@ -1,4 +1,4 @@
-import * as crypto from 'crypto'
+import * as crypto from 'crypto';
 import {Document, Model, model, Schema} from 'mongoose';
 import {IUser} from './user';
 
@@ -69,17 +69,14 @@ UserSchema.path('password').validate((password: string) => {
 }, 'Password cannot be blank');
 
 // Validate email is not taken
-UserSchema.path('email').validate((value: any, respond: any) => {
+UserSchema.path('email').validate((value: any) => {
   const self = this;
   return User.findOne({ email: value }).exec()
     .then((user: any) => {
       if (user) {
-        if (self.id === user.id) {
-          return respond(true);
-        }
-        return respond(false);
+        return self.id === user.id;
       }
-      return respond(true);
+      return true;
     })
     .catch((err: any) => {
       throw err;
@@ -87,17 +84,17 @@ UserSchema.path('email').validate((value: any, respond: any) => {
 }, 'The specified email address is already in use.');
 
 // Validate username is not taken
-UserSchema.path('userName').validate((value: any, respond: any) => {
+UserSchema.path('userName').validate((value: any) => {
   const self = this;
   return User.findOne({ userName: value }).exec()
     .then((user: any) => {
       if (user) {
         if (self.id === user.id) {
-          return respond(true);
+          return true;
         }
-        return respond(false);
+        return false;
       }
-      return respond(true);
+      return true;
     })
     .catch((err: any) => {
       throw err;
