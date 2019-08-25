@@ -29,17 +29,17 @@ export let AccountSchema: Schema = new Schema({
 // }]
 });
 
-AccountSchema.path('name').validate((value: any, respond: any) => {
+AccountSchema.path('name').validate((value: any) => {
     const self = this;
     return Account.findOne({ name: value }).exec()
       .then((account: any) => {
         if (account) {
           if (self.id === account.id) {
-            return respond(true);
+            return true;
           }
-          return respond(false);
+          return false;
         }
-        return respond(true);
+        return true;
       })
       .catch((err: any) => {
         throw err;

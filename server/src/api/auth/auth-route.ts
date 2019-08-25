@@ -74,7 +74,7 @@ export class AuthRoute extends BaseRoute {
     this.logger.debug('Setting up signin request for Authentication');
     this.router.post(this.path + '/signin', (req, res, next) => {
       this.logger.debug('Signing in user: "%s"', req.body.userName);
-      User.findOne({ userName: req.body.userName }, (err: any, user: any) => {
+      User.findOne({ userName: req.body.userName }).select('+salt +password').exec((err: any, user: any) => {
         if (err) {
           this.logger.error('There was an error finding the user');
           return res.status(500).json({

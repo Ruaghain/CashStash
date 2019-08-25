@@ -22,14 +22,16 @@ const UserSchema = new Schema({
     type: String,
     required: function () {
       return authTypes.indexOf(this.provider) === -1;
-    }
+    },
+    select : false
   },
   role: {
     type: String,
-    default: 'user'
+    default: 'user',
+    select: false
   },
   provider: String,
-  salt: String
+  salt: {type: String, select: false}
 });
 
 // UserSchema.virtual('profile').get(() => {
@@ -47,7 +49,7 @@ UserSchema.virtual('token').get(() => {
   };
 });
 
-// Non-sensitive info we'll be putting in the token
+// Non-sensitive info we'll be put in the token
 UserSchema.virtual('fullName').get(() => {
   return this.firstName.trim() + ' ' + this.lastName.trim();
 });
@@ -125,11 +127,11 @@ UserSchema.pre<IUserModel>('save', function (next: any) {
 
   // Make salt with a callback
   UserSchema.methods.makeSalt(16, (saltErr: any, salt: any) => {
+    this.salt = salt;
     if (saltErr) {
       return next(saltErr);
     }
-    this.salt = salt;
-    UserSchema.methods.encryptPassword(this.password, (encryptErr: any, hashedPassword: any) => {
+    UserSchema.methods.encryptPassword(this.password, salt, (encryptErr: any, hashedPassword: any) => {
       if (encryptErr) {
         return next(encryptErr);
       }
@@ -152,6 +154,7 @@ UserSchema.methods = {
    * @api public
    */
   authenticate(password: string, callback: any) {
+
     if (!callback) {
       return this.password === this.encryptPassword(password);
     }
